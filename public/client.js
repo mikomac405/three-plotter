@@ -1,6 +1,12 @@
 import * as THREE from 'three';
+
+import { renderParametricMesh } from './modules/parametric_test.js'
+import { renderMeshFromPoints } from './modules/buffer_test.js';
+import { renderCubes } from './modules/cubes_test.js';
+
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import { ParametricGeometry } from "three/examples/jsm/geometries/ParametricGeometry";
+
 
 // Changing color mode
 const dark = document.getElementById('dark');
@@ -24,16 +30,13 @@ function main() {
   const renderer = new THREE.WebGLRenderer({canvas,alpha: true});
 
   // Camera initial setup
-  let fov = 75;
-  let aspect = 0;  // the canvas default
-  let near = 0.1;
-  let far = 20;
+  let fov = 75;  let aspect = 0;  let near = 0.1;  let far = 20;
+
   const camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
-  camera.position.y = -2;
-  camera.position.z = 5;
+  camera.position.y = -2; camera.position.z = 5;
 
   // Orbital controls
-  // TODO: Find way to rewrite `OrbitControls`
+  // TODO: Find way to rewrite `OrbitControls` (Optional)
   const controls = new OrbitControls(camera, canvas)
 
   // Default scene
@@ -47,49 +50,17 @@ function main() {
   scene.add(sceneLight);
 
   // Rendering cubes
-  const boxWidth = 1;
-  const boxHeight = 1;
-  const boxDepth = 1;
-  const boxGeometry = new THREE.BoxGeometry(boxWidth, boxHeight, boxDepth);
+  let cubes = renderCubes();
+  for(let i in cubes)
+    scene.add(cubes[i])
 
-  function makeDefaultMesh(geometry, color, x) {
-    const defaultMeshMaterial = new THREE.MeshPhongMaterial({color});
-
-    const defaultMesh = new THREE.Mesh(geometry, defaultMeshMaterial);
-    scene.add(defaultMesh);
-
-    defaultMesh.position.x = x;
-    defaultMesh.position.y = -2;
-    return defaultMesh;
-  }
-
-  const cubes = [
-    makeDefaultMesh(boxGeometry, 0x44aa88,  0),
-    makeDefaultMesh(boxGeometry, 0x8844aa, -2),
-    makeDefaultMesh(boxGeometry, 0xaa8844,  2),
-  ];
-
-
-  // Rendering parametric geometry
-  let xMin = -0.5, yMin = -0.5
-  let xMax = 0.5, yMax = 0.5
-  let xRange = xMax-xMin, yRange = yMax-yMin;
-
-  let parametricFunction = function (x, y, target){
-      x = xRange * x + xMin;
-      y = yRange * y + yMin;
-      // TODO: Create or find parser
-      let z = 2*x + (y*y);
-      target.set(x,y,z);
-  }
-
-  let parametricGeometry = new ParametricGeometry(parametricFunction, 100,100);
-  let parametricMaterial = new THREE.MeshLambertMaterial({color: 0xFFFFFF, side: THREE.DoubleSide});
-  let parametricMesh = new THREE.Mesh(parametricGeometry, parametricMaterial);
-  parametricMesh.position.set(0,0,0);
-  // Debug
-  // console.log(parametricMesh);
+  // Rendering parametric mesh
+  let parametricMesh = renderParametricMesh();
   scene.add(parametricMesh);
+
+  // Rendering mesh from points
+  let fromPointsMesh = renderMeshFromPoints();
+  scene.add(fromPointsMesh);
 
   // Smart resizer
   function resizeRendererToDisplaySize(renderer) {
