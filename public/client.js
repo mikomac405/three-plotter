@@ -2,6 +2,7 @@ import * as THREE from 'three';
 
 import { renderParametricMesh } from './modules/parametric_test.js'
 import { renderMeshFromPoints } from './modules/buffer_test.js';
+import { renderSinFunFromPoint } from './modules/delaunator_test.js';
 import { renderCubes } from './modules/cubes_test.js';
 
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
@@ -59,8 +60,11 @@ function main() {
   scene.add(parametricMesh);
 
   // Rendering mesh from points
-  let fromPointsMesh = renderMeshFromPoints();
+  //let fromPointsMesh = renderMeshFromPoints();
+  let fromPointsCloud,fromPointsMesh = renderSinFunFromPoint();
+  scene.add(fromPointsCloud)
   scene.add(fromPointsMesh);
+
 
   // Smart resizer
   function resizeRendererToDisplaySize(renderer) {
