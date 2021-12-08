@@ -22,7 +22,8 @@ function renderMeshFromPoints(){
         new THREE.Vector3(-1, -1, 1),//b
     ]
 
-    fromPointGeometry.setFromPoints(points);
+
+    fromPointGeometry.setFromPoints(points); 
     fromPointGeometry.computeVertexNormals();
 
     const fromPointsMesh = new THREE.Mesh(fromPointGeometry, fromPointsMaterial);
