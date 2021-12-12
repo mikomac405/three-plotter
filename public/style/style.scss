@@ -28,6 +28,19 @@ body{
   background: linear-gradient(120deg,$dark-upper-gradient-background,$dark-bottom-gradient-background);
 }
 
+.button-2D-3D{
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: 10px;
+  margin: 1vh 1vh 1vh 1vh;
+  width: 3vh;
+  height:3vh;
+  padding: 5px 5px;
+  background-color: rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 0px 15px 2px rgba(0, 0, 0, 0.6);
+}
+
 .mode-switch{
   position: absolute;
   bottom: 0;
@@ -47,8 +60,8 @@ body{
   right: 0;
   border-radius: 10px;
   margin: 1vh 1vh 1vh 1vh;
-  width: 3vh;
-  height:3vh;
+  width: 20vh;
+  height:20vh;
   padding: 5px 5px;
   background-color: rgba(0, 0, 0, 0.2);
   box-shadow: 0px 0px 15px 2px rgba(0, 0, 0, 0.6);
@@ -72,5 +85,21 @@ body{
   height: 3vh;
   width: 3vh;
   background-image: url(../resources/sun.png);
+  background-size: 3vh,3vh;
+}
+
+#button-2D{
+  position: absolute;
+  height: 3vh;
+  width: 3vh;
+  background-image: url(../resources/2D.png);
+  background-size: 3vh,3vh;
+}
+
+#button-3D{
+  position: absolute;
+  height: 3vh;
+  width: 3vh;
+  background-image: url(../resources/3D.png);
   background-size: 3vh,3vh;
 }

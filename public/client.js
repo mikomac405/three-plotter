@@ -13,6 +13,7 @@ console.log("Test log")
 // Changing color mode
 const dark = document.getElementById('dark');
 const iconOfDarkLightMode = document.getElementById('dark-mode');
+const iconOf2DMode = document.getElementById('button-2D');
 
 iconOfDarkLightMode.addEventListener('click',()=>{
     if(dark.id==='dark'){
@@ -23,6 +24,15 @@ iconOfDarkLightMode.addEventListener('click',()=>{
         dark.id='dark';
         iconOfDarkLightMode.id='dark-mode';
     }
+});
+
+iconOf2DMode.addEventListener('click',()=>{
+  if(iconOf2DMode.id==='button-2D'){
+      iconOf2DMode.id='button-3D';
+  }
+  else {
+      iconOf2DMode.id='button-2D';
+  }
 });
 
 
