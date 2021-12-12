@@ -8,6 +8,7 @@ import { renderCubes } from './modules/cubes_test.js';
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import { ParametricGeometry } from "three/examples/jsm/geometries/ParametricGeometry";
 
+console.log("Test log")
 
 // Changing color mode
 const dark = document.getElementById('dark');
