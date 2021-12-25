@@ -5,8 +5,8 @@ html {
 }
 
 body {
-  height: auto;
-  width: auto;
+  height: 100%;
+  width: 100%;
   margin: 0;
 }
 
@@ -22,11 +22,57 @@ body {
   background: linear-gradient(120deg, #313131, #08265e);
 }
 
-.dock {
+.button-2D-3D {
+  position: absolute;
+  top: 0;
+  left: 0;
   border-radius: 10px;
   margin: 1vh 1vh 1vh 1vh;
-  width: auto;
+  width: 3vh;
   height: 3vh;
+  padding: 5px 5px;
+  background-color: rgba(0, 0, 0, 0.2);
+  -webkit-box-shadow: 0px 0px 15px 2px rgba(0, 0, 0, 0.6);
+          box-shadow: 0px 0px 15px 2px rgba(0, 0, 0, 0.6);
+}
+
+.mode-switch {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  border-radius: 10px;
+  margin: 1vh 1vh 1vh 1vh;
+  width: 3vh;
+  height: 3vh;
+  padding: 5px 5px;
+  background-color: rgba(0, 0, 0, 0.2);
+  -webkit-box-shadow: 0px 0px 15px 2px rgba(0, 0, 0, 0.6);
+          box-shadow: 0px 0px 15px 2px rgba(0, 0, 0, 0.6);
+}
+
+.inputFunction {
+  position: absolute;
+  color: white;
+  top: 0;
+  right: 0;
+  border-radius: 10px;
+  margin: 1vh 1vh 1vh 1vh;
+  width: 20vh;
+  height: 3vh;
+  padding: 5px 5px;
+  background-color: rgba(0, 0, 0, 0.2);
+  -webkit-box-shadow: 0px 0px 15px 2px rgba(0, 0, 0, 0.6);
+          box-shadow: 0px 0px 15px 2px rgba(0, 0, 0, 0.6);
+}
+
+.dock {
+  position: absolute;
+  top: 5vh;
+  right: 0;
+  border-radius: 10px;
+  margin: 1vh 1vh 1vh 1vh;
+  width: 20vh;
+  height: 20vh;
   padding: 5px 5px;
   background-color: rgba(0, 0, 0, 0.2);
   -webkit-box-shadow: 0px 0px 15px 2px rgba(0, 0, 0, 0.6);
@@ -35,8 +81,7 @@ body {
 
 #writer {
   width: 100%;
-  height: 94vh;
-  display: block;
+  height: 100vh;
 }
 
 #dark-mode {
@@ -52,6 +97,22 @@ body {
   height: 3vh;
   width: 3vh;
   background-image: url(../resources/sun.png);
+  background-size: 3vh,3vh;
+}
+
+#button-2D {
+  position: absolute;
+  height: 3vh;
+  width: 3vh;
+  background-image: url(../resources/2D.png);
+  background-size: 3vh,3vh;
+}
+
+#button-3D {
+  position: absolute;
+  height: 3vh;
+  width: 3vh;
+  background-image: url(../resources/3D.png);
   background-size: 3vh,3vh;
 }
 /*# sourceMappingURL=style.css.map */

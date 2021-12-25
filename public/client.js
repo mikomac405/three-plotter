@@ -8,12 +8,12 @@ import { renderCubes } from './modules/cubes_test.js';
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import { ParametricGeometry } from "three/examples/jsm/geometries/ParametricGeometry";
 
-console.log("Test log")
-
 // Changing color mode
 const dark = document.getElementById('dark');
 const iconOfDarkLightMode = document.getElementById('dark-mode');
+const iconOf2DMode = document.getElementById('button-2D');
 
+// Button to switch between light and dark mode
 iconOfDarkLightMode.addEventListener('click',()=>{
     if(dark.id==='dark'){
         dark.id='light';
@@ -25,6 +25,15 @@ iconOfDarkLightMode.addEventListener('click',()=>{
     }
 });
 
+// Button to switch between 2D and 3D
+iconOf2DMode.addEventListener('click',()=>{
+  if(iconOf2DMode.id==='button-2D'){
+      iconOf2DMode.id='button-3D';
+  }
+  else {
+      iconOf2DMode.id='button-2D';
+  }
+});
 
 // Main function
 function main() {
