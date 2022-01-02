@@ -3,13 +3,15 @@ import Delaunator from 'delaunator/index';
 import { DoubleSide } from 'three';
 
 function renderSinFunFromPoint(){
-    var size = { x: 5, y: 5 };
-    var pointsCount = 3;
-    var points3d = [];
+    let num = 10
+    let size_x = { min: -num, max: num}
+    let size_z = { min: -num, max: num}
+    let points3d = [];
 
-    for (let x = -3; x < pointsCount; x+=0.1){
-        for (let z = -3; z < pointsCount; z+=0.1){
-            let y = x*x+(z/2);
+    for (let x = size_x.min; x < size_x.max; x+=0.1){
+        for (let z = size_z.min; z < size_z.max; z+=0.1){
+            //let y = x*x+(z/2);
+            let y = Math.sqrt((x*x) + (z*z))
             points3d.push(new THREE.Vector3(x,y,z));
         }
     }
@@ -21,10 +23,6 @@ function renderSinFunFromPoint(){
     let mat = new THREE.PointsMaterial({ color: 0x99ccff, size: 2 })
     mat.side = 2
     var geom = new THREE.BufferGeometry().setFromPoints(points3d);
-    var cloud = new THREE.Points(
-    geom,
-    
-    );
 
     // triangulate x, z
     var indexDelaunay = Delaunator.from(
@@ -35,19 +33,19 @@ function renderSinFunFromPoint(){
 
     var meshIndex = []; // delaunay index => three.js index
     for (let i = 0; i < indexDelaunay.triangles.length; i++){
-    meshIndex.push(indexDelaunay.triangles[i]);
+        meshIndex.push(indexDelaunay.triangles[i]);
     }
 
     geom.setIndex(meshIndex); // add three.js index to the existing geometry
     geom.computeVertexNormals();
     var mesh = new THREE.Mesh(
-    geom, // re-use the existing geometry
-    new THREE.MeshLambertMaterial({ color: "purple", wireframe: false })
+        geom, // re-use the existing geometry
+        new THREE.MeshLambertMaterial({ color: "purple", wireframe: false })
     );
     mesh.material.flatShading = false
     mesh.material.side = DoubleSide
 
-    return cloud, mesh;
+    return mesh;
 }
 
 export { renderSinFunFromPoint };
