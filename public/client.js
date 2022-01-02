@@ -4,10 +4,18 @@ import { renderSinFunFromPoint } from './modules/delaunator_test.js';
 
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 
+
+const scene3D = new THREE.Scene();
+const scene2D = new THREE.Scene();
+
+// Default scene
+let scene = scene3D;
+
 // Changing color mode
 const dark = document.getElementById('dark');
 const iconOfDarkLightMode = document.getElementById('dark-mode');
 const iconOf2DMode = document.getElementById('button-2D');
+iconOf2DMode.id='button-3D';
 
 // Button to switch between light and dark mode
 iconOfDarkLightMode.addEventListener('click',()=>{
@@ -25,17 +33,23 @@ iconOfDarkLightMode.addEventListener('click',()=>{
 iconOf2DMode.addEventListener('click',()=>{
   if(iconOf2DMode.id==='button-2D'){
       iconOf2DMode.id='button-3D';
+      scene = scene3D;
+      console.log(scene)
   }
   else {
       iconOf2DMode.id='button-2D';
+      scene = scene2D;
+      console.log(scene)
   }
 });
+
+
 
 // Main function
 function main() {
   const canvas = document.getElementById('writer');
   const renderer = new THREE.WebGLRenderer({canvas,alpha: true});
-
+  
   // Camera initial setup
   let fov = 75;  let aspect = 0;  let near = 0.1;  let far = 200;
 
@@ -45,9 +59,6 @@ function main() {
   // Orbital controls
   // TODO: Find way to rewrite `OrbitControls` (Optional)
   const controls = new OrbitControls(camera, canvas)
-
-  // Default scene
-  const scene = new THREE.Scene();
 
   // Default light
   let sceneLightColor = 0xFFFFFF;
