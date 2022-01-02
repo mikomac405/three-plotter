@@ -2,7 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Three.js Tutorials by Sean Bradley : https://sbcode.net/threejs/</title>
+    <title>Wykreślacz</title>
+
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="style/style.css">
     <script type="importmap">
@@ -12,16 +13,24 @@
                 "three/examples/jsm/controls/OrbitControls":"./jsm/controls/OrbitControls.js",
                 "three/examples/jsm/geometries/ParametricGeometry":"./jsm/geometries/ParametricGeometry.js",
                 "three/examples/jsm/libs/stats.module":"./jsm/libs/stats.module.js",
-                "three/examples/jsm/libs/dat.gui.module":"./jsm/libs/dat.gui.module.js"
+                "three/examples/jsm/libs/dat.gui.module":"./jsm/libs/dat.gui.module.js",
+                "delaunator/index": "./delaunator/index.js",
+                "robust-predicates": "./robust-predicates/index.js"
             }
         }
     </script>
 </head>
 <body id="dark">
     <canvas id="writer"></canvas>
-    <div class="dock">
+    <div class="mode-switch">
         <div id="dark-mode"></div>
     </div>
+    <input class="inputFunction"></input>
+    <div class="dock"></div>
+    <div class="button-2D-3D">
+        <div id="button-2D"></div>
+    </div>
+
     <script type="module" src="client.js"></script>
 </body>
 </html>

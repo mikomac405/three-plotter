@@ -1,4 +1,4 @@
-# Three-plotter
-How to run project:
-1. npm install
-2. npm run start
+# three-plotter
+## Please put all your current test projects/prototypes into prototypes folder
+
+### README.md in progress...
