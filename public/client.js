@@ -55,19 +55,14 @@ function main() {
 
   // Default light
   let sceneLightColor = 0xFFFFFF;
-  let sceneLightIntensity = 1;
-  const sceneLight = new THREE.DirectionalLight(sceneLightColor, sceneLightIntensity);
-  sceneLight.position.set(-1, 2, 4);
+  let sceneLightIntensity = 2;
+  const sceneLight = new THREE.HemisphereLight( 0xffffbb, 0x080820, 1 );
   scene.add(sceneLight);
 
   // Rendering cubes
   let cubes = renderCubes();
   for(let i in cubes)
     scene.add(cubes[i])
-
-  // Rendering parametric mesh
-  let parametricMesh = renderParametricMesh();
-  scene.add(parametricMesh);
 
   // Rendering mesh from points
   //let fromPointsMesh = renderMeshFromPoints();

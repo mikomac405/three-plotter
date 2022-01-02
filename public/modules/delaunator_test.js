@@ -1,22 +1,21 @@
 import * as THREE from 'three';
 import Delaunator from 'delaunator/index';
+import { DoubleSide } from 'three';
 
 function renderSinFunFromPoint(){
     var size = { x: 5, y: 5 };
     var pointsCount = 3;
     var points3d = [];
-    for (let i = 0; i < pointsCount; i+=0.1) {
-        let x = THREE.Math.randFloatSpread(size.x);
-        let z = THREE.Math.randFloatSpread(size.y);
-        let y = THREE.Math.randFloatSpread(x / size.x * 5, z / size.y * 5);
-        //points3d.push(new THREE.Vector3(x, y, z));
-    }
 
     for (let x = -3; x < pointsCount; x+=0.1){
         for (let z = -3; z < pointsCount; z+=0.1){
             let y = x*x+(z/2);
             points3d.push(new THREE.Vector3(x,y,z));
         }
+    }
+
+    for(let i = 0; i < points3d.length; i++){
+        console.log(`Point ${i} -> x: ${points3d[i].x} | y: ${points3d[i].y} | z: ${points3d[i].z}`)
     }
 
     let mat = new THREE.PointsMaterial({ color: 0x99ccff, size: 2 })
@@ -46,6 +45,7 @@ function renderSinFunFromPoint(){
     new THREE.MeshLambertMaterial({ color: "purple", wireframe: false })
     );
     mesh.material.flatShading = false
+    mesh.material.side = DoubleSide
 
     return cloud, mesh;
 }
