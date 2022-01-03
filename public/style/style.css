@@ -1,53 +1,3 @@
-BadPixel
-#9059
-
-BadPixel — 11.10.2021
-https://discord.gg/dFJ4jmY8
-Pawłov — Wczoraj o 20:40
-$font-stack: Helvetica, sans-serif;
-$dark-upper-gradient-background: rgb(49, 49, 49);
-$dark-bottom-gradient-background: rgb(8, 38, 94);
-$light-upper-gradient-background: rgb(204, 204, 204);
-$light-bottom-gradient-background: rgb(149, 186, 255);
-/* comment be like haha */
-Rozwiń
-style.scss
-3 KB
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Wykreślacz</title>
-Rozwiń
-index.html
-2 KB
-import * as THREE from 'three';
-
-import { renderSinFunFromPoint } from './modules/delaunator_test.js';
-
-import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
-Rozwiń
-client.js
-4 KB
-BadPixel — Wczoraj o 20:56
-w tym style.scss nie ma tej klasy slidecontainer
-może jest w pliku style.css ?
-Pawłov — Wczoraj o 22:02
-.slidecontainer {
-  position: absolute;
-  color: white;
-  top: 27vh;
-  right: 0;
-  border-radius: 10px;
-  margin: 1vh 1vh 1vh 1vh;
-  width: 20vh;
-  height: auto;
-  padding: 5px 5px;
-  background-color: rgba(0, 0, 0, 0.2);
-  -webkit-box-shadow: 0px 0px 15px 2px rgba(0, 0, 0, 0.6);
-          box-shadow: 0px 0px 15px 2px rgba(0, 0, 0, 0.6);
-}
-styl
 /* comment be like haha */
 html {
   height: 100%;
@@ -74,7 +24,7 @@ body {
 
 .button-2D-3D {
   position: absolute;
-  top: 5vh;
+  top: 0;
   left: 0;
   border-radius: 10px;
   margin: 1vh 1vh 1vh 1vh;
@@ -88,7 +38,7 @@ body {
 
 .mode-switch {
   position: absolute;
-  top: 0;
+  bottom: 0;
   left: 0;
   border-radius: 10px;
   margin: 1vh 1vh 1vh 1vh;
@@ -129,144 +79,6 @@ body {
           box-shadow: 0px 0px 15px 2px rgba(0, 0, 0, 0.6);
 }
 
-.slidecontainer {
-  position: absolute;
-  color: white;
-  top: 27vh;
-  right: 0;
-  border-radius: 10px;
-  margin: 1vh 1vh 1vh 1vh;
-  width: 20vh;
-  height: auto;
-  padding: 5px 5px;
-  background-color: rgba(0, 0, 0, 0.2);
-  -webkit-box-shadow: 0px 0px 15px 2px rgba(0, 0, 0, 0.6);
-          box-shadow: 0px 0px 15px 2px rgba(0, 0, 0, 0.6);
-}
-/* zoom
-.slidezoomcontainer {
-  position: absolute;
-  color: white;
-  bottom: 0;
-... (Pozostałe wiersze: 58)
-Zwiń
-style.css
-4 KB
-zły plik wrzuciłem
-BadPixel — Wczoraj o 22:03
-Dzięki
-﻿
-/* comment be like haha */
-html {
-  height: 100%;
-  width: 100%;
-}
-
-body {
-  height: 100%;
-  width: 100%;
-  margin: 0;
-}
-
-#light {
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  background: linear-gradient(120deg, #cccccc, #95baff);
-}
-
-#dark {
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  background: linear-gradient(120deg, #313131, #08265e);
-}
-
-.button-2D-3D {
-  position: absolute;
-  top: 5vh;
-  left: 0;
-  border-radius: 10px;
-  margin: 1vh 1vh 1vh 1vh;
-  width: 3vh;
-  height: 3vh;
-  padding: 5px 5px;
-  background-color: rgba(0, 0, 0, 0.2);
-  -webkit-box-shadow: 0px 0px 15px 2px rgba(0, 0, 0, 0.6);
-          box-shadow: 0px 0px 15px 2px rgba(0, 0, 0, 0.6);
-}
-
-.mode-switch {
-  position: absolute;
-  top: 0;
-  left: 0;
-  border-radius: 10px;
-  margin: 1vh 1vh 1vh 1vh;
-  width: 3vh;
-  height: 3vh;
-  padding: 5px 5px;
-  background-color: rgba(0, 0, 0, 0.2);
-  -webkit-box-shadow: 0px 0px 15px 2px rgba(0, 0, 0, 0.6);
-          box-shadow: 0px 0px 15px 2px rgba(0, 0, 0, 0.6);
-}
-
-.inputFunction {
-  position: absolute;
-  color: white;
-  top: 0;
-  right: 0;
-  border-radius: 10px;
-  margin: 1vh 1vh 1vh 1vh;
-  width: 20vh;
-  height: 3vh;
-  padding: 5px 5px;
-  background-color: rgba(0, 0, 0, 0.2);
-  -webkit-box-shadow: 0px 0px 15px 2px rgba(0, 0, 0, 0.6);
-          box-shadow: 0px 0px 15px 2px rgba(0, 0, 0, 0.6);
-}
-
-.dock {
-  position: absolute;
-  top: 5vh;
-  right: 0;
-  border-radius: 10px;
-  margin: 1vh 1vh 1vh 1vh;
-  width: 20vh;
-  height: 20vh;
-  padding: 5px 5px;
-  background-color: rgba(0, 0, 0, 0.2);
-  -webkit-box-shadow: 0px 0px 15px 2px rgba(0, 0, 0, 0.6);
-          box-shadow: 0px 0px 15px 2px rgba(0, 0, 0, 0.6);
-}
-
-.slidecontainer {
-  position: absolute;
-  color: white;
-  top: 27vh;
-  right: 0;
-  border-radius: 10px;
-  margin: 1vh 1vh 1vh 1vh;
-  width: 20vh;
-  height: auto;
-  padding: 5px 5px;
-  background-color: rgba(0, 0, 0, 0.2);
-  -webkit-box-shadow: 0px 0px 15px 2px rgba(0, 0, 0, 0.6);
-          box-shadow: 0px 0px 15px 2px rgba(0, 0, 0, 0.6);
-}
-/* zoom
-.slidezoomcontainer {
-  position: absolute;
-  color: white;
-  bottom: 0;
-  right: 0;
-  border-radius: 10px;
-  margin: 1vh 1vh 1vh 1vh;
-  width: 100% ;
-  height: auto;
-  padding: 5px 5px;
-  background-color: rgba(0, 0, 0, 0.2);
-  -webkit-box-shadow: 0px 0px 15px 2px rgba(0, 0, 0, 0.6);
-          box-shadow: 0px 0px 15px 2px rgba(0, 0, 0, 0.6);
-}
-*/
 #writer {
   width: 100%;
   height: 100vh;
@@ -303,14 +115,4 @@ body {
   background-image: url(../resources/3D.png);
   background-size: 3vh,3vh;
 }
-
-.slider {
-  -webkit-appearance: none;
-  width: 100%;
-  height: 15px;
-  border-radius: 5px;  
-  background: #d3d3d3;
-  outline: none;
-}
-
 /*# sourceMappingURL=style.css.map */
