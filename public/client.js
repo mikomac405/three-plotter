@@ -64,7 +64,13 @@ iconOf2DMode.addEventListener('click',()=>{
   }
 });
 
-
+// PrecisionSpeed Slider
+var slider = document.getElementById("Efficiency");
+var output = document.getElementById("Precision");
+output.innerHTML = slider.value;
+slider.oninput = function() {
+  output.innerHTML = this.value;
+}
 
 // Main function
 function main() {
