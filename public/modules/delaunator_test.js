@@ -3,7 +3,7 @@ import Delaunator from 'delaunator/index';
 import { DoubleSide } from 'three';
 
 function renderSinFunFromPoint(){
-    let num = 10
+    let num = 2
     let size_x = { min: -num, max: num}
     let size_z = { min: -num, max: num}
     let points3d = [];
