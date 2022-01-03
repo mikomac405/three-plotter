@@ -1,12 +1,8 @@
 import * as THREE from 'three';
 
-import { renderParametricMesh } from './modules/parametric_test.js'
-import { renderMeshFromPoints } from './modules/buffer_test.js';
 import { renderSinFunFromPoint } from './modules/delaunator_test.js';
-import { renderCubes } from './modules/cubes_test.js';
 
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
-import { ParametricGeometry } from "three/examples/jsm/geometries/ParametricGeometry";
 
 // Changing color mode
 const dark = document.getElementById('dark');
@@ -62,7 +58,7 @@ function main() {
   const renderer = new THREE.WebGLRenderer({canvas,alpha: true});
 
   // Camera initial setup
-  let fov = 75;  let aspect = 0;  let near = 0.1;  let far = 20;
+  let fov = 75;  let aspect = 0;  let near = 0.1;  let far = 200;
 
   const camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
   camera.position.y = -2; camera.position.z = 5;
@@ -80,15 +76,12 @@ function main() {
   const sceneLight = new THREE.HemisphereLight( 0xffffbb, 0x080820, 1 );
   scene.add(sceneLight);
 
-  // Rendering cubes
-  let cubes = renderCubes();
-  for(let i in cubes)
-    scene.add(cubes[i])
-
   // Rendering mesh from points
-  //let fromPointsMesh = renderMeshFromPoints();
-  let fromPointsCloud,fromPointsMesh = renderSinFunFromPoint();
-  scene.add(fromPointsCloud)
+  const axesHelper = new THREE.AxesHelper( 5 );
+  scene.add( axesHelper );
+
+  let fromPointsMesh = renderSinFunFromPoint();
+
   scene.add(fromPointsMesh);
 
 
@@ -115,13 +108,6 @@ function main() {
       camera.aspect = canvas.clientWidth / canvas.clientHeight;
       camera.updateProjectionMatrix();
     }
-
-    cubes.forEach((cube, ndx) => {
-      const speed = 1 + ndx * .1;
-      const rot = time * speed;
-      cube.rotation.x = rot;
-      cube.rotation.y = rot;
-    });
 
     renderer.render(scene, camera);
 
