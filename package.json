@@ -8,9 +8,10 @@
   },
   "license": "ISC",
   "dependencies": {
+    "@jaames/iro": "^5.5.2",
+    "delaunator": "^5.0.0",
     "express": "^4.17.1",
-    "three": "^0.133.1",
     "mathjs": "^10.0.0",
-    "delaunator":"^5.0.0"
+    "three": "^0.133.1"
   }
 }

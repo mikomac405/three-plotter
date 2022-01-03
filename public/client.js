@@ -13,6 +13,27 @@ const dark = document.getElementById('dark');
 const iconOfDarkLightMode = document.getElementById('dark-mode');
 const iconOf2DMode = document.getElementById('button-2D');
 
+// Color picker
+var colorWheel = new iro.ColorPicker("#colorPicker", {
+  layout: [
+  
+    {
+      component: iro.ui.Box,
+      options: {
+        width: 200
+      }
+    },
+    {
+      component: iro.ui.Slider,
+      options: {
+        sliderType: 'hue',
+        width: 200,
+        activeIndex: 2
+      }
+    }
+    ]
+});
+
 // Button to switch between light and dark mode
 iconOfDarkLightMode.addEventListener('click',()=>{
     if(dark.id==='dark'){
