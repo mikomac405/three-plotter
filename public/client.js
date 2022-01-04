@@ -16,6 +16,7 @@ const dark = document.getElementById('dark');
 const iconOfDarkLightMode = document.getElementById('dark-mode');
 const iconOf2DMode = document.getElementById('button-2D');
 iconOf2DMode.id='button-3D';
+const zrange = document.getElementById("zvaluerange");
 
 // Color picker
 var colorWheel = new iro.ColorPicker("#colorPicker", {
@@ -54,11 +55,13 @@ iconOfDarkLightMode.addEventListener('click',()=>{
 iconOf2DMode.addEventListener('click',()=>{
   if(iconOf2DMode.id==='button-2D'){
       iconOf2DMode.id='button-3D';
+      zrange.style = "visibility: visible";
       scene = scene3D;
       console.log(scene)
   }
   else {
       iconOf2DMode.id='button-2D';
+      zrange.style = "visibility: hidden";
       scene = scene2D;
       console.log(scene)
   }
@@ -70,6 +73,15 @@ var output = document.getElementById("Precision");
 output.innerHTML = slider.value;
 slider.oninput = function() {
   output.innerHTML = this.value;
+}
+
+// Zoom slider TO DO get zoom working
+var zoomslider = document.getElementById("zoomer");
+output.innerHTML = slider.value;
+zoomslider.oninput = function() {
+  var zoomlevel = zoomer.valueAsNumber;
+  scene.style.webkitTransform = "scale("+zoomlevel+")";
+	scene.style.transform = "scale("+zoomlevel+")";
 }
 
 // Main function
