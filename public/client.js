@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 
-import { renderSinFunFromPoint } from './modules/delaunator_test.js';
+import { renderSinFunFromPoint } from './modules/delaunator.js';
 
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 
