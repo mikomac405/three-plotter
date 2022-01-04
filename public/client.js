@@ -4,6 +4,8 @@ import { renderSinFunFromPoint } from './modules/delaunator_test.js';
 
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 
+console.log("test")
+console.log("test2")
 
 const scene3D = new THREE.Scene();
 const scene2D = new THREE.Scene();
