@@ -1,20 +1,24 @@
-import * as THREE from 'three';
-import Delaunator from 'delaunator/index';
-import { DoubleSide } from 'three';
+import Delaunator from "delaunator/index.js";
+import * as THREE from "three"
 
-function renderSinFunFromPoint(){
-    let num = 2
-    let size_x = { min: -num, max: num}
-    let size_z = { min: -num, max: num}
-    let points3d = [];
-
-    for (let x = size_x.min; x < size_x.max; x+=0.1){
-        for (let z = size_z.min; z < size_z.max; z+=0.1){
-            //let y = x*x+(z/2);
+function calculatePoints(size_x, size_z){
+    let points = [];
+    for (let x = size_x.min; x <= size_x.max; x+=1){
+        for (let z = size_z.min; z <= size_z.max; z+=1){
             let y = Math.sqrt((x*x) + (z*z))
-            points3d.push(new THREE.Vector3(x,y,z));
+            points.push(new THREE.Vector3(x,y,z));
         }
     }
+    console.log(points)
+    return points
+}
+
+function renderSinFunFromPoint(){
+    let num = 0.5
+    let size_x = { min: -num, max: num}
+    let size_z = { min: -num, max: num}
+    let points3d = calculatePoints(size_x, size_z)
+    
 
     for(let i = 0; i < points3d.length; i++){
         console.log(`Point ${i} -> x: ${points3d[i].x} | y: ${points3d[i].y} | z: ${points3d[i].z}`)
@@ -43,9 +47,9 @@ function renderSinFunFromPoint(){
         new THREE.MeshLambertMaterial({ color: "purple", wireframe: false })
     );
     mesh.material.flatShading = false
-    mesh.material.side = DoubleSide
+    mesh.material.side = THREE.DoubleSide
 
     return mesh;
 }
 
-export { renderSinFunFromPoint };
+export { calculatePoints, renderSinFunFromPoint };

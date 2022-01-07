@@ -1,9 +1,9 @@
-import * as THREE from 'three';
+import * as THREE from "three"
+import { renderSinFunFromPoint } from "./modules/delaunator.js"
+import { OrbitControls }  from "three/examples/jsm/controls/OrbitControls";
 
-import { renderSinFunFromPoint } from './modules/delaunator_test.js';
-
-import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
-
+console.log("test")
+console.log("test2")
 
 const scene3D = new THREE.Scene();
 const scene2D = new THREE.Scene();
@@ -17,6 +17,7 @@ const iconOfDarkLightMode = document.getElementById('light-dark-button');
 const addFunc = document.getElementById('button-plus');
 const iconOf2DMode = document.getElementById('button-2D');
 iconOf2DMode.id='button-3D';
+const zrange = document.getElementById("zvaluerange");
 
 iconOfDarkLightMode.addEventListener('click',()=>{
   dark.classList.toggle("transition");
@@ -74,11 +75,13 @@ ColorCtx .canvas.height);
 iconOf2DMode.addEventListener('click',()=>{
   if(iconOf2DMode.id==='button-2D'){
       iconOf2DMode.id='button-3D';
+      zrange.style = "visibility: visible";
       scene = scene3D;
       console.log(scene)
   }
   else {
       iconOf2DMode.id='button-2D';
+      zrange.style = "visibility: hidden";
       scene = scene2D;
       console.log(scene)
   }
@@ -90,6 +93,15 @@ var output = document.getElementById("Precision");
 output.innerHTML = slider.value;
 slider.oninput = function() {
   output.innerHTML = this.value;
+}
+
+// Zoom slider TO DO get zoom working
+var zoomslider = document.getElementById("zoomer");
+output.innerHTML = slider.value;
+zoomslider.oninput = function() {
+  var zoomlevel = zoomer.valueAsNumber;
+  scene.style.webkitTransform = "scale("+zoomlevel+")";
+	scene.style.transform = "scale("+zoomlevel+")";
 }
 
 // Main function

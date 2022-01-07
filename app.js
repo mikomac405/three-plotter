@@ -1,6 +1,11 @@
-const express = require('express');
+import express from 'express';
 const app = express();
-const path = require('path');
+import path from 'path'
+import { fileURLToPath } from 'url'
+import { dirname } from 'path';
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
+
 
 app.use(express.static(__dirname + "/public"));
 app.use('/build/', express.static(path.join(__dirname, 'node_modules/three/build')));

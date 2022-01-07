@@ -6,9 +6,6 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="style/style.css">
-    <!-- From dist folder -->
-    <script src="dist/iro.js"></script>
-    <!-- Or from a CDN -->
     <script src="https://cdn.jsdelivr.net/npm/@jaames/iro"></script>
     <script type="importmap">
         {
@@ -18,7 +15,7 @@
                 "three/examples/jsm/geometries/ParametricGeometry":"./jsm/geometries/ParametricGeometry.js",
                 "three/examples/jsm/libs/stats.module":"./jsm/libs/stats.module.js",
                 "three/examples/jsm/libs/dat.gui.module":"./jsm/libs/dat.gui.module.js",
-                "delaunator/index": "./delaunator/index.js",
+                "delaunator/index.js": "./delaunator/index.js",
                 "robust-predicates": "./robust-predicates/index.js"
             }
         }
@@ -41,18 +38,41 @@
     <div class="sliderContainer">
         <div class="inSliderUp">
             <span id="speedPrecision"> Precision / Speed: </span>
+        </div>
             <span id="Precision" style="font-size: large"></span>
+        
+        <div class="xvaluerangee" id="xvaluerange">
+            <span>X minimum range</span>
+            <input type="text" id="x_min_range">
+            <span>X maximum range</span>
+            <input type="text" id="x_min_range">
+        </div>
+        <div class="yvaluerangee" id="yvaluerange">
+            <span>Y minimum range</span>
+            <input type="text" id="y_min_range">
+            <span>Y maximum range</span>
+            <input type="text" id="y_min_range">
         </div>
         <div class="inSliderDown">
             <input type="range" min="1" max="100" value="50" class="slider" id="Efficiency">
         </div>
         
-        
+        <div class="zvaluerangee" id="zvaluerange" style="visibility: visible">
+            <span>Z minimum range</span>
+            <input type="text" id="z_min_range">
+            <span>Z maximum range</span>
+            <input type="text" id="z_min_range">
+        </div>   
     </div>
     <div class="button-2D-3D">
         <div id="button-2D"></div>
     </div>
-    
+
+    <div class="slidezoomcontainer">
+        <span><center>Zoom</center></span>
+        <input type="range" min="1" max="100" value="50" class="slider" id="zoomer" oninput="zoomfunction()">
+    </div>
+
     <script type="module" src="client.js"></script>
 </body>
 </html>
