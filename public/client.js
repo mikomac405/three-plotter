@@ -13,11 +13,22 @@ let scene = scene3D;
 
 // Changing color mode
 const dark = document.getElementById('dark');
-const iconOfDarkLightMode = document.getElementById('dark-mode');
+const iconOfDarkLightMode = document.getElementById('light-dark-button');
+const addFunc = document.getElementById('button-plus');
 const iconOf2DMode = document.getElementById('button-2D');
 iconOf2DMode.id='button-3D';
 const zrange = document.getElementById("zvaluerange");
 
+iconOfDarkLightMode.addEventListener('click',()=>{
+  dark.classList.toggle("transition");
+  iconOfDarkLightMode.classList.toggle("transition1");
+});
+
+addFunc.addEventListener('click',()=>{
+  
+});
+
+/*
 // Color picker
 var colorWheel = new iro.ColorPicker("#colorPicker", {
   layout: [
@@ -39,17 +50,26 @@ var colorWheel = new iro.ColorPicker("#colorPicker", {
     ]
 });
 
+// OUR COLOR PICKER
+var colorCanvas = document.getElementsById('ourPicker');
+var ColorCtx = colorCanvas .getContext('2d');  // This create a 2D context for the canvas
+
+var color = 'rgba(0,0,255,1)';
+let gradientH = ColorCtx .createLinearGradient(0, 0, ColorCtx .canvas.width, 0);
+gradientH.addColorStop(0, '#fff');
+gradientH.addColorStop(1, color);
+ColorCtx .fillStyle = gradientH;
+ColorCtx .fillRect(0, 0, ColorCtx .canvas.width, ColorCtx .canvas.height);
+
+ let gradientV = ColorCtx .createLinearGradient(0, 0, 0, 300);
+ gradientV.addColorStop(0, 'rgba(0,0,0,0)');
+ gradientV.addColorStop(1, '#000');
+ ColorCtx .fillStyle = gradientV;
+ ColorCtx .fillRect(0, 0, ColorCtx .canvas.width,
+ColorCtx .canvas.height); 
+*/
 // Button to switch between light and dark mode
-iconOfDarkLightMode.addEventListener('click',()=>{
-    if(dark.id==='dark'){
-        dark.id='light';
-        iconOfDarkLightMode.id='light-mode';
-    }
-    else {
-        dark.id='dark';
-        iconOfDarkLightMode.id='dark-mode';
-    }
-});
+
 
 // Button to switch between 2D and 3D
 iconOf2DMode.addEventListener('click',()=>{

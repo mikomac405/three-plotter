@@ -21,18 +21,24 @@
         }
     </script>
 </head>
-<body id="dark">
+<body>
+    <div id="light"></div>
+    <div id="dark"></div>
     <canvas id="writer"></canvas>
     <div class="mode-switch">
-        <div id="dark-mode"></div>
+        <div id="light-dark-button"></div>
     </div>
     <input class="inputFunction"></input>
+    <div class="addFunction">
+        <div id="button-plus"></div>
+    </div>
     <div class="dock">
-        <div id="colorPicker"></div>
+        <!--<div id="colorPicker"></div>-->
+    </div>
+    <div class="sliderContainer">
+        <div class="inSliderUp">
+            <span id="speedPrecision"> Precision / Speed: </span>
         </div>
-        <div class="slidecontainer">
-            <span>Precision / Speed</span>
-            <input type="range" min="1" max="100" value="50" class="slider" id="Efficiency">
             <span id="Precision" style="font-size: large"></span>
         
         <div class="xvaluerangee" id="xvaluerange">
@@ -47,6 +53,10 @@
             <span>Y maximum range</span>
             <input type="text" id="y_min_range">
         </div>
+        <div class="inSliderDown">
+            <input type="range" min="1" max="100" value="50" class="slider" id="Efficiency">
+        </div>
+        
         <div class="zvaluerangee" id="zvaluerange" style="visibility: visible">
             <span>Z minimum range</span>
             <input type="text" id="z_min_range">
@@ -57,6 +67,7 @@
     <div class="button-2D-3D">
         <div id="button-2D"></div>
     </div>
+
     <div class="slidezoomcontainer">
         <span><center>Zoom</center></span>
         <input type="range" min="1" max="100" value="50" class="slider" id="zoomer" oninput="zoomfunction()">
