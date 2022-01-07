@@ -24,13 +24,17 @@
         }
     </script>
 </head>
-<body id="dark">
+<body>
+    <div id="light"></div>
+    <div id="dark"></div>
     <canvas id="writer"></canvas>
     <div class="mode-switch">
-        <div id="dark-mode"></div>
+        <div id="light-dark-button"></div>
     </div>
     <input class="inputFunction"></input>
-    <div class="addFunction"></div>
+    <div class="addFunction">
+        <div id="button-plus"></div>
+    </div>
     <div class="dock">
         <!--<div id="colorPicker"></div>-->
     </div>
@@ -48,7 +52,7 @@
     <div class="button-2D-3D">
         <div id="button-2D"></div>
     </div>
-
+    
     <script type="module" src="client.js"></script>
 </body>
 </html>

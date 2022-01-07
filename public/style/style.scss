@@ -17,15 +17,34 @@ body{
 }
 
 #light{
+  z-index: -1;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  margin: 0;
   background-repeat: no-repeat;
   background-attachment: fixed;
-  background: linear-gradient(120deg,$light-upper-gradient-background,$light-bottom-gradient-background);
+  background-image: linear-gradient(120deg,$light-upper-gradient-background,$light-bottom-gradient-background);
 }
 
 #dark{
+  z-index: -1;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  margin: 0;
   background-repeat: no-repeat;
   background-attachment: fixed;
-  background: linear-gradient(120deg,$dark-upper-gradient-background,$dark-bottom-gradient-background);
+  background-image: linear-gradient(120deg,$dark-upper-gradient-background,$dark-bottom-gradient-background);
+  transition: opacity 0.5s ease-in-out;
+}
+
+#dark.transition{
+  opacity:0;
 }
 
 .button-2D-3D{
@@ -140,7 +159,7 @@ body{
   border-radius: 15px;
   appearance: none;
   display: inline-block;
-  background: rgba(224, 224, 224);
+  background: rgb(224, 224, 224);
   outline: none;
   opacity: 0.6;
   transition: opacity .3s;
@@ -168,7 +187,7 @@ body{
   height: 100vh;
 }
 
-#dark-mode{
+#light-dark-button{
   position: absolute;
   height: 3vh;
   width: 3vh;
@@ -176,7 +195,7 @@ body{
   background-size: 3vh,3vh;
 }
 
-#light-mode{
+#light-dark-button.transition1{
   position: absolute;
   height: 3vh;
   width: 3vh;
@@ -197,5 +216,13 @@ body{
   height: 3vh;
   width: 3vh;
   background-image: url(../resources/3D.png);
+  background-size: 3vh,3vh;
+}
+
+#button-plus{
+  position: absolute;
+  height: 3vh;
+  width: 3vh;
+  background-image: url(../resources/plus.png);
   background-size: 3vh,3vh;
 }

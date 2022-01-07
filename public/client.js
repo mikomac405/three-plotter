@@ -13,9 +13,20 @@ let scene = scene3D;
 
 // Changing color mode
 const dark = document.getElementById('dark');
-const iconOfDarkLightMode = document.getElementById('dark-mode');
+const iconOfDarkLightMode = document.getElementById('light-dark-button');
+const addFunc = document.getElementById('button-plus');
 const iconOf2DMode = document.getElementById('button-2D');
 iconOf2DMode.id='button-3D';
+
+iconOfDarkLightMode.addEventListener('click',()=>{
+  dark.classList.toggle("transition");
+  iconOfDarkLightMode.classList.toggle("transition1");
+});
+
+addFunc.addEventListener('click',()=>{
+  
+});
+
 /*
 // Color picker
 var colorWheel = new iro.ColorPicker("#colorPicker", {
@@ -57,16 +68,7 @@ ColorCtx .fillRect(0, 0, ColorCtx .canvas.width, ColorCtx .canvas.height);
 ColorCtx .canvas.height); 
 */
 // Button to switch between light and dark mode
-iconOfDarkLightMode.addEventListener('click',()=>{
-    if(dark.id==='dark'){
-        dark.id='light';
-        iconOfDarkLightMode.id='light-mode';
-    }
-    else {
-        dark.id='dark';
-        iconOfDarkLightMode.id='dark-mode';
-    }
-});
+
 
 // Button to switch between 2D and 3D
 iconOf2DMode.addEventListener('click',()=>{
