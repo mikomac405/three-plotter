@@ -1,11 +1,13 @@
 import Delaunator from "delaunator/index.js";
 import * as THREE from "three"
+import Formula from 'fparser';
 
-function calculatePoints(size_x, size_z){
+function calculatePoints(func, size_x, size_z){
     let points = [];
-    for (let x = size_x.min; x <= size_x.max; x+=1){
-        for (let z = size_z.min; z <= size_z.max; z+=1){
-            let y = Math.sqrt((x*x) + (z*z))
+    const fObj = new Formula(func)
+    for (let x = size_x.min; x <= size_x.max; x+=0.01){
+        for (let z = size_z.min; z <= size_z.max; z+=0.01){
+            let y = fObj.evaluate({x:x,z:z})
             points.push(new THREE.Vector3(x,y,z));
         }
     }
@@ -13,11 +15,11 @@ function calculatePoints(size_x, size_z){
     return points
 }
 
-function renderSinFunFromPoint(){
+function renderFunctionMesh(func, scene){
     let num = 0.5
     let size_x = { min: -num, max: num}
     let size_z = { min: -num, max: num}
-    let points3d = calculatePoints(size_x, size_z)
+    let points3d = calculatePoints(func, size_x, size_z)
     
 
     for(let i = 0; i < points3d.length; i++){
@@ -44,12 +46,13 @@ function renderSinFunFromPoint(){
     geom.computeVertexNormals();
     var mesh = new THREE.Mesh(
         geom, // re-use the existing geometry
-        new THREE.MeshLambertMaterial({ color: "purple", wireframe: false })
+        new THREE.MeshPhongMaterial({ color: "purple", wireframe: false })
+        //new THREE.MeshLambertMaterial({ color: "purple", wireframe: false })
     );
     mesh.material.flatShading = false
     mesh.material.side = THREE.DoubleSide
 
-    return mesh;
+    scene.add(mesh);
 }
 
-export { calculatePoints, renderSinFunFromPoint };
+export { calculatePoints, renderFunctionMesh };

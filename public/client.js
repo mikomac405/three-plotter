@@ -1,12 +1,12 @@
 import * as THREE from "three"
-import { renderSinFunFromPoint } from "./modules/delaunator.js"
+import { renderFunctionMesh } from "./modules/delaunator.js"
 import { OrbitControls }  from "three/examples/jsm/controls/OrbitControls";
-
-console.log("test")
-console.log("test2")
+import Formula from 'fparser';
 
 const scene3D = new THREE.Scene();
 const scene2D = new THREE.Scene();
+const canvas = document.getElementById('writer');
+const renderer = new THREE.WebGLRenderer({canvas,alpha: true, preserveDrawingBuffer: true });
 
 // Default scene
 let scene = scene3D;
@@ -15,6 +15,7 @@ let scene = scene3D;
 const dark = document.getElementById('dark');
 const iconOfDarkLightMode = document.getElementById('light-dark-button');
 const addFunc = document.getElementById('button-plus');
+const functionInput = document.getElementById('input');
 const iconOf2DMode = document.getElementById('button-2D');
 iconOf2DMode.id='button-3D';
 const zrange = document.getElementById("zvaluerange");
@@ -25,8 +26,38 @@ iconOfDarkLightMode.addEventListener('click',()=>{
 });
 
 addFunc.addEventListener('click',()=>{
-  
+  renderFunctionMesh(functionInput.value, scene3D)
 });
+
+
+function saveFile(strData, filename) {
+    var strDownloadMime = "image/octet-stream";
+    var imgData;
+
+      try {
+          var strMime = "image/jpeg";
+          imgData = renderer.domElement.toDataURL(strMime);
+          var link = document.createElement('a');
+          if (typeof link.download === 'string') {
+              document.body.appendChild(link); //Firefox requires the link to be in the body
+              link.download = "test.jpg";
+              link.href = imgData.replace(strMime, strDownloadMime);
+              link.click();
+              document.body.removeChild(link); //remove the link when done
+          } else {
+              location.replace(uri);
+          }
+
+      } catch (e) {
+          console.log(e);
+          return;
+      }
+   
+}
+
+
+
+
 
 /*
 // Color picker
@@ -106,8 +137,7 @@ zoomslider.oninput = function() {
 
 // Main function
 function main() {
-  const canvas = document.getElementById('writer');
-  const renderer = new THREE.WebGLRenderer({canvas,alpha: true});
+ 
   
   // Camera initial setup
   let fov = 75;  let aspect = 0;  let near = 0.1;  let far = 200;
@@ -128,10 +158,6 @@ function main() {
   // Rendering mesh from points
   const axesHelper = new THREE.AxesHelper( 5 );
   scene.add( axesHelper );
-
-  let fromPointsMesh = renderSinFunFromPoint();
-
-  scene.add(fromPointsMesh);
 
 
   // Smart resizer
