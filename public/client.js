@@ -18,7 +18,11 @@ const addFunc = document.getElementById('button-plus');
 const functionInput = document.getElementById('input');
 const iconOf2DMode = document.getElementById('button-2D');
 iconOf2DMode.id='button-3D';
-const zrange = document.getElementById("zvaluerange");
+const xRange = document.getElementById("X");
+const yRange = document.getElementById("Y");
+const zRange = document.getElementById("Z");
+
+console.log()
 
 iconOfDarkLightMode.addEventListener('click',()=>{
   dark.classList.toggle("transition");
@@ -26,11 +30,44 @@ iconOfDarkLightMode.addEventListener('click',()=>{
 });
 
 addFunc.addEventListener('click',()=>{
-  renderFunctionMesh(functionInput.value, scene3D)
+ generatePlot()
+ saveFile()
 });
 
+// Button to switch between 2D and 3D
+iconOf2DMode.addEventListener('click',()=>{
+  if(iconOf2DMode.id==='button-2D'){
+      iconOf2DMode.id='button-3D';
+      zRange.style.visibility = "visible";
+      scene = scene3D;
+  }
+  else {
+      iconOf2DMode.id='button-2D';
+      zRange.style.visibility = "hidden";
+      scene = scene2D;
+  }
+});
 
-function saveFile(strData, filename) {
+function generatePlot(){
+  let x_range = {
+    min : parseFloat(xRange.querySelector("#minRangeInput").value),
+    max : parseFloat(xRange.querySelector("#maxRangeInput").value)
+  }
+  let y_range = {
+    min : parseFloat(yRange.querySelector("#minRangeInput").value),
+    max : parseFloat(yRange.querySelector("#maxRangeInput").value)
+  }
+  let z_range = {
+    min : parseFloat(zRange.querySelector("#minRangeInput").value),
+    max : parseFloat(zRange.querySelector("#maxRangeInput").value)
+  }
+  console.log(x_range)
+  console.log(y_range)
+  console.log(z_range)
+  renderFunctionMesh(functionInput.value, x_range, y_range, z_range, scene3D)
+}
+
+function saveFile() {
     var strDownloadMime = "image/octet-stream";
     var imgData;
 
@@ -40,7 +77,7 @@ function saveFile(strData, filename) {
           var link = document.createElement('a');
           if (typeof link.download === 'string') {
               document.body.appendChild(link); //Firefox requires the link to be in the body
-              link.download = "test.jpg";
+              link.download = "test.png";
               link.href = imgData.replace(strMime, strDownloadMime);
               link.click();
               document.body.removeChild(link); //remove the link when done
@@ -59,7 +96,7 @@ function saveFile(strData, filename) {
 
 
 
-/*
+
 // Color picker
 var colorWheel = new iro.ColorPicker("#colorPicker", {
   layout: [
@@ -81,21 +118,6 @@ var colorWheel = new iro.ColorPicker("#colorPicker", {
     ]
 });
 
-// Button to switch between 2D and 3D
-iconOf2DMode.addEventListener('click',()=>{
-  if(iconOf2DMode.id==='button-2D'){
-      iconOf2DMode.id='button-3D';
-      zrange.style = "visibility: visible";
-      scene = scene3D;
-      console.log(scene)
-  }
-  else {
-      iconOf2DMode.id='button-2D';
-      zrange.style = "visibility: hidden";
-      scene = scene2D;
-      console.log(scene)
-  }
-});
 
 
 // PrecisionSpeed Slider
@@ -106,7 +128,7 @@ slider.oninput = function() {
   output.innerHTML = this.value;
 }
 
-/*
+
 // Zoom slider TO DO get zoom working
 
 
@@ -117,7 +139,7 @@ zoomslider.oninput = function() {
   scene.style.webkitTransform = "scale("+zoomlevel+")";
 	scene.style.transform = "scale("+zoomlevel+")";
 }
-*/
+
 
 // Main function
 function main() {

@@ -2,24 +2,24 @@ import Delaunator from "delaunator/index.js";
 import * as THREE from "three"
 import Formula from 'fparser';
 
-function calculatePoints(func, size_x, size_z){
+function calculatePoints(func, x_range, y_range, z_range){
     let points = [];
     const fObj = new Formula(func)
-    for (let x = size_x.min; x <= size_x.max; x+=0.01){
-        for (let z = size_z.min; z <= size_z.max; z+=0.01){
+    for (let x = x_range.min; x <= x_range.max; x+=0.01){
+        for (let z = z_range.min; z <= z_range.max; z+=0.01){
             let y = fObj.evaluate({x:x,z:z})
-            points.push(new THREE.Vector3(x,y,z));
+            if(y >= y_range.min && y <= y_range.max){
+                points.push(new THREE.Vector3(x,y,z));
+            }
         }
     }
     console.log(points)
     return points
 }
 
-function renderFunctionMesh(func, scene){
-    let num = 0.5
-    let size_x = { min: -num, max: num}
-    let size_z = { min: -num, max: num}
-    let points3d = calculatePoints(func, size_x, size_z)
+function renderFunctionMesh(func, x_range, y_range, z_range, scene){
+
+    let points3d = calculatePoints(func, x_range, y_range, z_range)
     
 
     for(let i = 0; i < points3d.length; i++){

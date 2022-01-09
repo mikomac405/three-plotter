@@ -58,25 +58,25 @@
         <div id="button-xml"></div>
     </div>
 
-    <div class="xValueRange">
+    <div class="xValueRange" id="X">
         <span id="rangeSpan">x min range: </span>
-        <input type="text" id="inputRange">
+        <input type="text" id="minRangeInput" value="-1">
         <span id="rangeSpan">x max range: </span>
-        <input type="text" id="inputRange">
+        <input type="text" id="maxRangeInput" value="1">
     </div>
 
-    <div class="yValueRange">
+    <div class="yValueRange" id="Y">
         <span id="rangeSpan">y min range: </span>
-        <input type="text" id="inputRange">
+        <input type="text" id="minRangeInput" value="-1">
         <span id="rangeSpan">y max range: </span>
-        <input type="text" id="inputRange">
+        <input type="text" id="maxRangeInput" value="1">
     </div>
     
-    <div class="zValueRange">
+    <div class="zValueRange" id="Z">
         <span id="rangeSpan">z min range: </span>
-        <input type="text" id="inputRange">
+        <input type="text" id="minRangeInput" value="-1">
         <span id="rangeSpan">z max range: </span>
-        <input type="text" id="inputRange">
+        <input type="text" id="maxRangeInput" value="1">
     </div>   
 
     <div class="button-2D-3D">
@@ -84,7 +84,7 @@
     </div>
 
     <div class="slideZoomContainer">
-        <span id="zoomSpan">Zomm</span>
+        <span id="zoomSpan">Scale</span>
         <input type="range" min="1" max="100" value="50" class="slider" id="zoomer" oninput="zoomfunction()">
     </div>
 
