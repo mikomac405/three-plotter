@@ -88,7 +88,7 @@ body {
           box-shadow: 0px 0px 15px 2px rgba(0, 0, 0, 0.6);
 }
 
-#inputRange {
+#minRangeInput, #maxRangeInput {
   font-size: 15px;
   width: 100px;
   color: white;
