@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2D plot</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+<body>
+    <canvas id="2d-graph" width="1200" height="800" onmouseover="scrollingEvent()">
+        CANVAS NOT SUPPORTED IN THIS BROWSER
+    </canvas>
+    <input type="text" id="function-code" placeholder="x*x OR Math.sin(x)*Math.sin(2*x)">
+    <br>
+    <input type="text" id="x-right-bound" placeholder="x right bound">
+    <input type="text" id="x-left-bound" placeholder="x left bound">
+    <input type="text" id="x-precision" placeholder="x precision">
+    <input type="color" id="plot-color" name="plot-color" value="#ff0000"><br>
+    <button onclick="init(false)">Draw</button>
+    <button onclick="init(true)">Draw only points</button><br>
+    <a href="#" id="downloader_png" onclick="downloadPlot('PNG')" download="image.png">Download graph as PNG</a><br>
+    <a href="#" id="downloader_jpg" onclick="downloadPlot('JPG')" download="image.jpg">Download graph as JPG</a><br>
+    <script src="app.js"></script>
+</body>
+</html>
