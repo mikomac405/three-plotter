@@ -47,9 +47,9 @@ body {
   top: 0;
   left: 0;
   border-radius: 10px;
-  margin: 1vh 1vh 1vh 1vh;
-  width: 3vh;
-  height: 3vh;
+  margin: 10px 10px 10px 10px;
+  width: 40px;
+  height: 40px;
   padding: 5px 5px;
   background-color: rgba(0, 0, 0, 0.2);
   -webkit-box-shadow: 0px 0px 15px 2px rgba(0, 0, 0, 0.6);
@@ -61,9 +61,9 @@ body {
   bottom: 0;
   left: 0;
   border-radius: 10px;
-  margin: 1vh 1vh 1vh 1vh;
-  width: 3vh;
-  height: 3vh;
+  margin: 10px 10px 10px 10px;
+  width: 40px;
+  height: 40px;
   padding: 5px 5px;
   background-color: rgba(0, 0, 0, 0.2);
   -webkit-box-shadow: 0px 0px 15px 2px rgba(0, 0, 0, 0.6);
@@ -71,33 +71,47 @@ body {
 }
 
 .inputFunction {
+  font-size: 20px;
   position: absolute;
   color: white;
   top: 0;
   outline: 0;
-  right: 5vh;
+  right: 60px;
   border: 0;
   border-radius: 10px;
-  margin: 1vh 1vh 1vh 1vh;
-  width: 15vh;
-  height: 3vh;
+  margin: 10px 10px 10px 10px;
+  width: 140px;
+  height: 40px;
   padding: 5px 5px;
   background-color: rgba(0, 0, 0, 0.2);
   -webkit-box-shadow: 0px 0px 15px 2px rgba(0, 0, 0, 0.6);
           box-shadow: 0px 0px 15px 2px rgba(0, 0, 0, 0.6);
 }
 
+#inputRange {
+  font-size: 15px;
+  width: 100px;
+  color: white;
+  background-color: rgba(0, 0, 0, 0);
+  outline: 0;
+  border: 0;
+}
+
+#rangeSpan {
+  font-family: sans-serif, Helvetica;
+  font-size: 15px;
+}
+
 .addFunction {
   position: absolute;
-  color: white;
   top: 0;
   outline: 0;
   right: 0;
   border: 0;
   border-radius: 10px;
-  margin: 1vh 1vh 1vh 1vh;
-  width: 3vh;
-  height: 3vh;
+  margin: 10px 10px 10px 10px;
+  width: 40px;
+  height: 40px;
   padding: 5px 5px;
   background-color: rgba(0, 0, 0, 0.2);
   -webkit-box-shadow: 0px 0px 15px 2px rgba(0, 0, 0, 0.6);
@@ -106,12 +120,12 @@ body {
 
 .dock {
   position: absolute;
-  top: 5vh;
+  top: 60px;
   right: 0vh;
   border-radius: 10px;
-  margin: 1vh 1vh 1vh 1vh;
-  width: 20vh;
-  height: 20vh;
+  margin: 10px 10px 10px 10px;
+  width: 200px;
+  height: 240px;
   padding: 5px 5px;
   background-color: rgba(0, 0, 0, 0.2);
   -webkit-box-shadow: 0px 0px 15px 2px rgba(0, 0, 0, 0.6);
@@ -121,12 +135,60 @@ body {
 .sliderContainer {
   position: absolute;
   text-align: center;
-  top: 27vh;
+  top: 500px;
   right: 0vh;
   border-radius: 10px;
-  margin: 1vh 1vh 1vh 1vh;
-  width: 20vh;
-  height: 5vh;
+  margin: 10px 10px 10px 10px;
+  width: 200px;
+  height: 40px;
+  padding: 5px 5px;
+  background-color: rgba(0, 0, 0, 0.2);
+  -webkit-box-shadow: 0px 0px 15px 2px rgba(0, 0, 0, 0.6);
+          box-shadow: 0px 0px 15px 2px rgba(0, 0, 0, 0.6);
+}
+
+.xml {
+  position: absolute;
+  top: 620px;
+  outline: 0;
+  right: 0;
+  border: 0;
+  border-radius: 10px;
+  margin: 10px 10px 10px 10px;
+  width: 40px;
+  height: 40px;
+  padding: 5px 5px;
+  background-color: rgba(0, 0, 0, 0.2);
+  -webkit-box-shadow: 0px 0px 15px 2px rgba(0, 0, 0, 0.6);
+          box-shadow: 0px 0px 15px 2px rgba(0, 0, 0, 0.6);
+}
+
+.png {
+  position: absolute;
+  top: 620px;
+  outline: 0;
+  right: 80px;
+  border: 0;
+  border-radius: 10px;
+  margin: 10px 10px 10px 10px;
+  width: 40px;
+  height: 40px;
+  padding: 5px 5px;
+  background-color: rgba(0, 0, 0, 0.2);
+  -webkit-box-shadow: 0px 0px 15px 2px rgba(0, 0, 0, 0.6);
+          box-shadow: 0px 0px 15px 2px rgba(0, 0, 0, 0.6);
+}
+
+.jpg {
+  position: absolute;
+  top: 620px;
+  outline: 0;
+  right: 160px;
+  border: 0;
+  border-radius: 10px;
+  margin: 10px 10px 10px 10px;
+  width: 40px;
+  height: 40px;
   padding: 5px 5px;
   background-color: rgba(0, 0, 0, 0.2);
   -webkit-box-shadow: 0px 0px 15px 2px rgba(0, 0, 0, 0.6);
@@ -135,28 +197,28 @@ body {
 
 .inSliderUp {
   display: inline-block;
-  width: 20vh;
+  width: 200px;
   height: 2vh;
 }
 
 .inSliderDown {
   display: inline-block;
-  margin: 1vh 0vh 0vh 0vh;
-  width: 20vh;
+  margin: 10px 0px 0px 0px;
+  width: 200px;
   height: 2vh;
 }
 
 #speedPrecision {
   color: white;
-  font-family: sans-serif;
+  font-family: sans-serif, Helvetica;
   display: inline-block;
 }
 
 .slider {
   -webkit-appearance: none;
-  width: 20vh;
-  height: 1vh;
-  margin: 0;
+  width: 200px;
+  height: 10px;
+  margin: 0px;
   border-radius: 15px;
   -moz-appearance: none;
        appearance: none;
@@ -181,70 +243,74 @@ body {
 
 #Precision {
   color: white;
-  font-family: sans-serif;
-  font-size: 2rem;
+  font-family: sans-serif, Helvetica;
   display: inline-block;
 }
 
-.xvaluerangee {
+.xValueRange {
   position: absolute;
   color: white;
-  top: 8vh;
+  top: 320px;
   right: 0;
   border-radius: 10px;
-  margin: 1vh 1vh 1vh 1vh;
-  width: 20vh;
-  height: auto;
+  margin: 10px 10px 10px 10px;
+  width: 200px;
+  height: 40px;
   padding: 5px 5px;
   background-color: rgba(0, 0, 0, 0.2);
   -webkit-box-shadow: 0px 0px 15px 2px rgba(0, 0, 0, 0.6);
           box-shadow: 0px 0px 15px 2px rgba(0, 0, 0, 0.6);
 }
 
-.yvaluerangee {
+.yValueRange {
   position: absolute;
   color: white;
-  top: 19vh;
+  top: 380px;
   right: 0;
   border-radius: 10px;
-  margin: 1vh 1vh 1vh 1vh;
-  width: 20vh;
-  height: auto;
+  margin: 10px 10px 10px 10px;
+  width: 200px;
+  height: 40px;
   padding: 5px 5px;
   background-color: rgba(0, 0, 0, 0.2);
   -webkit-box-shadow: 0px 0px 15px 2px rgba(0, 0, 0, 0.6);
           box-shadow: 0px 0px 15px 2px rgba(0, 0, 0, 0.6);
 }
 
-.zvaluerangee {
+.zValueRange {
   position: absolute;
-  display: block;
   color: white;
-  top: 30vh;
+  top: 440px;
   right: 0;
   border-radius: 10px;
-  margin: 1vh 1vh 1vh 1vh;
-  width: 20vh;
-  height: auto;
+  margin: 10px 10px 10px 10px;
+  width: 200px;
+  height: 40px;
   padding: 5px 5px;
   background-color: rgba(0, 0, 0, 0.2);
   -webkit-box-shadow: 0px 0px 15px 2px rgba(0, 0, 0, 0.6);
           box-shadow: 0px 0px 15px 2px rgba(0, 0, 0, 0.6);
 }
 
-.slidezoomcontainer {
+.slideZoomContainer {
   position: absolute;
   color: white;
-  bottom: 5vh;
-  right: 40%;
+  text-align: center;
+  top: 560px;
+  right: 0;
   border-radius: 10px;
-  margin: 1vh 1vh 1vh 1vh;
-  width: 20%;
-  height: auto;
+  margin: 10px 10px 10px 10px;
+  width: 200px;
+  height: 40px;
   padding: 5px 5px;
-  background-color: rgba(172, 80, 52, 0.2);
-  -webkit-box-shadow: 0px 0px 15px 2px rgba(7, 204, 89, 0.6);
-          box-shadow: 0px 0px 15px 2px rgba(7, 204, 89, 0.6);
+  background-color: rgba(0, 0, 0, 0.2);
+  -webkit-box-shadow: 0px 0px 15px 2px rgba(0, 0, 0, 0.6);
+          box-shadow: 0px 0px 15px 2px rgba(0, 0, 0, 0.6);
+}
+
+#zoomSpan {
+  color: white;
+  font-family: sans-serif, Helvetica;
 }
 
 #writer {
@@ -254,41 +320,65 @@ body {
 
 #light-dark-button {
   position: absolute;
-  height: 3vh;
-  width: 3vh;
+  height: 40px;
+  width: 40px;
   background-image: url(../resources/moon.png);
-  background-size: 3vh,3vh;
+  background-size: 40px, 40px;
 }
 
 #light-dark-button.transition1 {
   position: absolute;
-  height: 3vh;
-  width: 3vh;
+  height: 40px;
+  width: 40px;
   background-image: url(../resources/sun.png);
-  background-size: 3vh,3vh;
+  background-size: 40px, 40px;
 }
 
 #button-2D {
   position: absolute;
-  height: 3vh;
-  width: 3vh;
+  height: 40px;
+  width: 40px;
   background-image: url(../resources/2D.png);
-  background-size: 3vh,3vh;
+  background-size: 40px, 40px;
 }
 
 #button-3D {
   position: absolute;
-  height: 3vh;
-  width: 3vh;
+  height: 40px;
+  width: 40px;
   background-image: url(../resources/3D.png);
-  background-size: 3vh,3vh;
+  background-size: 40px, 40px;
 }
 
 #button-plus {
   position: absolute;
-  height: 3vh;
-  width: 3vh;
+  height: 40px;
+  width: 40px;
   background-image: url(../resources/plus.png);
-  background-size: 3vh,3vh;
+  background-size: 40px, 40px;
+}
+
+#button-xml {
+  position: absolute;
+  height: 40px;
+  width: 40px;
+  background-image: url(../resources/xml.png);
+  background-size: 40px, 40px;
+}
+
+#button-jpg {
+  position: absolute;
+  height: 40px;
+  width: 40px;
+  background-image: url(../resources/jpg.png);
+  background-size: 40px, 40px;
+}
+
+#button-png {
+  position: absolute;
+  height: 40px;
+  width: 40px;
+  background-image: url(../resources/png.png);
+  background-size: 40px, 40px;
 }
 /*# sourceMappingURL=style.css.map */

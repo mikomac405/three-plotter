@@ -81,27 +81,6 @@ var colorWheel = new iro.ColorPicker("#colorPicker", {
     ]
 });
 
-// OUR COLOR PICKER
-var colorCanvas = document.getElementsById('ourPicker');
-var ColorCtx = colorCanvas .getContext('2d');  // This create a 2D context for the canvas
-
-var color = 'rgba(0,0,255,1)';
-let gradientH = ColorCtx .createLinearGradient(0, 0, ColorCtx .canvas.width, 0);
-gradientH.addColorStop(0, '#fff');
-gradientH.addColorStop(1, color);
-ColorCtx .fillStyle = gradientH;
-ColorCtx .fillRect(0, 0, ColorCtx .canvas.width, ColorCtx .canvas.height);
-
- let gradientV = ColorCtx .createLinearGradient(0, 0, 0, 300);
- gradientV.addColorStop(0, 'rgba(0,0,0,0)');
- gradientV.addColorStop(1, '#000');
- ColorCtx .fillStyle = gradientV;
- ColorCtx .fillRect(0, 0, ColorCtx .canvas.width,
-ColorCtx .canvas.height); 
-*/
-// Button to switch between light and dark mode
-
-
 // Button to switch between 2D and 3D
 iconOf2DMode.addEventListener('click',()=>{
   if(iconOf2DMode.id==='button-2D'){
@@ -118,6 +97,7 @@ iconOf2DMode.addEventListener('click',()=>{
   }
 });
 
+
 // PrecisionSpeed Slider
 var slider = document.getElementById("Efficiency");
 var output = document.getElementById("Precision");
@@ -126,7 +106,10 @@ slider.oninput = function() {
   output.innerHTML = this.value;
 }
 
+/*
 // Zoom slider TO DO get zoom working
+
+
 var zoomslider = document.getElementById("zoomer");
 output.innerHTML = slider.value;
 zoomslider.oninput = function() {
@@ -134,6 +117,7 @@ zoomslider.oninput = function() {
   scene.style.webkitTransform = "scale("+zoomlevel+")";
 	scene.style.transform = "scale("+zoomlevel+")";
 }
+*/
 
 // Main function
 function main() {
