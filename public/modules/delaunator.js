@@ -1,6 +1,7 @@
 import Delaunator from "delaunator/index.js";
 import * as THREE from "three"
 import Formula from 'fparser';
+import { plot3D } from "../classes/plot3D.js"
 
 function calculatePoints(func, x_range, y_range, z_range){
     let points = [];
@@ -13,18 +14,18 @@ function calculatePoints(func, x_range, y_range, z_range){
             }
         }
     }
-    console.log(points)
     return points
 }
 
 function renderFunctionMesh(func, x_range, y_range, z_range, scene){
 
+
     let points3d = calculatePoints(func, x_range, y_range, z_range)
     
 
-    for(let i = 0; i < points3d.length; i++){
-        console.log(`Point ${i} -> x: ${points3d[i].x} | y: ${points3d[i].y} | z: ${points3d[i].z}`)
-    }
+    // for(let i = 0; i < points3d.length; i++){
+    //     console.log(`Point ${i} -> x: ${points3d[i].x} | y: ${points3d[i].y} | z: ${points3d[i].z}`)
+    // }
 
     let mat = new THREE.PointsMaterial({ color: 0x99ccff, size: 2 })
     mat.side = 2
@@ -52,7 +53,13 @@ function renderFunctionMesh(func, x_range, y_range, z_range, scene){
     mesh.material.flatShading = false
     mesh.material.side = THREE.DoubleSide
 
-    scene.add(mesh);
+    let plt = new plot3D(func, mesh)
+
+    console.log(plt)
+
+    scene.add(plt.mesh)
+
+    return plt;
 }
 
 export { calculatePoints, renderFunctionMesh };
