@@ -1,8 +1,13 @@
-$font-stack: Helvetica, sans-serif;
+$font-stack: sans-serif,Helvetica;
 $dark-upper-gradient-background: rgb(49, 49, 49);
 $dark-bottom-gradient-background: rgb(8, 38, 94);
 $light-upper-gradient-background: rgb(204, 204, 204);
 $light-bottom-gradient-background: rgb(149, 186, 255);
+$widthOfOpt: 200px;
+$widthOfInputFunc: 140px;
+$widthOfButton: 40px;
+$margin: 10px;
+
 /* comment be like haha */
 
 html{
@@ -51,10 +56,10 @@ body{
   position: absolute;
   top: 0;
   left: 0;
-  border-radius: 10px;
-  margin: 1vh 1vh 1vh 1vh;
-  width: 3vh;
-  height:3vh;
+  border-radius: $margin;
+  margin: $margin $margin $margin $margin;
+  width: $widthOfButton;
+  height:$widthOfButton;
   padding: 5px 5px;
   background-color: rgba(0, 0, 0, 0.2);
   box-shadow: 0px 0px 15px 2px rgba(0, 0, 0, 0.6);
@@ -64,42 +69,56 @@ body{
   position: absolute;
   bottom: 0;
   left: 0;
-  border-radius: 10px;
-  margin: 1vh 1vh 1vh 1vh;
-  width: 3vh;
-  height:3vh;
+  border-radius: $margin;
+  margin: $margin $margin $margin $margin;
+  width: $widthOfButton;
+  height:$widthOfButton;
   padding: 5px 5px;
   background-color: rgba(0, 0, 0, 0.2);
   box-shadow: 0px 0px 15px 2px rgba(0, 0, 0, 0.6);
 }
 
 .inputFunction{
+  font-size: 20px;
   position: absolute;
   color: white;
   top: 0;
   outline: 0;
-  right: 5vh;
+  right: $widthOfButton + $margin + $margin;
   border: 0;
-  border-radius: 10px;
-  margin: 1vh 1vh 1vh 1vh;
-  width: 15vh;
-  height:3vh;
+  border-radius: $margin;
+  margin: $margin $margin $margin $margin;
+  width: $widthOfInputFunc;
+  height:$widthOfButton;
   padding: 5px 5px;
   background-color: rgba(0, 0, 0, 0.2);
   box-shadow: 0px 0px 15px 2px rgba(0, 0, 0, 0.6);
 }
 
+#inputRange{
+  font-size: 15px;
+  width: 100px;
+  color: white;
+  background-color: rgba(0, 0, 0, 0);
+  outline: 0;
+  border: 0;
+}
+
+#rangeSpan{
+  font-family: $font-stack;
+  font-size: 15px;
+}
+
 .addFunction{
   position: absolute;
-  color: white;
   top: 0;
   outline: 0;
   right: 0;
   border: 0;
-  border-radius: 10px;
-  margin: 1vh 1vh 1vh 1vh;
-  width: 3vh;
-  height:3vh;
+  border-radius: $margin;
+  margin: $margin $margin $margin $margin;
+  width: $widthOfButton;
+  height:$widthOfButton;
   padding: 5px 5px;
   background-color: rgba(0, 0, 0, 0.2);
   box-shadow: 0px 0px 15px 2px rgba(0, 0, 0, 0.6);
@@ -107,12 +126,12 @@ body{
 
 .dock{
   position: absolute;
-  top: 5vh;
+  top: $widthOfButton + $margin + $margin;
   right: 0vh;
-  border-radius: 10px;
-  margin: 1vh 1vh 1vh 1vh;
-  width: 20vh;
-  height:20vh;
+  border-radius: $margin;
+  margin: $margin $margin $margin $margin;
+  width: $widthOfOpt;
+  height: $widthOfOpt + 40px;
   padding: 5px 5px;
   background-color: rgba(0, 0, 0, 0.2);
   box-shadow: 0px 0px 15px 2px rgba(0, 0, 0, 0.6);
@@ -121,12 +140,57 @@ body{
 .sliderContainer{
   position: absolute;
   text-align: center;
-  top: 27vh;
+  top: $widthOfButton + $margin + $margin + $margin + $margin + $widthOfOpt + 40px+ $margin + $margin + $widthOfButton + $margin + $margin + $widthOfButton + $margin + $margin + $widthOfButton;
   right: 0vh;
-  border-radius: 10px;
-  margin: 1vh 1vh 1vh 1vh;
-  width: 20vh;
-  height:5vh;
+  border-radius: $margin;
+  margin: $margin $margin $margin $margin;
+  width: $widthOfOpt;
+  height:$widthOfButton;
+  padding: 5px 5px;
+  background-color: rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 0px 15px 2px rgba(0, 0, 0, 0.6);
+}
+
+.xml{
+  position: absolute;
+  top: $widthOfButton + $margin + $margin + $margin + $margin + $widthOfOpt + $margin + $widthOfButton + $margin + 40px + $margin + $margin + $widthOfButton+ $margin + $margin + $widthOfButton+ $margin + $margin + $widthOfButton+ $margin + $margin + $widthOfButton;
+  outline: 0;
+  right: 0;
+  border: 0;
+  border-radius: $margin;
+  margin: $margin $margin $margin $margin;
+  width: $widthOfButton;
+  height:$widthOfButton;
+  padding: 5px 5px;
+  background-color: rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 0px 15px 2px rgba(0, 0, 0, 0.6);
+}
+
+.png{
+  position: absolute;
+  top: $widthOfButton + $margin + $margin + $margin + $margin + $widthOfOpt + $margin + $widthOfButton + $margin + 40px + $margin + $margin + $widthOfButton+ $margin + $margin + $widthOfButton+ $margin + $margin + $widthOfButton+ $margin + $margin + $widthOfButton;
+  outline: 0;
+  right: $widthOfButton + $margin + $margin + $margin + $margin;
+  border: 0;
+  border-radius: $margin;
+  margin: $margin $margin $margin $margin;
+  width: $widthOfButton;
+  height:$widthOfButton;
+  padding: 5px 5px;
+  background-color: rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 0px 15px 2px rgba(0, 0, 0, 0.6);
+}
+
+.jpg{
+  position: absolute;
+  top: $widthOfButton + $margin + $margin + $margin + $margin + $widthOfOpt + $margin + $widthOfButton + $margin + 40px + $margin + $margin + $widthOfButton+ $margin + $margin + $widthOfButton+ $margin + $margin + $widthOfButton+ $margin + $margin + $widthOfButton;
+  outline: 0;
+  right: $widthOfButton + $margin + $margin + $margin + $margin + $margin + $margin + $widthOfButton + $margin + $margin;
+  border: 0;
+  border-radius: $margin;
+  margin: $margin $margin $margin $margin;
+  width: $widthOfButton;
+  height:$widthOfButton;
   padding: 5px 5px;
   background-color: rgba(0, 0, 0, 0.2);
   box-shadow: 0px 0px 15px 2px rgba(0, 0, 0, 0.6);
@@ -134,28 +198,28 @@ body{
 
 .inSliderUp{
   display: inline-block;
-  width: 20vh;
+  width: $widthOfOpt;
   height:2vh;
 }
 
 .inSliderDown{
   display: inline-block;
-  margin: 1vh 0vh 0vh 0vh;
-  width: 20vh;
+  margin: $margin 0px 0px 0px;
+  width: $widthOfOpt;
   height:2vh;
 }
 
 #speedPrecision{
   color: rgb(255, 255, 255);
-  font-family: sans-serif;
+  font-family: $font-stack;
   display: inline-block;
 }
 
 .slider{
   -webkit-appearance: none;
-  width: 20vh;
-  height:1vh;
-  margin:0;
+  width: $widthOfOpt;
+  height:10px;
+  margin:0px;
   border-radius: 15px;
   appearance: none;
   display: inline-block;
@@ -177,66 +241,70 @@ body{
 
 #Precision{
   color: rgb(255, 255, 255);
-  font-family: sans-serif;
-  font-size: 2rem;
+  font-family: $font-stack;
   display: inline-block;
 }
 
-.xvaluerangee {
+.xValueRange {
   position: absolute;
   color: white;
-  top: 8vh;
+  top: $widthOfButton + $margin + $margin + $margin + $margin + $widthOfOpt + 40px;
   right: 0;
   border-radius: 10px;
-  margin: 1vh 1vh 1vh 1vh;
-  width: 20vh;
-  height: auto;
+  margin: $margin $margin $margin $margin;
+  width: $widthOfOpt;
+  height: $widthOfButton;
   padding: 5px 5px;
   background-color: rgba(0, 0, 0, 0.2);
   box-shadow: 0px 0px 15px 2px rgba(0, 0, 0, 0.6);
 }
 
-.yvaluerangee {
+.yValueRange {
   position: absolute;
   color: white;
-  top: 19vh;
+  top: $widthOfButton + $margin + $margin + $margin + $margin + $widthOfOpt + $margin + $widthOfButton + $margin + 40px;
   right: 0;
   border-radius: 10px;
-  margin: 1vh 1vh 1vh 1vh;
-  width: 20vh;
-  height: auto;
+  margin: $margin $margin $margin $margin;
+  width: $widthOfOpt;
+  height: $widthOfButton;
   padding: 5px 5px;
   background-color: rgba(0, 0, 0, 0.2);
   box-shadow: 0px 0px 15px 2px rgba(0, 0, 0, 0.6);
 }
 
-.zvaluerangee {
+.zValueRange {
   position: absolute;
-  display: block;
   color: white;
-  top: 30vh;
+  top: $widthOfButton + $margin + $margin + $margin + $margin + $widthOfOpt + $margin + $widthOfButton + $margin + 40px + $margin + $margin + $widthOfButton;
   right: 0;
   border-radius: 10px;
-  margin: 1vh 1vh 1vh 1vh;
-  width: 20vh;
-  height: auto;
+  margin: $margin $margin $margin $margin;
+  width: $widthOfOpt;
+  height: $widthOfButton;
   padding: 5px 5px;
   background-color: rgba(0, 0, 0, 0.2);
   box-shadow: 0px 0px 15px 2px rgba(0, 0, 0, 0.6);
 }
 
-.slidezoomcontainer {
+.slideZoomContainer {
   position: absolute;
   color: white;
-  bottom: 5vh;
-  right: 40%;
+  text-align: center;
+  top: $widthOfButton + $margin + $margin + $margin + $margin + $widthOfOpt + $margin + $widthOfButton + $margin + 40px+ $margin + $margin + $widthOfButton + $margin + $margin + $widthOfButton + $margin + $margin + $widthOfButton;
+  right: 0;
   border-radius: 10px;
-  margin: 1vh 1vh 1vh 1vh;
-  width: 20%;
-  height: auto;
+  margin: $margin $margin $margin $margin;
+  width: $widthOfOpt;
+  height: $widthOfButton;
   padding: 5px 5px;
-  background-color: rgba(172, 80, 52, 0.2);
-  box-shadow: 0px 0px 15px 2px rgba(7, 204, 89, 0.6);
+  background-color: rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 0px 15px 2px rgba(0, 0, 0, 0.6);
+}
+
+#zoomSpan{
+  color: rgb(255, 255, 255);
+  font-family: $font-stack;
 }
 
 #writer{
@@ -246,40 +314,64 @@ body{
 
 #light-dark-button{
   position: absolute;
-  height: 3vh;
-  width: 3vh;
+  height: $widthOfButton;
+  width: $widthOfButton;
   background-image: url(../resources/moon.png);
-  background-size: 3vh,3vh;
+  background-size: $widthOfButton,$widthOfButton;
 }
 
 #light-dark-button.transition1{
   position: absolute;
-  height: 3vh;
-  width: 3vh;
+  height: $widthOfButton;
+  width: $widthOfButton;
   background-image: url(../resources/sun.png);
-  background-size: 3vh,3vh;
+  background-size: $widthOfButton,$widthOfButton;
 }
 
 #button-2D{
   position: absolute;
-  height: 3vh;
-  width: 3vh;
+  height: $widthOfButton;
+  width: $widthOfButton;
   background-image: url(../resources/2D.png);
-  background-size: 3vh,3vh;
+  background-size: $widthOfButton,$widthOfButton;
 }
 
 #button-3D{
   position: absolute;
-  height: 3vh;
-  width: 3vh;
+  height: $widthOfButton;
+  width: $widthOfButton;
   background-image: url(../resources/3D.png);
-  background-size: 3vh,3vh;
+  background-size: $widthOfButton,$widthOfButton;
 }
 
 #button-plus{
   position: absolute;
-  height: 3vh;
-  width: 3vh;
+  height: $widthOfButton;
+  width: $widthOfButton;
   background-image: url(../resources/plus.png);
-  background-size: 3vh,3vh;
+  background-size: $widthOfButton , $widthOfButton;
+}
+
+#button-xml{
+  position: absolute;
+  height: $widthOfButton;
+  width: $widthOfButton;
+  background-image: url(../resources/xml.png);
+  background-size: $widthOfButton , $widthOfButton;
+}
+
+#button-jpg{
+  position: absolute;
+  height: $widthOfButton;
+  width: $widthOfButton;
+  background-image: url(../resources/jpg.png);
+  background-size: $widthOfButton , $widthOfButton;
+}
+
+#button-png{
+  position: absolute;
+  height: $widthOfButton;
+  width: $widthOfButton;
+  background-image: url(../resources/png.png);
+  background-size: $widthOfButton , $widthOfButton;
 }

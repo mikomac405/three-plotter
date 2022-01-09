@@ -32,44 +32,58 @@
     <div class="addFunction">
         <div id="button-plus"></div>
     </div>
+
     <div class="dock">
-        <!--<div id="colorPicker"></div>-->
+        <div id="colorPicker"></div>
     </div>
+
     <div class="sliderContainer">
         <div class="inSliderUp">
             <span id="speedPrecision"> Precision / Speed: </span>
-        </div>
-            <span id="Precision" style="font-size: large"></span>
-        
-        <div class="xvaluerangee" id="xvaluerange">
-            <span>X minimum range</span>
-            <input type="text" id="x_min_range">
-            <span>X maximum range</span>
-            <input type="text" id="x_min_range">
-        </div>
-        <div class="yvaluerangee" id="yvaluerange">
-            <span>Y minimum range</span>
-            <input type="text" id="y_min_range">
-            <span>Y maximum range</span>
-            <input type="text" id="y_min_range">
-        </div>
-        <div class="inSliderDown">
+            <span id="Precision"></span>
             <input type="range" min="1" max="100" value="50" class="slider" id="Efficiency">
         </div>
-        
-        <div class="zvaluerangee" id="zvaluerange" style="visibility: visible">
-            <span>Z minimum range</span>
-            <input type="text" id="z_min_range">
-            <span>Z maximum range</span>
-            <input type="text" id="z_min_range">
-        </div>   
     </div>
+          
+    <div class="jpg">
+        <div id="button-jpg"></div>
+    </div>
+
+    <div class="png">
+        <div id="button-png"></div>
+    </div>
+
+    <div class="xml">
+        <div id="button-xml"></div>
+    </div>
+
+    <div class="xValueRange">
+        <span id="rangeSpan">x min range: </span>
+        <input type="text" id="inputRange">
+        <span id="rangeSpan">x max range: </span>
+        <input type="text" id="inputRange">
+    </div>
+
+    <div class="yValueRange">
+        <span id="rangeSpan">y min range: </span>
+        <input type="text" id="inputRange">
+        <span id="rangeSpan">y max range: </span>
+        <input type="text" id="inputRange">
+    </div>
+    
+    <div class="zValueRange">
+        <span id="rangeSpan">z min range: </span>
+        <input type="text" id="inputRange">
+        <span id="rangeSpan">z max range: </span>
+        <input type="text" id="inputRange">
+    </div>   
+
     <div class="button-2D-3D">
         <div id="button-2D"></div>
     </div>
 
-    <div class="slidezoomcontainer">
-        <span><center>Zoom</center></span>
+    <div class="slideZoomContainer">
+        <span id="zoomSpan">Zomm</span>
         <input type="range" min="1" max="100" value="50" class="slider" id="zoomer" oninput="zoomfunction()">
     </div>
 
