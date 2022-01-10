@@ -3,16 +3,23 @@ import { renderFunctionMesh } from "./modules/delaunator.js"
 import { OrbitControls }  from "three/examples/jsm/controls/OrbitControls";
 import Formula from 'fparser';
 import { plot3D } from "./classes/plot3D.js"
+import { plot2D } from "./classes/plot2D.js"
 
 // ============================ Default environment
 const scene3D = new THREE.Scene();
-const scene2D = new THREE.Scene();
+const scene2D = "2D";
 const canvas = document.getElementById('writer');
+let container2D = document.getElementById("container2D")
+let canvas_2d = document.getElementById("2d-graph");
 const renderer = new THREE.WebGLRenderer({canvas,alpha: true, preserveDrawingBuffer: true });
 
 // ============================ Scene logic
 // Default scene
 let scene = scene3D;
+
+// Hide 2d canvas and container from default
+container2D.style.display = 'none';
+canvas_2d.style.visibility = "hidden";
 
 // Button to switch between 2D and 3D
 const iconOf2DMode = document.getElementById('button-2D');
@@ -23,12 +30,21 @@ iconOf2DMode.addEventListener('click',()=>{
   if(iconOf2DMode.id==='button-2D'){
       iconOf2DMode.id='button-3D';
       zRange.style.visibility = "visible";
+      canvas.style.visibility = "visible";
+      canvas_2d.style.visibility = "hidden";
+      container2D.style.display = 'none';
       scene = scene3D;
+      changeScene(scene);
   }
   else {
       iconOf2DMode.id='button-2D';
       zRange.style.visibility = "hidden";
+      canvas.style.visibility = "hidden";
+      canvas_2d.style.visibility = "visible";
+      container2D.style.display = 'block';
       scene = scene2D;
+      DrawFirstAxes();
+      changeScene(scene);
   }
 });
 
@@ -57,8 +73,246 @@ let plots3D = []
 let plots2D = []
 
 addFunc.addEventListener('click',()=>{
-  generatePlot()
+  if (scene == scene2D){
+    generatePlot2D();
+  }else{
+    generatePlot()
+  }
 });
+
+// ============== 2D Plot logic ============
+
+let onlyPointsGlobal = false;
+let Ctx = null;
+let Width = canvas_2d.width;
+let Height = canvas_2d.height;
+let xLeftBound = parseFloat(xRange.querySelector("#minRangeInput").value);
+let xRightBound = parseFloat(xRange.querySelector("#maxRangeInput").value);
+
+function DrawFirstAxes(){
+  if (canvas_2d.getContext){
+    xLeftBound = parseFloat(xRange.querySelector("#minRangeInput").value);
+    xRightBound = parseFloat(xRange.querySelector("#maxRangeInput").value);
+    Ctx = canvas_2d.getContext("2d");
+    Ctx.clearRect(0,0,Width,Height);
+
+    DrawAxes();
+  }
+}
+
+// Returns the right boundary of the logical viewport
+function MaxX(){
+  return xRightBound;
+}
+
+// Returns the left boundary of the logical viewport
+function MinX(){
+  return xLeftBound;
+}
+
+// Returns the top boundary of the logical viewport
+function MaxY(){
+  return MaxX() * Height / Width;
+  // return parseFloat(yRange.querySelector("#maxRangeInput").value);
+}
+
+// Returns the bottom boundary of the logical viewport
+function MinY(){
+  return MinX() * Height / Width;
+  // return parseFloat(yRange.querySelector("#minRangeInput").value);
+}
+
+// Returns the phycisal x-coordinate of a logical x-coordinate
+function XC(x){
+  return (x - MinX()) / (MaxX() - MinX()) * Width;
+}
+
+// Returns the phycisal y-coordinate of a logical y-coordinate
+function YC(y){
+  return Height - (y - MinY()) / (MaxY() - MinY()) * Height;
+}
+
+// Clears the canvas, draws the axes and plot the function F that is evaluted from input
+function Draw(){
+  let F = function(x){
+      return eval(document.getElementById('input').value)
+  }
+  
+  if (canvas_2d.getContext){
+      Ctx = canvas_2d.getContext("2d");
+      // Ctx.clearRect(0,0,Width,Height);  // Reset the whole canvas 
+
+      DrawAxes();
+      if (onlyPointsGlobal){
+        console.log("RENDER POINTS ONLY")
+          // RenderFunctionWithPointsOnly(F)
+      }else{
+          RenderFunction(F);
+      }
+      
+  }
+}
+
+// Returns the distance between ticks on X/Y axis
+function XTickDelta(){
+  return 1;
+}
+
+function YTickDelta(){
+  return 1;
+}
+
+function DrawAxes(){
+  Ctx.save();
+  Ctx.strokeStyle = "black";
+  Ctx.lineWidth = 2;
+
+  // Draw positive Y-axis
+  Ctx.beginPath();
+  Ctx.moveTo(XC(0), YC(0));
+  Ctx.lineTo(XC(0), YC(MaxY()));
+  Ctx.stroke();
+
+  // Draw negative Y-axis
+  Ctx.beginPath();
+  Ctx.moveTo(XC(0), YC(0));
+  Ctx.lineTo(XC(0), YC(MinY()));
+  Ctx.stroke();
+
+  // Draw ticks on Y-axis
+  let delta_y = YTickDelta();
+  for(let i=1; (i*delta_y) < MaxY(); ++i){
+      Ctx.beginPath();
+      Ctx.moveTo(XC(0) - 5, YC(i*delta_y));
+      Ctx.lineTo(XC(0) + 5, YC(i*delta_y));
+      Ctx.stroke();
+      Ctx.font = 'bold 11px Arial';
+      Ctx.textAlign = 'start';
+      Ctx.fillStyle = "black";
+      Ctx.fillText(i, XC(0) + 12, YC(i*delta_y) + 3);
+  }
+
+  for(let i=1; (i*delta_y) > MinY(); --i){
+      Ctx.beginPath();
+      Ctx.moveTo(XC(0) - 5, YC(i*delta_y));
+      Ctx.lineTo(XC(0) + 5, YC(i*delta_y));
+      Ctx.stroke();
+      if (i === 0){
+          Ctx.font = 'bold 11px Arial';
+          Ctx.textAlign = 'start';
+          Ctx.fillText(i, XC(0) + 12, YC(i*delta_y) - 5);
+      }else{
+          Ctx.font = 'bold 11px Arial';
+          Ctx.textAlign = 'start';
+          Ctx.fillText(i, XC(0) + 12, YC(i*delta_y) + 3);
+      }
+      
+  }
+
+  // Draw positive X-axis
+  Ctx.beginPath();
+  Ctx.moveTo(XC(0), YC(0));
+  Ctx.lineTo(XC(MaxX()), YC(0));
+  Ctx.stroke();
+
+  // Draw negative X-axis
+  Ctx.beginPath();
+  Ctx.moveTo(XC(0), YC(0));
+  Ctx.lineTo(XC(MinX()), YC(0));
+  Ctx.stroke();
+
+  // Draw ticks on X-axis
+  let delta_x = XTickDelta();
+  for(let i=1; (i*delta_x) < MaxX(); ++i){
+      Ctx.beginPath();
+      Ctx.moveTo(XC(i*delta_x), YC(0) - 5);
+      Ctx.lineTo(XC(i*delta_x), YC(0) + 5);
+      Ctx.stroke();
+      Ctx.font = 'bold 11px Arial';
+      Ctx.textAlign = 'start';
+      Ctx.fillText(i, XC(i*delta_x) - 3, YC(0) + 25);
+  }
+
+  for(let i=1; (i*delta_x) > MinX(); --i){
+      Ctx.beginPath();
+      Ctx.moveTo(XC(i*delta_x), YC(0) - 5);
+      Ctx.lineTo(XC(i*delta_x), YC(0) + 5);
+      Ctx.stroke();
+      if (i === 0){
+          Ctx.font = 'bold 11px Arial';
+          Ctx.textAlign = 'start';
+          Ctx.fillText(i, XC(i*delta_x) + 13, YC(0) + 25);
+      }else{
+          Ctx.font = 'bold 11px Arial';
+          Ctx.textAlign = 'start';
+          Ctx.fillText(i, XC(i*delta_x) - 3, YC(0) + 25);
+      }
+      
+  }
+  Ctx.restore();
+}
+
+function RenderFunction(f){
+  let XSTEP;
+  let xPrecision = false;
+  if(xPrecision){
+      XSTEP = xPrecision;
+  }else{
+      XSTEP = (MaxX() - MinX()) / Width;
+  }
+  let first = true;
+  Ctx.beginPath();
+  for (let x = MinX(); x <= MaxX(); x += XSTEP){
+      let y = f(x);
+      if (first){
+          Ctx.moveTo(XC(x), YC(y));
+          first = false;
+      } else {
+          Ctx.lineTo(XC(x), YC(y));
+      }
+  }
+  // Ctx.strokeStyle = plotColor;
+  Ctx.strokeStyle = "red";
+  Ctx.lineWidth = 2;
+  Ctx.stroke();
+}
+
+function scrollingEvent(){
+    canvas_2d.addEventListener('wheel', function(event)
+    {
+        
+        if (event.deltaY < 0)
+        {
+            // scrolling up
+            
+            if (xRightBound <= 20 && xLeftBound >= -20){
+                xRightBound++;
+                xLeftBound--;
+                Draw();
+            }
+        }
+        else if (event.deltaY > 0)
+        {
+            // scrolling down
+            if (xRightBound >= 3 && xLeftBound <= -3){
+                xRightBound--;
+                xLeftBound++;
+                Draw();
+            }
+        }
+    });
+}
+
+function generatePlot2D(){
+  xLeftBound = parseFloat(xRange.querySelector("#minRangeInput").value);
+  xRightBound = parseFloat(xRange.querySelector("#maxRangeInput").value);
+  canvas_2d.onmouseover = scrollingEvent()
+  Draw();
+  // plots2D.push() // Need to implement creating plot2D objects
+}
+
+
+// ============================
 
 
 
@@ -222,13 +476,17 @@ function main() {
       camera.aspect = canvas.clientWidth / canvas.clientHeight;
       camera.updateProjectionMatrix();
     }
-
-    renderer.render(scene, camera);
-
-    requestAnimationFrame(render);
+    if (scene == scene3D){
+      renderer.render(scene, camera);
+      requestAnimationFrame(render);
+    }
   }
-
   requestAnimationFrame(render);
 }
 
-main();
+function changeScene(scene){
+  if(scene == scene3D){
+    main();
+  }
+}
+changeScene(scene)
