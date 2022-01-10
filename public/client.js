@@ -9,8 +9,9 @@ import { plot2D } from "./classes/plot2D.js"
 const scene3D = new THREE.Scene();
 const scene2D = "2D";
 const canvas = document.getElementById('writer');
-let container2D = document.getElementById("container2D")
-let canvas_2d = document.getElementById("2d-graph");
+const container2D = document.getElementById("container2D")
+const canvas_2d = document.getElementById("2d-graph");
+const slideZoomContainer = document.getElementsByClassName("slideZoomContainer")[0]
 const renderer = new THREE.WebGLRenderer({canvas,alpha: true, preserveDrawingBuffer: true });
 
 // ============================ Scene logic
@@ -30,7 +31,9 @@ iconOf2DMode.addEventListener('click',()=>{
   if(iconOf2DMode.id==='button-2D'){
       iconOf2DMode.id='button-3D';
       zRange.style.visibility = "visible";
+      yRange.style.visibility = "visible";
       canvas.style.visibility = "visible";
+      slideZoomContainer.style.display = "block";
       canvas_2d.style.visibility = "hidden";
       container2D.style.display = 'none';
       scene = scene3D;
@@ -39,7 +42,9 @@ iconOf2DMode.addEventListener('click',()=>{
   else {
       iconOf2DMode.id='button-2D';
       zRange.style.visibility = "hidden";
+      yRange.style.visibility = "hidden";
       canvas.style.visibility = "hidden";
+      slideZoomContainer.style.display = "none";
       canvas_2d.style.visibility = "visible";
       container2D.style.display = 'block';
       scene = scene2D;
@@ -72,9 +77,22 @@ console.log()
 let plots3D = []
 let plots2D = []
 
+function isEmpty(str) {
+  return !str.trim().length;
+}
+
 addFunc.addEventListener('click',()=>{
+  if (isEmpty(document.getElementById('input').value)){
+    return
+  }
   if (scene == scene2D){
     generatePlot2D();
+    if (plots2D.length >= 2){
+      console.log(plots2D)
+      console.log(plots2D.length)
+      DrawFromPlotList();
+    }
+      
   }else{
     generatePlot()
   }
@@ -88,6 +106,7 @@ let Width = canvas_2d.width;
 let Height = canvas_2d.height;
 let xLeftBound = parseFloat(xRange.querySelector("#minRangeInput").value);
 let xRightBound = parseFloat(xRange.querySelector("#maxRangeInput").value);
+let xPrecision = document.getElementById("Efficiency").value;
 
 function DrawFirstAxes(){
   if (canvas_2d.getContext){
@@ -95,7 +114,6 @@ function DrawFirstAxes(){
     xRightBound = parseFloat(xRange.querySelector("#maxRangeInput").value);
     Ctx = canvas_2d.getContext("2d");
     Ctx.clearRect(0,0,Width,Height);
-
     DrawAxes();
   }
 }
@@ -140,16 +158,37 @@ function Draw(){
   
   if (canvas_2d.getContext){
       Ctx = canvas_2d.getContext("2d");
-      // Ctx.clearRect(0,0,Width,Height);  // Reset the whole canvas 
+      Ctx.clearRect(0,0,Width,Height);  // Reset the whole canvas 
 
       DrawAxes();
       if (onlyPointsGlobal){
-        console.log("RENDER POINTS ONLY")
-          // RenderFunctionWithPointsOnly(F)
+        RenderFunctionWithPointsOnly(F)
       }else{
-          RenderFunction(F);
+        RenderFunction(F);
       }
       
+  }
+  let colorFromColorPickerInRgb = hsvToRgb(colorWheel.color.$["h"] / 360, colorWheel.color.$["s"] / 100, colorWheel.color.$["v"] / 100)
+  let color = `rgb(${colorFromColorPickerInRgb[0]}, ${colorFromColorPickerInRgb[1]}, ${colorFromColorPickerInRgb[2]})`;
+  let plot = new plot2D(document.getElementById('input').value, color)
+  console.log(plot)
+  return plot
+}
+
+function DrawFromPlotList(){
+  for(let i=0; i < plots2D.length; i++){
+    let F = function(x){
+      return eval(plots2D[i].func_string)
+    }
+    if (canvas_2d.getContext){
+      Ctx = canvas_2d.getContext("2d");
+      DrawAxes();
+      if (onlyPointsGlobal){
+        RenderFunctionWithPointsOnlyFromList(F, plots2D[i].color)
+      }else{
+        RenderFunctionFromList(F, plots2D[i].color);
+      }
+    }
   }
 }
 
@@ -277,27 +316,96 @@ function RenderFunction(f){
   Ctx.stroke();
 }
 
+function RenderFunctionFromList(f, color){
+  let XSTEP;
+  let xPrecision = false;
+  if(xPrecision){
+      XSTEP = xPrecision;
+  }else{
+      XSTEP = (MaxX() - MinX()) / Width;
+  }
+  let first = true;
+  Ctx.beginPath();
+  for (let x = MinX(); x <= MaxX(); x += XSTEP){
+      let y = f(x);
+      if (first){
+          Ctx.moveTo(XC(x), YC(y));
+          first = false;
+      } else {
+          Ctx.lineTo(XC(x), YC(y));
+      }
+  }
+  Ctx.strokeStyle = color
+  Ctx.lineWidth = 2;
+  Ctx.stroke();
+}
+
+function RenderFunctionWithPointsOnly(f){
+  let first = true;
+  let colorFromColorPickerInRgb = hsvToRgb(colorWheel.color.$["h"] / 360, colorWheel.color.$["s"] / 100, colorWheel.color.$["v"] / 100)
+  let color = `rgb(${colorFromColorPickerInRgb[0]}, ${colorFromColorPickerInRgb[1]}, ${colorFromColorPickerInRgb[2]})`;
+  Ctx.beginPath();
+  xPrecision =  document.getElementById("Efficiency").value / 100;
+  console.log(xPrecision)
+  for (let x = MinX(); x <= MaxX(); x += xPrecision){
+      let y = f(x);
+      if (first){
+          Ctx.moveTo(XC(x), YC(y));
+          first = false;
+      } else {
+          Ctx.fillStyle = color;
+          if (xPrecision < 0.5)
+              Ctx.fillRect(XC(x), YC(y), 3, 3);
+          else
+              Ctx.fillRect(XC(x), YC(y), 5, 5);
+      }
+  }   
+  Ctx.stroke();
+}
+
+function RenderFunctionWithPointsOnlyFromList(f, color){
+  let first = true;
+  Ctx.beginPath();
+  xPrecision =  document.getElementById("Efficiency").value / 100;
+  console.log(xPrecision)
+  for (let x = MinX(); x <= MaxX(); x += xPrecision){
+      let y = f(x);
+      if (first){
+          Ctx.moveTo(XC(x), YC(y));
+          first = false;
+      } else {
+          Ctx.fillStyle = color;
+          if (xPrecision < 0.5)
+              Ctx.fillRect(XC(x), YC(y), 3, 3);
+          else
+              Ctx.fillRect(XC(x), YC(y), 5, 5);
+      }
+  }   
+  Ctx.stroke();
+}
+
 function scrollingEvent(){
     canvas_2d.addEventListener('wheel', function(event)
     {
-        
         if (event.deltaY < 0)
         {
             // scrolling up
             
             if (xRightBound <= 20 && xLeftBound >= -20){
+                Ctx.clearRect(0,0,Width,Height);
                 xRightBound++;
                 xLeftBound--;
-                Draw();
+                DrawFromPlotList()
             }
         }
         else if (event.deltaY > 0)
         {
             // scrolling down
             if (xRightBound >= 3 && xLeftBound <= -3){
+                Ctx.clearRect(0,0,Width,Height);
                 xRightBound--;
                 xLeftBound++;
-                Draw();
+                DrawFromPlotList();
             }
         }
     });
@@ -306,9 +414,9 @@ function scrollingEvent(){
 function generatePlot2D(){
   xLeftBound = parseFloat(xRange.querySelector("#minRangeInput").value);
   xRightBound = parseFloat(xRange.querySelector("#maxRangeInput").value);
-  canvas_2d.onmouseover = scrollingEvent()
-  Draw();
-  // plots2D.push() // Need to implement creating plot2D objects
+  canvas_2d.onmouseover = scrollingEvent();
+  plots2D.push(Draw());
+  console.log(plots2D)
 }
 
 
@@ -355,13 +463,16 @@ function generatePlot(){
 }
 
 function saveFile() {
-    var strDownloadMime = "image/octet-stream";
-    var imgData;
-
+    const strDownloadMime = "image/octet-stream";
+    let imgData;
       try {
           var strMime = "image/jpeg";
-          imgData = renderer.domElement.toDataURL(strMime);
-          var link = document.createElement('a');
+          if (scene == scene3D){
+            imgData = renderer.domElement.toDataURL(strMime);
+          }else{
+            imgData = document.getElementById("2d-graph").toDataURL("image/png");
+          }
+          let link = document.createElement('a');
           if (typeof link.download === 'string') {
               document.body.appendChild(link); //Firefox requires the link to be in the body
               link.download = "test.png";
@@ -379,7 +490,8 @@ function saveFile() {
    
 }
 
-
+let jpgButton = document.getElementById("button-jpg");
+jpgButton.addEventListener("click", saveFile);
 
 
 
