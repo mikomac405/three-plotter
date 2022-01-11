@@ -73,6 +73,12 @@ body{
   padding: 5px 5px;
   background-color: rgba(0, 0, 0, 0.2);
   box-shadow: 0px 0px 15px 2px rgba(0, 0, 0, 0.6);
+  transition: .3s;
+}
+
+.button-2D-3D:hover{
+  background-color: rgba(0, 0, 0, 0.3);
+  box-shadow: 0px 0px 15px 2px rgba(0, 0, 0, 0.7);
 }
 
 .mode-switch{
@@ -86,7 +92,14 @@ body{
   padding: 5px 5px;
   background-color: rgba(0, 0, 0, 0.2);
   box-shadow: 0px 0px 15px 2px rgba(0, 0, 0, 0.6);
+  transition: .3s;
 }
+
+.mode-switch:hover{
+  background-color: rgba(0, 0, 0, 0.3);
+  box-shadow: 0px 0px 15px 2px rgba(0, 0, 0, 0.7);
+}
+
 
 .inputFunction{
   font-size: 20px;
@@ -132,6 +145,12 @@ body{
   padding: 5px 5px;
   background-color: rgba(0, 0, 0, 0.2);
   box-shadow: 0px 0px 15px 2px rgba(0, 0, 0, 0.6);
+  transition: .3s;
+}
+
+.addFunction:hover{
+  background-color: rgba(0, 0, 0, 0.3);
+  box-shadow: 0px 0px 15px 2px rgba(0, 0, 0, 0.7);
 }
 
 .dock{
@@ -174,6 +193,12 @@ body{
   padding: 5px 5px;
   background-color: rgba(0, 0, 0, 0.2);
   box-shadow: 0px 0px 15px 2px rgba(0, 0, 0, 0.6);
+  transition: .3s;
+}
+
+.xml:hover{
+  background-color: rgba(0, 0, 0, 0.3);
+  box-shadow: 0px 0px 15px 2px rgba(0, 0, 0, 0.7);
 }
 
 .png{
@@ -189,6 +214,12 @@ body{
   padding: 5px 5px;
   background-color: rgba(0, 0, 0, 0.2);
   box-shadow: 0px 0px 15px 2px rgba(0, 0, 0, 0.6);
+  transition: .3s;
+}
+
+.png:hover{
+  background-color: rgba(0, 0, 0, 0.3);
+  box-shadow: 0px 0px 15px 2px rgba(0, 0, 0, 0.7);
 }
 
 .jpg{
@@ -204,6 +235,12 @@ body{
   padding: 5px 5px;
   background-color: rgba(0, 0, 0, 0.2);
   box-shadow: 0px 0px 15px 2px rgba(0, 0, 0, 0.6);
+  transition: .3s;
+}
+
+.jpg:hover{
+  background-color: rgba(0, 0, 0, 0.3);
+  box-shadow: 0px 0px 15px 2px rgba(0, 0, 0, 0.7);
 }
 
 .inSliderUp{
