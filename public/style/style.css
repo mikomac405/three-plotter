@@ -65,6 +65,14 @@ body {
   background-color: rgba(0, 0, 0, 0.2);
   -webkit-box-shadow: 0px 0px 15px 2px rgba(0, 0, 0, 0.6);
           box-shadow: 0px 0px 15px 2px rgba(0, 0, 0, 0.6);
+  -webkit-transition: .3s;
+  transition: .3s;
+}
+
+.button-2D-3D:hover {
+  background-color: rgba(0, 0, 0, 0.3);
+  -webkit-box-shadow: 0px 0px 15px 2px rgba(0, 0, 0, 0.7);
+          box-shadow: 0px 0px 15px 2px rgba(0, 0, 0, 0.7);
 }
 
 .mode-switch {
@@ -79,6 +87,14 @@ body {
   background-color: rgba(0, 0, 0, 0.2);
   -webkit-box-shadow: 0px 0px 15px 2px rgba(0, 0, 0, 0.6);
           box-shadow: 0px 0px 15px 2px rgba(0, 0, 0, 0.6);
+  -webkit-transition: .3s;
+  transition: .3s;
+}
+
+.mode-switch:hover {
+  background-color: rgba(0, 0, 0, 0.3);
+  -webkit-box-shadow: 0px 0px 15px 2px rgba(0, 0, 0, 0.7);
+          box-shadow: 0px 0px 15px 2px rgba(0, 0, 0, 0.7);
 }
 
 .inputFunction {
@@ -127,6 +143,14 @@ body {
   background-color: rgba(0, 0, 0, 0.2);
   -webkit-box-shadow: 0px 0px 15px 2px rgba(0, 0, 0, 0.6);
           box-shadow: 0px 0px 15px 2px rgba(0, 0, 0, 0.6);
+  -webkit-transition: .3s;
+  transition: .3s;
+}
+
+.addFunction:hover {
+  background-color: rgba(0, 0, 0, 0.3);
+  -webkit-box-shadow: 0px 0px 15px 2px rgba(0, 0, 0, 0.7);
+          box-shadow: 0px 0px 15px 2px rgba(0, 0, 0, 0.7);
 }
 
 .dock {
@@ -172,6 +196,14 @@ body {
   background-color: rgba(0, 0, 0, 0.2);
   -webkit-box-shadow: 0px 0px 15px 2px rgba(0, 0, 0, 0.6);
           box-shadow: 0px 0px 15px 2px rgba(0, 0, 0, 0.6);
+  -webkit-transition: .3s;
+  transition: .3s;
+}
+
+.xml:hover {
+  background-color: rgba(0, 0, 0, 0.3);
+  -webkit-box-shadow: 0px 0px 15px 2px rgba(0, 0, 0, 0.7);
+          box-shadow: 0px 0px 15px 2px rgba(0, 0, 0, 0.7);
 }
 
 .png {
@@ -188,6 +220,14 @@ body {
   background-color: rgba(0, 0, 0, 0.2);
   -webkit-box-shadow: 0px 0px 15px 2px rgba(0, 0, 0, 0.6);
           box-shadow: 0px 0px 15px 2px rgba(0, 0, 0, 0.6);
+  -webkit-transition: .3s;
+  transition: .3s;
+}
+
+.png:hover {
+  background-color: rgba(0, 0, 0, 0.3);
+  -webkit-box-shadow: 0px 0px 15px 2px rgba(0, 0, 0, 0.7);
+          box-shadow: 0px 0px 15px 2px rgba(0, 0, 0, 0.7);
 }
 
 .jpg {
@@ -204,6 +244,14 @@ body {
   background-color: rgba(0, 0, 0, 0.2);
   -webkit-box-shadow: 0px 0px 15px 2px rgba(0, 0, 0, 0.6);
           box-shadow: 0px 0px 15px 2px rgba(0, 0, 0, 0.6);
+  -webkit-transition: .3s;
+  transition: .3s;
+}
+
+.jpg:hover {
+  background-color: rgba(0, 0, 0, 0.3);
+  -webkit-box-shadow: 0px 0px 15px 2px rgba(0, 0, 0, 0.7);
+          box-shadow: 0px 0px 15px 2px rgba(0, 0, 0, 0.7);
 }
 
 .inSliderUp {
