@@ -12,13 +12,23 @@ $margin: 10px;
 
 html{
   height: 100%;
-  width: 100%
-}
+  width: 100%;}
 
 body{
   height: 100%;
   width: 100%;
   margin: 0;
+  overflow: hidden;
+}
+
+.menu{
+  position: absolute;
+  overflow: auto;
+  width:$widthOfOpt+50px;
+  height:$widthOfButton + $margin + $margin + $margin + $margin + $widthOfOpt + $margin + $widthOfButton + $margin + 40px + $margin + $margin + $widthOfButton+ $margin + $margin + $widthOfButton+ $margin + $margin + $widthOfButton + $margin + $margin + $widthOfButton + $widthOfButton + $margin + $margin + $margin + $margin;
+  margin: 0px;
+  top: 0;
+  right: 0;
 }
 
 #light{
