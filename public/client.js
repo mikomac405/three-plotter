@@ -2,39 +2,23 @@ import * as THREE from "three"
 import { renderFunctionMesh } from "./modules/delaunator.js"
 import { OrbitControls }  from "three/examples/jsm/controls/OrbitControls";
 import Formula from 'fparser';
+import { plot3D } from "./classes/plot3D.js"
 
+// ============================ Default environment
 const scene3D = new THREE.Scene();
 const scene2D = new THREE.Scene();
 const canvas = document.getElementById('writer');
 const renderer = new THREE.WebGLRenderer({canvas,alpha: true, preserveDrawingBuffer: true });
 
+// ============================ Scene logic
 // Default scene
 let scene = scene3D;
 
-// Changing color mode
-const dark = document.getElementById('dark');
-const iconOfDarkLightMode = document.getElementById('light-dark-button');
-const addFunc = document.getElementById('button-plus');
-const functionInput = document.getElementById('input');
+// Button to switch between 2D and 3D
 const iconOf2DMode = document.getElementById('button-2D');
 iconOf2DMode.id='button-3D';
-const xRange = document.getElementById("X");
-const yRange = document.getElementById("Y");
-const zRange = document.getElementById("Z");
 
-console.log()
-
-iconOfDarkLightMode.addEventListener('click',()=>{
-  dark.classList.toggle("transition");
-  iconOfDarkLightMode.classList.toggle("transition1");
-});
-
-addFunc.addEventListener('click',()=>{
- generatePlot()
- saveFile()
-});
-
-// Button to switch between 2D and 3D
+// Changing scene event
 iconOf2DMode.addEventListener('click',()=>{
   if(iconOf2DMode.id==='button-2D'){
       iconOf2DMode.id='button-3D';
@@ -48,6 +32,36 @@ iconOf2DMode.addEventListener('click',()=>{
   }
 });
 
+// Changing color mode
+const dark = document.getElementById('dark');
+const iconOfDarkLightMode = document.getElementById('light-dark-button');
+
+iconOfDarkLightMode.addEventListener('click',()=>{
+  dark.classList.toggle("transition");
+  iconOfDarkLightMode.classList.toggle("transition1");
+});
+
+// ============================ Plots logic
+
+// Buttons and inputs
+const addFunc = document.getElementById('button-plus');
+const functionInput = document.getElementById('input');
+
+const xRange = document.getElementById("X");
+const yRange = document.getElementById("Y");
+const zRange = document.getElementById("Z");
+
+console.log()
+
+let plots3D = []
+let plots2D = []
+
+addFunc.addEventListener('click',()=>{
+  generatePlot()
+});
+
+
+
 function generatePlot(){
   let x_range = {
     min : parseFloat(xRange.querySelector("#minRangeInput").value),
@@ -57,14 +71,33 @@ function generatePlot(){
     min : parseFloat(yRange.querySelector("#minRangeInput").value),
     max : parseFloat(yRange.querySelector("#maxRangeInput").value)
   }
-  let z_range = {
-    min : parseFloat(zRange.querySelector("#minRangeInput").value),
-    max : parseFloat(zRange.querySelector("#maxRangeInput").value)
+
+  if(scene == scene3D){
+    let z_range = {
+      min : parseFloat(zRange.querySelector("#minRangeInput").value),
+      max : parseFloat(zRange.querySelector("#maxRangeInput").value)
+    }
+
+    plots3D.push(renderFunctionMesh(functionInput.value, x_range, y_range, z_range, scene3D))
+    console.log(plots3D)
+    // Change scale and color
+    /*
+    plots3D.at(0).color = {r:0,g:0,b:1}
+    plots3D.at(0).scale = 0.1
+    console.log(plots3D.at(0))
+    */
+
+    // Remove example
+    /*
+    let p = plots3D.at(0)
+    plots3D = plots3D.filter(function(value, index, arr){ 
+      return value != p});
+    scene.remove(p.mesh);
+    */
   }
-  console.log(x_range)
-  console.log(y_range)
-  console.log(z_range)
-  renderFunctionMesh(functionInput.value, x_range, y_range, z_range, scene3D)
+  else if(scene == scene2D){
+    console.log("2D unimplemented")
+  }
 }
 
 function saveFile() {
