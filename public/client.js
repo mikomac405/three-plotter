@@ -1,18 +1,26 @@
 import * as THREE from "three"
 import { renderFunctionMesh } from "./modules/delaunator.js"
+import { DrawFirstAxes, DrawFromPlotList, generatePlot2D, plots2D } from "./modules/logic2dPlot.js"
 import { OrbitControls }  from "three/examples/jsm/controls/OrbitControls";
 import Formula from 'fparser';
 import { plot3D } from "./classes/plot3D.js"
 
 // ============================ Default environment
 const scene3D = new THREE.Scene();
-const scene2D = new THREE.Scene();
+const scene2D = "2D";
 const canvas = document.getElementById('writer');
+const container2D = document.getElementById("container2D")
+const canvas_2d = document.getElementById("2d-graph");
+const slideZoomContainer = document.getElementsByClassName("slideZoomContainer")[0]
 const renderer = new THREE.WebGLRenderer({canvas,alpha: true, preserveDrawingBuffer: true });
 
 // ============================ Scene logic
 // Default scene
 let scene = scene3D;
+
+// Hide 2d canvas and container from default
+container2D.style.display = 'none';
+canvas_2d.style.visibility = "hidden";
 
 // Button to switch between 2D and 3D
 const iconOf2DMode = document.getElementById('button-2D');
@@ -23,12 +31,29 @@ iconOf2DMode.addEventListener('click',()=>{
   if(iconOf2DMode.id==='button-2D'){
       iconOf2DMode.id='button-3D';
       zRange.style.visibility = "visible";
+      yRange.style.visibility = "visible";
+      canvas.style.visibility = "visible";
+      slideZoomContainer.style.display = "block";
+      canvas_2d.style.visibility = "hidden";
+      container2D.style.display = 'none';
       scene = scene3D;
+      changeScene(scene);
   }
   else {
       iconOf2DMode.id='button-2D';
       zRange.style.visibility = "hidden";
+      yRange.style.visibility = "hidden";
+      canvas.style.visibility = "hidden";
+      slideZoomContainer.style.display = "none";
+      canvas_2d.style.visibility = "visible";
+      container2D.style.display = 'block';
       scene = scene2D;
+      if (plots2D.length >= 1){
+        DrawFromPlotList();
+      }else{
+        DrawFirstAxes();
+      }
+      changeScene(scene);
   }
 });
 
@@ -54,12 +79,21 @@ const zRange = document.getElementById("Z");
 console.log()
 
 let plots3D = []
-let plots2D = []
+
+function isEmpty(str) {
+  return !str.trim().length;
+}
 
 addFunc.addEventListener('click',()=>{
-  generatePlot()
+  if (isEmpty(document.getElementById('input').value)){
+    return
+  }
+  if (scene == scene2D){
+    generatePlot2D(); 
+  }else{
+    generatePlot()
+  }
 });
-
 
 
 function generatePlot(){
@@ -101,13 +135,16 @@ function generatePlot(){
 }
 
 function saveFile() {
-    var strDownloadMime = "image/octet-stream";
-    var imgData;
-
+    const strDownloadMime = "image/octet-stream";
+    let imgData;
       try {
           var strMime = "image/jpeg";
-          imgData = renderer.domElement.toDataURL(strMime);
-          var link = document.createElement('a');
+          if (scene == scene3D){
+            imgData = renderer.domElement.toDataURL(strMime);
+          }else{
+            imgData = document.getElementById("2d-graph").toDataURL("image/png");
+          }
+          let link = document.createElement('a');
           if (typeof link.download === 'string') {
               document.body.appendChild(link); //Firefox requires the link to be in the body
               link.download = "test.png";
@@ -125,7 +162,8 @@ function saveFile() {
    
 }
 
-
+let jpgButton = document.getElementById("button-jpg");
+jpgButton.addEventListener("click", saveFile);
 
 
 
@@ -151,7 +189,27 @@ var colorWheel = new iro.ColorPicker("#colorPicker", {
     ]
 });
 
+// HSV to RGB converter
+function hsvToRgb(h, s, v) {
+  var r, g, b;
 
+  var i = Math.floor(h * 6);
+  var f = h * 6 - i;
+  var p = v * (1 - s);
+  var q = v * (1 - f * s);
+  var t = v * (1 - (1 - f) * s);
+
+  switch (i % 6) {
+    case 0: r = v, g = t, b = p; break;
+    case 1: r = q, g = v, b = p; break;
+    case 2: r = p, g = v, b = t; break;
+    case 3: r = p, g = q, b = v; break;
+    case 4: r = t, g = p, b = v; break;
+    case 5: r = v, g = p, b = q; break;
+  }
+
+  return [ r * 255, g * 255, b * 255 ];
+}
 
 // PrecisionSpeed Slider
 var slider = document.getElementById("Efficiency");
@@ -222,13 +280,19 @@ function main() {
       camera.aspect = canvas.clientWidth / canvas.clientHeight;
       camera.updateProjectionMatrix();
     }
-
-    renderer.render(scene, camera);
-
-    requestAnimationFrame(render);
+    if (scene == scene3D){
+      renderer.render(scene, camera);
+      requestAnimationFrame(render);
+    }
   }
-
   requestAnimationFrame(render);
 }
 
-main();
+function changeScene(scene){
+  if(scene == scene3D){
+    main();
+  }
+}
+changeScene(scene)
+
+export {colorWheel}
