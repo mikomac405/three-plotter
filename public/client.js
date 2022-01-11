@@ -1,6 +1,6 @@
 import * as THREE from "three"
 import { renderFunctionMesh } from "./modules/delaunator.js"
-import { DrawFirstAxes, generatePlot2D } from "./modules/logic2dPlot.js"
+import { DrawFirstAxes, DrawFromPlotList, generatePlot2D, plots2D } from "./modules/logic2dPlot.js"
 import { OrbitControls }  from "three/examples/jsm/controls/OrbitControls";
 import Formula from 'fparser';
 import { plot3D } from "./classes/plot3D.js"
@@ -48,7 +48,11 @@ iconOf2DMode.addEventListener('click',()=>{
       canvas_2d.style.visibility = "visible";
       container2D.style.display = 'block';
       scene = scene2D;
-      DrawFirstAxes();
+      if (plots2D.length >= 1){
+        DrawFromPlotList();
+      }else{
+        DrawFirstAxes();
+      }
       changeScene(scene);
   }
 });
