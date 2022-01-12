@@ -348,4 +348,22 @@ function generatePlot2D(){
   }
 }
 
+function resizeCanvas() {
+  if ((window.innerWidth - 100 > 600 && window.innerWidth - 100 < 1200) || window.innerHeight - 100 > 400){
+    container2D.style.width = window.innerWidth+"px";
+    container2D.style.height = window.innerHeight+"px";
+    canvas_2d.width = window.innerWidth - 100;
+    canvas_2d.height = window.innerHeight - 200;
+    Width = canvas_2d.width;
+    Height = canvas_2d.height;
+    if (plots2D.length >= 1){
+      DrawFromPlotList()
+    }else{
+      DrawFirstAxes();
+    }
+  }
+}
+
+window.addEventListener("resize", resizeCanvas);
+
 export { DrawFirstAxes, MaxX, MinX, MaxY, MinY, XC, YC, Draw, DrawFromPlotList, XTickDelta, YTickDelta, DrawAxes, RenderFunction, RenderFunctionFromList, RenderFunctionWithPointsOnly, RenderFunctionWithPointsOnlyFromList, scrollingEvent, generatePlot2D, plots2D }
