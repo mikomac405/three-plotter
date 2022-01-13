@@ -57,20 +57,22 @@ function MaxX(){
     return Height - (y - MinY()) / (MaxY() - MinY()) * Height;
   }
 
+// Calculate f(x) from given function formula
+let calculatePoint = function(x){
+    return eval(document.getElementById('input').value)
+}
+
+// Draw axes and then draw points or whole function
 function Draw(){
-  let F = function(x){
-      return eval(document.getElementById('input').value)
-  }
-  
   if (canvas_2d.getContext){
       Ctx = canvas_2d.getContext("2d");
       Ctx.clearRect(0,0,Width,Height);  // Reset the whole canvas 
 
       DrawAxes();
       if (onlyPointsGlobal){
-        RenderFunctionWithPointsOnly(F)
+        RenderFunctionWithPointsOnly(calculatePoint)
       }else{
-        RenderFunction(F);
+        RenderFunction(calculatePoint);
       }
       
   }
@@ -81,6 +83,7 @@ function Draw(){
   return plot
 }
 
+// Draw axes and draw function from Plot2D in list
 function DrawFromPlotList(){
     for(let i=0; i < plots2D.length; i++){
       let F = function(x){
@@ -98,14 +101,17 @@ function DrawFromPlotList(){
     }
   }
 
+// Tick on X axes
 function XTickDelta(){
   return 1;
 }
 
+// Tick on Y axes
 function YTickDelta(){
   return 1;
 }
 
+// Draw axes
 function DrawAxes(){
     Ctx.save();
     Ctx.strokeStyle = "black";
@@ -196,6 +202,7 @@ function DrawAxes(){
     Ctx.restore();
   }
 
+// Render function from given f function
 function RenderFunction(f){
   let XSTEP;
   let xPrecision = false;
@@ -221,6 +228,7 @@ function RenderFunction(f){
   Ctx.stroke();
 }
 
+// Render function from Plot2D objects 
 function RenderFunctionFromList(f, color){
   let XSTEP;
   let xPrecision = false;
@@ -245,6 +253,7 @@ function RenderFunctionFromList(f, color){
   Ctx.stroke();
 }
 
+// Render points from given function
 function RenderFunctionWithPointsOnly(f){
   let first = true;
   let colorFromColorPickerInRgb = hsvToRgb(colorWheel.color.$["h"] / 360, colorWheel.color.$["s"] / 100, colorWheel.color.$["v"] / 100)
@@ -267,7 +276,7 @@ function RenderFunctionWithPointsOnly(f){
   }   
   Ctx.stroke();
 }
-
+// Render points of Plot2D object function string
 function RenderFunctionWithPointsOnlyFromList(f, color){
   let first = true;
   Ctx.beginPath();
@@ -289,6 +298,7 @@ function RenderFunctionWithPointsOnlyFromList(f, color){
   Ctx.stroke();
 }
 
+// zooming plot on mouse scroll
 function scrollingEvent(){
     canvas_2d.addEventListener('wheel', function(event)
     {
@@ -366,4 +376,4 @@ function resizeCanvas() {
 
 window.addEventListener("resize", resizeCanvas);
 
-export { DrawFirstAxes, MaxX, MinX, MaxY, MinY, XC, YC, Draw, DrawFromPlotList, XTickDelta, YTickDelta, DrawAxes, RenderFunction, RenderFunctionFromList, RenderFunctionWithPointsOnly, RenderFunctionWithPointsOnlyFromList, scrollingEvent, generatePlot2D, plots2D }
+export { DrawFirstAxes, MaxX, MinX, MaxY, MinY, XC, YC, Draw, DrawFromPlotList, XTickDelta, YTickDelta, DrawAxes, RenderFunction, RenderFunctionFromList, RenderFunctionWithPointsOnly, RenderFunctionWithPointsOnlyFromList, scrollingEvent, generatePlot2D, plots2D, calculatePoint }
