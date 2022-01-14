@@ -7,6 +7,8 @@ $widthOfOpt: 200px;
 $widthOfInputFunc: 140px;
 $widthOfButton: 40px;
 $margin: 10px;
+$margin4Func: 5px;
+$height4Func: 34px;
 
 /* comment be like haha */
 
@@ -25,7 +27,7 @@ body{
   position: absolute;
   overflow: auto;
   width:$widthOfOpt+50px;
-  height:$widthOfButton + $margin + $margin + $margin + $margin + $widthOfOpt + $margin + $widthOfButton + $margin + 40px + $margin + $margin + $widthOfButton+ $margin + $margin + $widthOfButton+ $margin + $margin + $widthOfButton + $margin + $margin + $widthOfButton + $widthOfButton + $margin + $margin + $margin + $margin;
+  height:$widthOfOpt + $widthOfButton + $margin + $margin + $margin + $margin + $widthOfOpt + $margin + $widthOfButton + $margin + 40px + $margin + $margin + $widthOfButton+ $margin + $margin + $widthOfButton+ $margin + $margin + $widthOfButton + $margin + $margin + $widthOfButton + $widthOfButton + $margin + $margin + $margin + $margin;
   margin: 0px;
   top: 0;
   right: 0;
@@ -105,14 +107,14 @@ body{
   font-size: 20px;
   position: absolute;
   color: white;
-  top: 0;
+  top: $margin4Func;
   outline: 0;
-  right: $widthOfButton + $margin + $margin;
+  left: $margin4Func;
   border: 0;
   border-radius: $margin;
-  margin: $margin $margin $margin $margin;
+  margin: 0px;
   width: $widthOfInputFunc;
-  height:$widthOfButton;
+  height:$height4Func;
   padding: 5px 5px;
   background-color: rgba(0, 0, 0, 0.2);
   box-shadow: 0px 0px 15px 2px rgba(0, 0, 0, 0.6);
@@ -134,14 +136,14 @@ body{
 
 .addFunction{
   position: absolute;
-  top: 0;
+  top: $margin4Func;
   outline: 0;
-  right: 0;
+  right: $margin4Func;
   border: 0;
   border-radius: $margin;
-  margin: $margin $margin $margin $margin;
-  width: $widthOfButton;
-  height:$widthOfButton;
+  margin: 0px;
+  width: 34px;
+  height:34px;
   padding: 5px 5px;
   background-color: rgba(0, 0, 0, 0.2);
   box-shadow: 0px 0px 15px 2px rgba(0, 0, 0, 0.6);
@@ -153,9 +155,22 @@ body{
   box-shadow: 0px 0px 15px 2px rgba(0, 0, 0, 0.7);
 }
 
+.dock4Func{
+  position: absolute;
+  top: 0vh;
+  right: 0vh;
+  border-radius: $margin;
+  margin: $margin $margin $margin $margin;
+  width: $widthOfOpt;
+  height: $widthOfOpt;
+  padding: 5px 5px;
+  background-color: rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 0px 15px 2px rgba(0, 0, 0, 0.6);
+}
+
 .dock{
   position: absolute;
-  top: $widthOfButton + $margin + $margin;
+  top: $widthOfOpt + $margin + $margin;
   right: 0vh;
   border-radius: $margin;
   margin: $margin $margin $margin $margin;
@@ -169,7 +184,7 @@ body{
 .sliderContainer{
   position: absolute;
   text-align: center;
-  top: $widthOfButton + $margin + $margin + $margin + $margin + $widthOfOpt + 40px+ $margin + $margin + $widthOfButton + $margin + $margin + $widthOfButton + $margin + $margin + $widthOfButton;
+  top: $margin + $margin + $widthOfOpt + $margin + $margin + $widthOfOpt + 40px+ $margin + $margin + $widthOfButton + $margin + $margin + $widthOfButton + $margin + $margin + $widthOfButton;
   right: 0vh;
   border-radius: $margin;
   margin: $margin $margin $margin $margin;
@@ -182,7 +197,7 @@ body{
 
 .xml{
   position: absolute;
-  top: $widthOfButton + $margin + $margin + $margin + $margin + $widthOfOpt + $margin + $widthOfButton + $margin + 40px + $margin + $margin + $widthOfButton+ $margin + $margin + $widthOfButton+ $margin + $margin + $widthOfButton+ $margin + $margin + $widthOfButton;
+  top: $margin + $margin + $widthOfButton + $margin + $margin + $margin + $margin + $widthOfOpt + $margin + $widthOfButton + $margin + 40px + $margin + $margin + $widthOfButton+ $margin + $margin + $widthOfButton+ $margin + $margin + $widthOfButton + $widthOfOpt;
   outline: 0;
   right: 0;
   border: 0;
@@ -203,7 +218,7 @@ body{
 
 .png{
   position: absolute;
-  top: $widthOfButton + $margin + $margin + $margin + $margin + $widthOfOpt + $margin + $widthOfButton + $margin + 40px + $margin + $margin + $widthOfButton+ $margin + $margin + $widthOfButton+ $margin + $margin + $widthOfButton+ $margin + $margin + $widthOfButton;
+  top: $margin + $margin + $widthOfButton + $margin + $margin + $margin + $margin + $widthOfOpt + $margin + $widthOfButton + $margin + 40px + $margin + $margin + $widthOfButton+ $margin + $margin + $widthOfButton+ $margin + $margin + $widthOfButton + $widthOfOpt;
   outline: 0;
   right: $widthOfButton + $margin + $margin + $margin + $margin;
   border: 0;
@@ -224,7 +239,7 @@ body{
 
 .jpg{
   position: absolute;
-  top: $widthOfButton + $margin + $margin + $margin + $margin + $widthOfOpt + $margin + $widthOfButton + $margin + 40px + $margin + $margin + $widthOfButton+ $margin + $margin + $widthOfButton+ $margin + $margin + $widthOfButton+ $margin + $margin + $widthOfButton;
+  top: $margin + $margin + $widthOfButton + $margin + $margin + $margin + $margin + $widthOfOpt + $margin + $widthOfButton + $margin + 40px + $margin + $margin + $widthOfButton+ $margin + $margin + $widthOfButton+ $margin + $margin + $widthOfButton + $widthOfOpt;
   outline: 0;
   right: $widthOfButton + $margin + $margin + $margin + $margin + $margin + $margin + $widthOfButton + $margin + $margin;
   border: 0;
@@ -295,7 +310,7 @@ body{
 .xValueRange {
   position: absolute;
   color: white;
-  top: $widthOfButton + $margin + $margin + $margin + $margin + $widthOfOpt + 40px;
+  top: $margin + $margin + $widthOfOpt + $margin + $margin + $widthOfOpt + 40px;
   right: 0;
   border-radius: 10px;
   margin: $margin $margin $margin $margin;
@@ -309,7 +324,7 @@ body{
 .yValueRange {
   position: absolute;
   color: white;
-  top: $widthOfButton + $margin + $margin + $margin + $margin + $widthOfOpt + $margin + $widthOfButton + $margin + 40px;
+  top: $margin + $margin + $widthOfOpt + $margin + $margin + $widthOfOpt + $margin + $widthOfButton + $margin + 40px;
   right: 0;
   border-radius: 10px;
   margin: $margin $margin $margin $margin;
@@ -323,7 +338,7 @@ body{
 .zValueRange {
   position: absolute;
   color: white;
-  top: $widthOfButton + $margin + $margin + $margin + $margin + $widthOfOpt + $margin + $widthOfButton + $margin + 40px + $margin + $margin + $widthOfButton;
+  top: $margin + $margin + $widthOfOpt + $margin + $margin + $widthOfOpt + $margin + $widthOfButton + $margin + 40px + $margin + $margin + $widthOfButton;
   right: 0;
   border-radius: 10px;
   margin: $margin $margin $margin $margin;
@@ -338,7 +353,7 @@ body{
   position: absolute;
   color: white;
   text-align: center;
-  top: $widthOfButton + $margin + $margin + $margin + $margin + $widthOfOpt + $margin + $widthOfButton + $margin + 40px+ $margin + $margin + $widthOfButton + $margin + $margin + $widthOfButton + $margin + $margin + $widthOfButton;
+  top: $margin + $margin + $widthOfOpt + $margin + $margin + $widthOfOpt + $margin + $widthOfButton + $margin + 40px+ $margin + $margin + $widthOfButton + $margin + $margin + $widthOfButton + $margin + $margin + $widthOfButton;
   right: 0;
   border-radius: 10px;
   margin: $margin $margin $margin $margin;
@@ -363,6 +378,13 @@ body{
 }
 
 #writer{
+  width: 100%;
+  height: 100vh;
+}
+
+#container2D{
+  left:0px;
+  top:0px;
   width: 100%;
   height: 100vh;
 }
@@ -407,10 +429,10 @@ body{
 
 #button-plus{
   position: absolute;
-  height: $widthOfButton;
-  width: $widthOfButton;
+  height: $height4Func;
+  width: $height4Func;
   background-image: url(../resources/plus.png);
-  background-size: $widthOfButton , $widthOfButton;
+  background-size: $height4Func , $height4Func;
 }
 
 #button-xml{
