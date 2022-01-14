@@ -69,6 +69,7 @@ iconOfDarkLightMode.addEventListener('click',()=>{
 // ============================ Plots logic
 
 // Buttons and inputs
+const listOfFunc = document.getElementById('list');
 const addFunc = document.getElementById('button-plus');
 const functionInput = document.getElementById('input');
 
