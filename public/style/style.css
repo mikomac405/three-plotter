@@ -399,6 +399,13 @@ body {
   height: 100vh;
 }
 
+#container2D {
+  left: 0px;
+  top: 0px;
+  width: 100%;
+  height: 100vh;
+}
+
 #2d-graph {
   border: 1px solid black;
   width: 100%;
