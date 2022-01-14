@@ -100,6 +100,7 @@ addFunc.addEventListener('click',()=>{
           break;
         }
       }
+      listOfFunc.innerHTML += '<li>'+input+'</li>'
       generatePlot2D(); 
     }else{
       for(let fun3d of plots3D){
@@ -109,6 +110,7 @@ addFunc.addEventListener('click',()=>{
           break;
         }
       }
+      listOfFunc.innerHTML += '<li>'+input+'</li>'
       generatePlot()
     }
   }
