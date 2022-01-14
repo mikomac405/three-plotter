@@ -85,20 +85,35 @@ function isEmpty(str) {
 }
 
 addFunc.addEventListener('click',()=>{
-  if (isEmpty(document.getElementById('input').value)){
+  let input = document.getElementById('input').value;
+  if (isEmpty(input)){
     return
   }
   try{
+    let obj = new Formula(input);
+    let exists = false;
     if (scene == scene2D){
-      new Formula(func).evaluate({x:1})
+      for(let fun2d of plots2D){
+        if(fun2d.func_string == input){
+          console.log("This function already exist in the list!");
+          break;
+        }
+      }
       generatePlot2D(); 
     }else{
-      new Formula(func).evaluate({x:1, z:1})
+      for(let fun3d of plots3D){
+        if(fun3d.func_string == input){
+          console.log("This function already exist in the list!");
+          exists = true;
+          break;
+        }
+      }
       generatePlot()
     }
   }
   catch(error){
     console.log("Can't calculate this function!")
+    console.log(error)
   }
 });
 
@@ -256,7 +271,7 @@ function main() {
   // Default light
   let sceneLightColor = 0xFFFFFF;
   let sceneLightIntensity = 2;
-  const sceneLight = new THREE.HemisphereLight( 0xffffbb, 0x080820, 1 );
+  const sceneLight = new THREE.HemisphereLight( 0xffffbb, 0x080820, 0.5 );
   scene.add(sceneLight);
 
   // Rendering mesh from points
