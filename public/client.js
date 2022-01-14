@@ -88,10 +88,17 @@ addFunc.addEventListener('click',()=>{
   if (isEmpty(document.getElementById('input').value)){
     return
   }
-  if (scene == scene2D){
-    generatePlot2D(); 
-  }else{
-    generatePlot()
+  try{
+    if (scene == scene2D){
+      new Formula(func).evaluate({x:1})
+      generatePlot2D(); 
+    }else{
+      new Formula(func).evaluate({x:1, z:1})
+      generatePlot()
+    }
+  }
+  catch(error){
+    console.log("Can't calculate this function!")
   }
 });
 

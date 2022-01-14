@@ -1,5 +1,6 @@
 import {colorWheel} from "../client.js"
 import { plot2D } from "../classes/plot2D.js"
+import Formula from 'fparser';
 
 const container2D = document.getElementById("container2D")
 const canvas_2d = document.getElementById("2d-graph");
@@ -59,7 +60,9 @@ function MaxX(){
 
 // Calculate f(x) from given function formula
 let calculatePoint = function(x){
-    return eval(document.getElementById('input').value)
+    const fObj = new Formula(document.getElementById('input').value);
+    let y = fObj.evaluate({x:x});
+    return y;
 }
 
 // Draw axes and then draw points or whole function
@@ -87,7 +90,14 @@ function Draw(){
 function DrawFromPlotList(){
     for(let i=0; i < plots2D.length; i++){
       let F = function(x){
-        return eval(plots2D[i].func_string)
+        try{
+          const fObj = new Formula(plots2D[i].func_string);
+          let y = fObj.evaluate({x:x});
+          return y;
+        }
+        catch(error){
+          console.log(error)
+        }
       }
       if (canvas_2d.getContext){
         Ctx = canvas_2d.getContext("2d");
