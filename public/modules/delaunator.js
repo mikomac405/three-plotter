@@ -2,6 +2,7 @@ import Delaunator from "delaunator/index.js";
 import * as THREE from "three"
 import Formula from 'fparser';
 import { plot3D } from "../classes/plot3D.js"
+import { colorWheel } from "../client.js"
 
 function calculatePoints(func, x_range, y_range, z_range){
     let points = [];
@@ -27,7 +28,8 @@ function renderFunctionMesh(func, x_range, y_range, z_range, scene){
     //     console.log(`Point ${i} -> x: ${points3d[i].x} | y: ${points3d[i].y} | z: ${points3d[i].z}`)
     // }
 
-    let mat = new THREE.PointsMaterial({ color: 0x99ccff, size: 2 })
+    let color = new THREE.Color( colorWheel.colors[0].rgb['r'], colorWheel.colors[0].rgb['g'], colorWheel.colors[0].rgb['b'])
+    let mat = new THREE.PointsMaterial({ color: color, size: 2 })
     mat.side = 2
     var geom = new THREE.BufferGeometry().setFromPoints(points3d);
 
@@ -47,7 +49,7 @@ function renderFunctionMesh(func, x_range, y_range, z_range, scene){
     geom.computeVertexNormals();
     var mesh = new THREE.Mesh(
         geom, // re-use the existing geometry
-        new THREE.MeshPhongMaterial({ color: "purple", wireframe: false })
+        new THREE.MeshPhongMaterial({ color: color, wireframe: false })
         //new THREE.MeshLambertMaterial({ color: "purple", wireframe: false })
     );
     mesh.material.flatShading = false
