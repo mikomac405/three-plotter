@@ -97,10 +97,12 @@ addFunc.addEventListener('click',()=>{
       for(let fun2d of plots2D){
         if(fun2d.func_string == input){
           console.log("This function already exist in the list!");
+          exists = true;
           break;
         }
       }
       listOfFunc.innerHTML += '<li>'+input+'</li>'
+      if(!exists) generatePlot2D()
       generatePlot2D(); 
     }else{
       for(let fun3d of plots3D){
@@ -111,6 +113,7 @@ addFunc.addEventListener('click',()=>{
         }
       }
       listOfFunc.innerHTML += '<li>'+input+'</li>'
+      if(!exists) generatePlot()
       generatePlot()
     }
   }
