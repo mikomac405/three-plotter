@@ -1,7 +1,7 @@
 import * as THREE from "three"
 import { renderFunctionMesh } from "./modules/delaunator.js"
 import { DrawFirstAxes, DrawFromPlotList, generatePlot2D, plots2D } from "./modules/logic2dPlot.js"
-import { OrbitControls }  from "three/examples/jsm/controls/OrbitControls";
+import { OrbitControls }  from "three/examples/jsm/controls/OrbitControls.js";
 import Formula from 'fparser';
 import { plot3D } from "./classes/plot3D.js"
 
