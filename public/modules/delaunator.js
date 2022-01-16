@@ -4,11 +4,11 @@ import Formula from 'fparser';
 import { plot3D } from "../classes/plot3D.js"
 import { colorWheel } from "../client.js"
 
-function calculatePoints(func, x_range, y_range, z_range){
+function calculatePoints(func, x_range, y_range, z_range, precision){
     let points = [];
     const fObj = new Formula(func)
-    for (let x = x_range.min; x <= x_range.max; x+=0.01){
-        for (let z = z_range.min; z <= z_range.max; z+=0.01){
+    for (let x = x_range.min; x <= x_range.max; x+=precision){
+        for (let z = z_range.min; z <= z_range.max; z+=precision){
             let y = fObj.evaluate({x:x,z:z})
             if(y >= y_range.min && y <= y_range.max){
                 points.push(new THREE.Vector3(x,y,z));
@@ -18,10 +18,10 @@ function calculatePoints(func, x_range, y_range, z_range){
     return points
 }
 
-function renderFunctionMesh(func, x_range, y_range, z_range, scene){
+function renderFunctionMesh(func, x_range, y_range, z_range, precision, scene){
 
 
-    let points3d = calculatePoints(func, x_range, y_range, z_range)
+    let points3d = calculatePoints(func, x_range, y_range, z_range, precision)
     
 
     // for(let i = 0; i < points3d.length; i++){

@@ -135,7 +135,7 @@ function generatePlot(){
       max : parseFloat(zRange.querySelector("#maxRangeInput").value)
     }
 
-    plots3D.push(renderFunctionMesh(functionInput.value, x_range, y_range, z_range, scene3D))
+    plots3D.push(renderFunctionMesh(functionInput.value, x_range, y_range, z_range, (51+(slider.value*-1))/100,scene3D))
     console.log(plots3D)
     // Change scale and color
     /*
@@ -239,7 +239,7 @@ var slider = document.getElementById("Efficiency");
 var output = document.getElementById("Precision");
 output.innerHTML = slider.value;
 slider.oninput = function() {
-  output.innerHTML = this.value;
+  output.innerHTML = (51+(this.value*-1))/100;
 }
 
 
