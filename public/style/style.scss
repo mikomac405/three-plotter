@@ -104,13 +104,21 @@ body{
 
 ul{
   padding:0px;
+  margin:49px 0px 0px 0px;
 }
 
 li{
+  padding: 5px 0 5px 5px;
+  border-radius: $margin;
   list-style-type: none;
-  height: 20px;
-  width: 20px;
-  background-color: white;
+  height: $height4Func;
+  margin: $margin4Func 0 $margin4Func 0;
+  width: 195px;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.2);
+  font-family: $font-stack;
+  font-size: 20px;
+  vertical-align:top
 }
 
 .inputFunction{
@@ -147,7 +155,7 @@ li{
   position: absolute;
   top: $margin4Func;
   outline: 0;
-  right: $margin4Func;
+  left: $widthOfInputFunc + $margin4Func + $margin4Func + $margin4Func+ $margin4Func;
   border: 0;
   border-radius: $margin;
   margin: 0px;
@@ -178,7 +186,7 @@ li{
 
 /* width */
 ::-webkit-scrollbar {
-  width: 20px;
+  width: 5px;
 }
 
 /* Track */
@@ -189,13 +197,13 @@ li{
  
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: red; 
+  background:  rgba(0, 0, 0, 0.2);
   border-radius: 10px;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: #b30000; 
+  background:  rgba(0, 0, 0, 0.3);
 }
 .dock{
   position: absolute;
