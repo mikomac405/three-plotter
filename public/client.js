@@ -69,6 +69,7 @@ iconOfDarkLightMode.addEventListener('click',()=>{
 // ============================ Plots logic
 
 // Buttons and inputs
+const listOfFunc = document.getElementById('list');
 const addFunc = document.getElementById('button-plus');
 const functionInput = document.getElementById('input');
 
@@ -100,7 +101,9 @@ addFunc.addEventListener('click',()=>{
           break;
         }
       }
-      if(!exists) generatePlot2D(); 
+      listOfFunc.innerHTML += '<li>'+input+'</li>'
+      if(!exists) generatePlot2D()
+      generatePlot2D(); 
     }else{
       for(let fun3d of plots3D){
         if(fun3d.func_string == input){
@@ -109,7 +112,9 @@ addFunc.addEventListener('click',()=>{
           break;
         }
       }
+      listOfFunc.innerHTML += '<li>'+input+'</li>'
       if(!exists) generatePlot()
+      generatePlot()
     }
   }
   catch(error){
