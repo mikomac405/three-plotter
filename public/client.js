@@ -14,6 +14,8 @@ const canvas_2d = document.getElementById("2d-graph");
 const slideZoomContainer = document.getElementsByClassName("slideZoomContainer")[0]
 const renderer = new THREE.WebGLRenderer({canvas,alpha: true, preserveDrawingBuffer: true });
 
+let current_function_id = NaN;
+
 // ============================ Scene logic
 // Default scene
 let scene = scene3D;
@@ -38,6 +40,7 @@ iconOf2DMode.addEventListener('click',()=>{
       container2D.style.display = 'none';
       scene = scene3D;
       changeScene(scene);
+      generateList();
   }
   else {
       iconOf2DMode.id='button-2D';
@@ -54,6 +57,7 @@ iconOf2DMode.addEventListener('click',()=>{
         DrawFirstAxes();
       }
       changeScene(scene);
+      generateList();
   }
 });
 
@@ -81,12 +85,27 @@ console.log()
 
 let plots3D = []
 
+function generateList(){
+  listOfFunc.innerHTML = ""
+  if(scene == scene3D){
+    for(let el of plots3D){
+      listOfFunc.innerHTML += `<li id="${el.id}">${el.func_string}</li>`
+    }
+  }
+  else{
+    for(let el of plots2D){
+      listOfFunc.innerHTML += `<li id="${el.id}">${el.func_string}</li>`
+    }
+  }
+}
+
+
 function isEmpty(str) {
   return !str.trim().length;
 }
 
 addFunc.addEventListener('click',()=>{
-  let input = document.getElementById('input').value;
+  let input = functionInput.value;
   if (isEmpty(input)){
     return
   }
@@ -101,9 +120,11 @@ addFunc.addEventListener('click',()=>{
           break;
         }
       }
-      listOfFunc.innerHTML += '<li>'+input+'</li>'
-      if(!exists) generatePlot2D()
-      generatePlot2D(); 
+      if(!exists){
+        generatePlot2D((Math.random() + 1).toString(36).substring(7));
+        generateList();
+        
+      }
     }else{
       for(let fun3d of plots3D){
         if(fun3d.func_string == input){
@@ -112,19 +133,21 @@ addFunc.addEventListener('click',()=>{
           break;
         }
       }
-      listOfFunc.innerHTML += '<li>'+input+'</li>'
-      if(!exists) generatePlot()
-      generatePlot()
+      if(!exists){
+        generatePlot((Math.random() + 1).toString(36).substring(7))
+        generateList();
+      }
     }
   }
   catch(error){
     console.log("Can't calculate this function!")
     console.log(error)
   }
+  functionInput.value = "";
 });
 
 
-function generatePlot(){
+function generatePlot(id){
   let x_range = {
     min : parseFloat(xRange.querySelector("#minRangeInput").value),
     max : parseFloat(xRange.querySelector("#maxRangeInput").value)
@@ -140,7 +163,7 @@ function generatePlot(){
       max : parseFloat(zRange.querySelector("#maxRangeInput").value)
     }
 
-    plots3D.push(renderFunctionMesh(functionInput.value, x_range, y_range, z_range, (51+(slider.value*-1))/100,scene3D))
+    plots3D.push(renderFunctionMesh(functionInput.value, x_range, y_range, z_range, (51+(slider.value*-1))/100,scene3D,id))
     console.log(plots3D)
     // Change scale and color
     /*

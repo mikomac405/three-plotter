@@ -66,7 +66,7 @@ let calculatePoint = function(x){
 }
 
 // Draw axes and then draw points or whole function
-function Draw(){
+function Draw(id){
   if (canvas_2d.getContext){
       Ctx = canvas_2d.getContext("2d");
       Ctx.clearRect(0,0,Width,Height);  // Reset the whole canvas 
@@ -81,7 +81,7 @@ function Draw(){
   }
   let colorFromColorPickerInRgb = hsvToRgb(colorWheel.color.$["h"] / 360, colorWheel.color.$["s"] / 100, colorWheel.color.$["v"] / 100)
   let color = `rgb(${colorFromColorPickerInRgb[0]}, ${colorFromColorPickerInRgb[1]}, ${colorFromColorPickerInRgb[2]})`;
-  let plot = new plot2D(document.getElementById('input').value, color)
+  let plot = new plot2D(document.getElementById('input').value, color, id)
   console.log(plot)
   return plot
 }
@@ -357,11 +357,11 @@ function hsvToRgb(h, s, v) {
     return [ r * 255, g * 255, b * 255 ];
   }
 
-function generatePlot2D(){
+function generatePlot2D(id){
   xLeftBound = parseFloat(xRange.querySelector("#minRangeInput").value);
   xRightBound = parseFloat(xRange.querySelector("#maxRangeInput").value);
   canvas_2d.onmouseover = scrollingEvent();
-  plots2D.push(Draw());
+  plots2D.push(Draw(id));
   console.log(plots2D)
   if (plots2D.length >= 2){
     DrawFromPlotList();

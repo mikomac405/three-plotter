@@ -18,7 +18,7 @@ function calculatePoints(func, x_range, y_range, z_range, precision){
     return points
 }
 
-function renderFunctionMesh(func, x_range, y_range, z_range, precision, scene){
+function renderFunctionMesh(func, x_range, y_range, z_range, precision, scene, id){
 
 
     let points3d = calculatePoints(func, x_range, y_range, z_range, precision)
@@ -55,7 +55,7 @@ function renderFunctionMesh(func, x_range, y_range, z_range, precision, scene){
     mesh.material.flatShading = false
     mesh.material.side = THREE.DoubleSide
 
-    let plt = new plot3D(func, mesh)
+    let plt = new plot3D(func, mesh, id)
 
     console.log(plt)
 
