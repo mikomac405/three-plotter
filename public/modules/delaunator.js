@@ -2,7 +2,7 @@ import Delaunator from "delaunator/index.js";
 import * as THREE from "three"
 import Formula from 'fparser';
 import { plot3D } from "../classes/plot3D.js"
-import { colorWheel } from "../client.js"
+import { hsvToRgb, colorWheel } from "../client.js"
 
 function calculatePoints(func, x_range, y_range, z_range, precision){
     let points = [];
@@ -28,7 +28,8 @@ function renderFunctionMesh(func, x_range, y_range, z_range, precision, scene, i
     //     console.log(`Point ${i} -> x: ${points3d[i].x} | y: ${points3d[i].y} | z: ${points3d[i].z}`)
     // }
 
-    let color = new THREE.Color( colorWheel.colors[0].rgb['r'], colorWheel.colors[0].rgb['g'], colorWheel.colors[0].rgb['b'])
+    let raw_color = hsvToRgb(colorWheel.color.$["h"] / 360, colorWheel.color.$["s"] / 100, colorWheel.color.$["v"] / 100)
+    let color = new THREE.Color(raw_color[0],raw_color[1],raw_color[2])
     let mat = new THREE.PointsMaterial({ color: color, size: 2 })
     mat.side = 2
     var geom = new THREE.BufferGeometry().setFromPoints(points3d);

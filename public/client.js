@@ -40,6 +40,7 @@ iconOf2DMode.addEventListener('click',()=>{
       container2D.style.display = 'none';
       scene = scene3D;
       changeScene(scene);
+      canvas.width += 1;
       generateList();
   }
   else {
@@ -346,4 +347,4 @@ function changeScene(scene){
 }
 changeScene(scene)
 
-export {colorWheel}
+export { hsvToRgb, colorWheel}
