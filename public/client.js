@@ -1,6 +1,6 @@
 import * as THREE from "three"
 import { renderFunctionMesh } from "./modules/delaunator.js"
-import { DrawFirstAxes, DrawFromPlotList, generatePlot2D, plots2D } from "./modules/logic2dPlot.js"
+import { DrawFirstAxes, DrawFromPlotList, generatePlot2D, plots2D, resizeCanvas } from "./modules/logic2dPlot.js"
 import { OrbitControls }  from "three/examples/jsm/controls/OrbitControls";
 import Formula from 'fparser';
 import { plot3D } from "./classes/plot3D.js"
@@ -13,8 +13,6 @@ const container2D = document.getElementById("container2D")
 const canvas_2d = document.getElementById("2d-graph");
 const slideZoomContainer = document.getElementsByClassName("slideZoomContainer")[0]
 const renderer = new THREE.WebGLRenderer({canvas,alpha: true, preserveDrawingBuffer: true });
-
-let current_function_id = NaN;
 
 // ============================ Scene logic
 // Default scene
@@ -59,6 +57,7 @@ iconOf2DMode.addEventListener('click',()=>{
       }
       changeScene(scene);
       generateList();
+      resizeCanvas();
   }
 });
 
@@ -77,6 +76,7 @@ iconOfDarkLightMode.addEventListener('click',()=>{
 const listOfFunc = document.getElementById('list');
 const addFunc = document.getElementById('button-plus');
 const functionInput = document.getElementById('input');
+const changeColor = document.getElementById('changeColor');
 
 const xRange = document.getElementById("X");
 const yRange = document.getElementById("Y");
@@ -150,6 +150,32 @@ addFunc.addEventListener('click',()=>{
     console.log(error)
   }
   functionInput.value = "";
+});
+
+changeColor.addEventListener('click', ()=>{
+  if(scene == scene3D){
+    for(let el of plots3D){
+      console.log(el)
+      if(el.id == idOfElement){
+        let raw_color = hsvToRgb(colorWheel.color.$["h"] / 360, colorWheel.color.$["s"] / 100, colorWheel.color.$["v"] / 100)
+        el.color = {r: raw_color[0], g:raw_color[1], b:raw_color[2]}
+        scene3D.remove(el.mesh)
+        scene3D.add(el.mesh)
+        console.log(plots3D)
+      }
+    }
+  }
+  else{
+    for(let el of plots2D){
+      console.log(el)
+      if(el.id == idOfElement){
+        resizeCanvas();
+        //plots2D = plots2D.filter(function(item){
+        //  return item !== el
+        //})
+      }
+    }
+  }
 });
 
 function generatePlot(id){
@@ -238,24 +264,30 @@ const deleteFunc = document.getElementById('deleteFunc');
 deleteFunc.addEventListener('click',() => {
   if(scene == scene3D){
     for(let el of plots3D){
-      console.log(el.id)
+      console.log(el)
       if(el.id == idOfElement){
-        plots3D = plots3D.filter(function(item){
-          return item !== el
-        })
+        scene3D.remove(el.mesh)
+        plots3D.pop(el)
+        //plots3D = plots3D.filter(function(item){
+        //  return item !== el
+        //})
       }
     }
+    console.log(plots3D);
     generateList();
     }
   else{
     for(let el of plots2D){
-      console.log(el.id)
+      console.log(el)
       if(el.id == idOfElement){
-        plots2D = plots2D.filter(function(item){
-          return item !== el
-        })
+        plots2D.pop(el)
+        resizeCanvas();
+        //plots2D = plots2D.filter(function(item){
+        //  return item !== el
+        //})
       }
     }
+    console.log(plots2D);
     generateList();
   }
 });

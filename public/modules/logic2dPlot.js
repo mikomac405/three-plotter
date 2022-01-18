@@ -2,15 +2,15 @@ import {colorWheel} from "../client.js"
 import { plot2D } from "../classes/plot2D.js"
 import Formula from 'fparser';
 
-const container2D = document.getElementById("container2D")
-const canvas_2d = document.getElementById("2d-graph");
-const slideZoomContainer = document.getElementsByClassName("slideZoomContainer")[0]
+let container2D = document.getElementById("container2D")
+let canvas_2d = document.getElementById("2d-graph");
+let slideZoomContainer = document.getElementsByClassName("slideZoomContainer")[0]
 
 let onlyPointsGlobal = false;
 let Ctx = null;
 let Width = canvas_2d.width;
 let Height = canvas_2d.height;
-const xRange = document.getElementById("X");
+let xRange = document.getElementById("X");
 let xLeftBound = parseFloat(xRange.querySelector("#minRangeInput").value);
 let xRightBound = parseFloat(xRange.querySelector("#maxRangeInput").value);
 let xPrecision = document.getElementById("Efficiency").value;
@@ -65,20 +65,24 @@ let calculatePoint = function(x){
     return y;
 }
 
+function RerenderCanvas(){
+  if (canvas_2d.getContext){
+    Ctx = canvas_2d.getContext("2d");
+    Ctx.clearRect(0,0,Width,Height);  // Reset the whole canvas 
+
+    DrawAxes();
+    if (onlyPointsGlobal){
+      RenderFunctionWithPointsOnly(calculatePoint)
+    }else{
+      RenderFunction(calculatePoint);
+    }
+    
+  }
+}
+
 // Draw axes and then draw points or whole function
 function Draw(id){
-  if (canvas_2d.getContext){
-      Ctx = canvas_2d.getContext("2d");
-      Ctx.clearRect(0,0,Width,Height);  // Reset the whole canvas 
-
-      DrawAxes();
-      if (onlyPointsGlobal){
-        RenderFunctionWithPointsOnly(calculatePoint)
-      }else{
-        RenderFunction(calculatePoint);
-      }
-      
-  }
+  RerenderCanvas()
   let colorFromColorPickerInRgb = hsvToRgb(colorWheel.color.$["h"] / 360, colorWheel.color.$["s"] / 100, colorWheel.color.$["v"] / 100)
   let color = `rgb(${colorFromColorPickerInRgb[0]}, ${colorFromColorPickerInRgb[1]}, ${colorFromColorPickerInRgb[2]})`;
   let plot = new plot2D(document.getElementById('input').value, color, id)
@@ -386,4 +390,4 @@ function resizeCanvas() {
 
 window.addEventListener("resize", resizeCanvas);
 
-export { DrawFirstAxes, MaxX, MinX, MaxY, MinY, XC, YC, Draw, DrawFromPlotList, XTickDelta, YTickDelta, DrawAxes, RenderFunction, RenderFunctionFromList, RenderFunctionWithPointsOnly, RenderFunctionWithPointsOnlyFromList, scrollingEvent, generatePlot2D, plots2D, calculatePoint }
+export { DrawFirstAxes, MaxX, MinX, MaxY, MinY, XC, YC, Draw, DrawFromPlotList, XTickDelta, YTickDelta, DrawAxes, RenderFunction, RenderFunctionFromList, RenderFunctionWithPointsOnly, RenderFunctionWithPointsOnlyFromList, scrollingEvent, generatePlot2D, plots2D, calculatePoint, RerenderCanvas, resizeCanvas }
