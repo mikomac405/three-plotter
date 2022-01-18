@@ -27,7 +27,7 @@ body{
   position: absolute;
   overflow: auto;
   width:$widthOfOpt+50px;
-  height:$widthOfOpt + $widthOfButton + $margin + $margin + $margin + $margin + $widthOfOpt + $margin + $widthOfButton + $margin + 40px + $margin + $margin + $widthOfButton+ $margin + $margin + $widthOfButton+ $margin + $margin + $widthOfButton + $margin + $margin + $widthOfButton + $widthOfButton + $margin + $margin + $margin + $margin;
+  height:$widthOfOpt + $widthOfButton + $margin + $margin + $margin + $margin + $widthOfOpt + $margin + $widthOfButton + $margin + 40px + $margin + $margin + $widthOfButton+ $margin + $margin + $widthOfButton+ $margin + $margin + $widthOfButton + $margin + $margin + $widthOfButton + $widthOfButton + $margin + $margin + $margin + $margin + $margin + $margin;
   margin: 0px;
   top: 0;
   right: 0;
@@ -121,6 +121,40 @@ li{
   vertical-align:top
 }
 
+.changeColor{
+  position: absolute;
+  top: $widthOfOpt + $margin + $margin;
+  right: 110px;
+  border-radius: $margin;
+  margin: $margin $margin $margin $margin;
+  width: 90px;
+  height: $widthOfButton;
+  padding: 5px 5px;
+  background-color: rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 0px 15px 2px rgba(0, 0, 0, 0.6);
+}
+
+.changeColor:hover{
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+.deleteFunc{
+  position: absolute;
+  top: $widthOfOpt + $margin + $margin;
+  right: 0vh;
+  border-radius: $margin;
+  margin: $margin $margin $margin $margin;
+  width: 90px;
+  height: $widthOfButton;
+  padding: 5px 5px;
+  background-color: rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 0px 15px 2px rgba(0, 0, 0, 0.6);
+}
+
+.deleteFunc:hover{
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
 .inputFunction{
   font-size: 20px;
   position: absolute;
@@ -149,6 +183,7 @@ li{
 #rangeSpan{
   font-family: $font-stack;
   font-size: 15px;
+  color: white;
 }
 
 .addFunction{
@@ -207,7 +242,7 @@ li{
 }
 .dock{
   position: absolute;
-  top: $widthOfOpt + $margin + $margin;
+  top: $widthOfOpt + $margin + $margin + $widthOfButton + $margin + $margin;
   right: 0vh;
   border-radius: $margin;
   margin: $margin $margin $margin $margin;
@@ -221,7 +256,7 @@ li{
 .sliderContainer{
   position: absolute;
   text-align: center;
-  top: $margin + $margin + $widthOfOpt + $margin + $margin + $widthOfOpt + 40px+ $margin + $margin + $widthOfButton + $margin + $margin + $widthOfButton + $margin + $margin + $widthOfButton;
+  top: $margin + $margin + $widthOfOpt + $margin + $margin + $widthOfOpt + 40px+ $margin + $margin + $widthOfButton + $margin + $margin + $widthOfButton + $margin + $margin + $widthOfButton + $widthOfButton + $margin + $margin;
   right: 0vh;
   border-radius: $margin;
   margin: $margin $margin $margin $margin;
@@ -234,7 +269,7 @@ li{
 
 .xml{
   position: absolute;
-  top: $margin + $margin + $widthOfButton + $margin + $margin + $margin + $margin + $widthOfOpt + $margin + $widthOfButton + $margin + 40px + $margin + $margin + $widthOfButton+ $margin + $margin + $widthOfButton+ $margin + $margin + $widthOfButton + $widthOfOpt;
+  top: $margin + $margin + $widthOfButton + $margin + $margin + $margin + $margin + $widthOfOpt + $margin + $widthOfButton + $margin + 40px + $margin + $margin + $widthOfButton+ $margin + $margin + $widthOfButton+ $margin + $margin + $widthOfButton + $widthOfOpt+ $widthOfButton + $margin + $margin;
   outline: 0;
   right: 0;
   border: 0;
@@ -255,7 +290,7 @@ li{
 
 .png{
   position: absolute;
-  top: $margin + $margin + $widthOfButton + $margin + $margin + $margin + $margin + $widthOfOpt + $margin + $widthOfButton + $margin + 40px + $margin + $margin + $widthOfButton+ $margin + $margin + $widthOfButton+ $margin + $margin + $widthOfButton + $widthOfOpt;
+  top: $margin + $margin + $widthOfButton + $margin + $margin + $margin + $margin + $widthOfOpt + $margin + $widthOfButton + $margin + 40px + $margin + $margin + $widthOfButton+ $margin + $margin + $widthOfButton+ $margin + $margin + $widthOfButton + $widthOfOpt+ $widthOfButton + $margin + $margin;
   outline: 0;
   right: $widthOfButton + $margin + $margin + $margin + $margin;
   border: 0;
@@ -276,7 +311,7 @@ li{
 
 .jpg{
   position: absolute;
-  top: $margin + $margin + $widthOfButton + $margin + $margin + $margin + $margin + $widthOfOpt + $margin + $widthOfButton + $margin + 40px + $margin + $margin + $widthOfButton+ $margin + $margin + $widthOfButton+ $margin + $margin + $widthOfButton + $widthOfOpt;
+  top: $margin + $margin + $widthOfButton + $margin + $margin + $margin + $margin + $widthOfOpt + $margin + $widthOfButton + $margin + 40px + $margin + $margin + $widthOfButton+ $margin + $margin + $widthOfButton+ $margin + $margin + $widthOfButton + $widthOfOpt+ $widthOfButton + $margin + $margin;
   outline: 0;
   right: $widthOfButton + $margin + $margin + $margin + $margin + $margin + $margin + $widthOfButton + $margin + $margin;
   border: 0;
@@ -347,7 +382,7 @@ li{
 .xValueRange {
   position: absolute;
   color: white;
-  top: $margin + $margin + $widthOfOpt + $margin + $margin + $widthOfOpt + 40px;
+  top: $margin + $margin + $widthOfOpt + $margin + $margin + $widthOfOpt + 40px + $widthOfButton + $margin + $margin;
   right: 0;
   border-radius: 10px;
   margin: $margin $margin $margin $margin;
@@ -361,7 +396,7 @@ li{
 .yValueRange {
   position: absolute;
   color: white;
-  top: $margin + $margin + $widthOfOpt + $margin + $margin + $widthOfOpt + $margin + $widthOfButton + $margin + 40px;
+  top: $margin + $margin + $widthOfOpt + $margin + $margin + $widthOfOpt + $margin + $widthOfButton + $margin + 40px+ $widthOfButton + $margin + $margin;
   right: 0;
   border-radius: 10px;
   margin: $margin $margin $margin $margin;
@@ -375,7 +410,7 @@ li{
 .zValueRange {
   position: absolute;
   color: white;
-  top: $margin + $margin + $widthOfOpt + $margin + $margin + $widthOfOpt + $margin + $widthOfButton + $margin + 40px + $margin + $margin + $widthOfButton;
+  top: $margin + $margin + $widthOfOpt + $margin + $margin + $widthOfOpt + $margin + $widthOfButton + $margin + 40px + $margin + $margin + $widthOfButton+ $widthOfButton + $margin + $margin;
   right: 0;
   border-radius: 10px;
   margin: $margin $margin $margin $margin;
@@ -390,7 +425,7 @@ li{
   position: absolute;
   color: white;
   text-align: center;
-  top: $margin + $margin + $widthOfOpt + $margin + $margin + $widthOfOpt + $margin + $widthOfButton + $margin + 40px+ $margin + $margin + $widthOfButton + $margin + $margin + $widthOfButton + $margin + $margin + $widthOfButton;
+  top: $margin + $margin + $widthOfOpt + $margin + $margin + $widthOfOpt + $margin + $widthOfButton + $margin + 40px+ $margin + $margin + $widthOfButton + $margin + $margin + $widthOfButton + $margin + $margin + $widthOfButton + $widthOfButton + $margin + $margin;
   right: 0;
   border-radius: 10px;
   margin: $margin $margin $margin $margin;
