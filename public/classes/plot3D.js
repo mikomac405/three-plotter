@@ -3,9 +3,10 @@ import { Vector3 } from 'three';
 import { Color } from 'three';
 
 class plot3D{
-    constructor(func_string, mesh){
+    constructor(func_string, mesh, id){
         this.func_string = func_string;
         this.mesh = mesh;
+        this.id = id;
     }
 
     set color(color){

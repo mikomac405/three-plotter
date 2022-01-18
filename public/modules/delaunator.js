@@ -2,13 +2,13 @@ import Delaunator from "delaunator/index.js";
 import * as THREE from "three"
 import Formula from 'fparser';
 import { plot3D } from "../classes/plot3D.js"
-import { colorWheel } from "../client.js"
+import { hsvToRgb, colorWheel } from "../client.js"
 
-function calculatePoints(func, x_range, y_range, z_range){
+function calculatePoints(func, x_range, y_range, z_range, precision){
     let points = [];
     const fObj = new Formula(func)
-    for (let x = x_range.min; x <= x_range.max; x+=0.01){
-        for (let z = z_range.min; z <= z_range.max; z+=0.01){
+    for (let x = x_range.min; x <= x_range.max; x+=precision){
+        for (let z = z_range.min; z <= z_range.max; z+=precision){
             let y = fObj.evaluate({x:x,z:z})
             if(y >= y_range.min && y <= y_range.max){
                 points.push(new THREE.Vector3(x,y,z));
@@ -18,17 +18,18 @@ function calculatePoints(func, x_range, y_range, z_range){
     return points
 }
 
-function renderFunctionMesh(func, x_range, y_range, z_range, scene){
+function renderFunctionMesh(func, x_range, y_range, z_range, precision, scene, id){
 
 
-    let points3d = calculatePoints(func, x_range, y_range, z_range)
+    let points3d = calculatePoints(func, x_range, y_range, z_range, precision)
     
 
     // for(let i = 0; i < points3d.length; i++){
     //     console.log(`Point ${i} -> x: ${points3d[i].x} | y: ${points3d[i].y} | z: ${points3d[i].z}`)
     // }
 
-    let color = new THREE.Color( colorWheel.colors[0].rgb['r'], colorWheel.colors[0].rgb['g'], colorWheel.colors[0].rgb['b'])
+    let raw_color = hsvToRgb(colorWheel.color.$["h"] / 360, colorWheel.color.$["s"] / 100, colorWheel.color.$["v"] / 100)
+    let color = new THREE.Color(raw_color[0],raw_color[1],raw_color[2])
     let mat = new THREE.PointsMaterial({ color: color, size: 2 })
     mat.side = 2
     var geom = new THREE.BufferGeometry().setFromPoints(points3d);
@@ -55,7 +56,7 @@ function renderFunctionMesh(func, x_range, y_range, z_range, scene){
     mesh.material.flatShading = false
     mesh.material.side = THREE.DoubleSide
 
-    let plt = new plot3D(func, mesh)
+    let plt = new plot3D(func, mesh, id)
 
     console.log(plt)
 
