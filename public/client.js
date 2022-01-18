@@ -268,9 +268,9 @@ deleteFunc.addEventListener('click',() => {
       if(el.id == idOfElement){
         scene3D.remove(el.mesh)
         plots3D.pop(el)
-        //plots3D = plots3D.filter(function(item){
-        //  return item !== el
-        //})
+        plots3D = plots3D.filter(function(item){
+          return item !== el
+        })
       }
     }
     console.log(plots3D);
