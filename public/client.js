@@ -90,16 +90,21 @@ function generateList(){
   listOfFunc.innerHTML = ""
   if(scene == scene3D){
     for(let el of plots3D){
-      listOfFunc.innerHTML += `<li id="${el.id}">${el.func_string}</li>`
+      const elementOfList = document.createElement('li');
+      elementOfList.setAttribute('id',`${el.id}`);
+      elementOfList.textContent = `${el.func_string}`;
+      listOfFunc.prepend(elementOfList);
     }
   }
   else{
     for(let el of plots2D){
-      listOfFunc.innerHTML += `<li id="${el.id}">${el.func_string}</li>`
+      const elementOfList = document.createElement('li');
+      elementOfList.setAttribute('id',`${el.id}`);
+      elementOfList.textContent = `${el.func_string}`;
+      listOfFunc.prepend(elementOfList);
     }
   }
 }
-
 
 function isEmpty(str) {
   return !str.trim().length;
@@ -146,7 +151,6 @@ addFunc.addEventListener('click',()=>{
   }
   functionInput.value = "";
 });
-
 
 function generatePlot(id){
   let x_range = {
@@ -218,6 +222,43 @@ let jpgButton = document.getElementById("button-jpg");
 jpgButton.addEventListener("click", saveFile);
 
 
+
+// delete and change colors of elements from list
+
+let idOfElement = "";
+
+listOfFunc.addEventListener('click',e => {
+  e.stopPropagation();
+  idOfElement = e.target.id;
+  console.log(idOfElement)
+});
+
+const deleteFunc = document.getElementById('deleteFunc');
+
+deleteFunc.addEventListener('click',() => {
+  if(scene == scene3D){
+    for(let el of plots3D){
+      console.log(el.id)
+      if(el.id == idOfElement){
+        plots3D = plots3D.filter(function(item){
+          return item !== el
+        })
+      }
+    }
+    generateList();
+    }
+  else{
+    for(let el of plots2D){
+      console.log(el.id)
+      if(el.id == idOfElement){
+        plots2D = plots2D.filter(function(item){
+          return item !== el
+        })
+      }
+    }
+    generateList();
+  }
+});
 
 
 // Color picker
