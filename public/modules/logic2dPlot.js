@@ -4,7 +4,7 @@ import Formula from 'fparser';
 
 let container2D = document.getElementById("container2D")
 let canvas_2d = document.getElementById("2d-graph");
-let slideZoomContainer = document.getElementsByClassName("slideZoomContainer")[0]
+// let dotted2D = document.getElementById("dotted2D");
 
 let onlyPointsGlobal = false;
 let Ctx = null;
@@ -15,6 +15,10 @@ let xLeftBound = parseFloat(xRange.querySelector("#minRangeInput").value);
 let xRightBound = parseFloat(xRange.querySelector("#maxRangeInput").value);
 let xPrecision = document.getElementById("Efficiency").value;
 let plots2D = []
+
+function ChangeOnlyPointsValue(newValue){
+  onlyPointsGlobal = newValue;
+}
 
 function DrawFirstAxes(){
     if (canvas_2d.getContext){
@@ -422,4 +426,4 @@ function ChangeColorOfPlot(plotId){
   }
 }
 
-export { ChangeColorOfPlot, DeleteFrom2DList, DrawFirstAxes, MaxX, MinX, MaxY, MinY, XC, YC, Draw, DrawFromPlotList, XTickDelta, YTickDelta, DrawAxes, RenderFunction, RenderFunctionFromList, RenderFunctionWithPointsOnly, RenderFunctionWithPointsOnlyFromList, scrollingEvent, generatePlot2D, plots2D, calculatePoint }
+export { ChangeOnlyPointsValue, ChangeColorOfPlot, DeleteFrom2DList, DrawFirstAxes, MaxX, MinX, MaxY, MinY, XC, YC, Draw, DrawFromPlotList, XTickDelta, YTickDelta, DrawAxes, RenderFunction, RenderFunctionFromList, RenderFunctionWithPointsOnly, RenderFunctionWithPointsOnlyFromList, scrollingEvent, generatePlot2D, plots2D, calculatePoint }
