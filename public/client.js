@@ -165,17 +165,11 @@ changeColor.addEventListener('click', ()=>{
     }
   }
   else{
-    for(let el of plots2D){
-      console.log(el)
-      if(el.id == idOfElement){
-        resizeCanvas();
-        //plots2D = plots2D.filter(function(item){
-        //  return item !== el
-        //})
-      }
-    }
+    ChangeColorOfPlot(idOfElement);
+    generateList();
   }
 });
+
 
 function generatePlot(id){
   let x_range = {
@@ -312,17 +306,7 @@ deleteFunc.addEventListener('click',() => {
 });
 
 
-const changeColorFunc = document.getElementsByClassName("changeColor")[0];
 
-changeColorFunc.addEventListener('click', () => {
-  if(scene == scene3D){
-    console.log("To implement.")
-    }
-  else{
-    ChangeColorOfPlot(idOfElement);
-    generateList();
-  }
-});
 
 // Color picker
 var colorWheel = new iro.ColorPicker("#colorPicker", {
