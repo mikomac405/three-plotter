@@ -1,4 +1,4 @@
-import {colorWheel} from "../client.js"
+import {colorWheel, idOfElement} from "../client.js"
 import { plot2D } from "../classes/plot2D.js"
 import Formula from 'fparser';
 
@@ -270,7 +270,6 @@ function RenderFunctionWithPointsOnly(f){
   let color = `rgb(${colorFromColorPickerInRgb[0]}, ${colorFromColorPickerInRgb[1]}, ${colorFromColorPickerInRgb[2]})`;
   Ctx.beginPath();
   xPrecision =  document.getElementById("Efficiency").value / 100;
-  console.log(xPrecision)
   for (let x = MinX(); x <= MaxX(); x += xPrecision){
       let y = f(x);
       if (first){
@@ -291,7 +290,6 @@ function RenderFunctionWithPointsOnlyFromList(f, color){
   let first = true;
   Ctx.beginPath();
   xPrecision =  document.getElementById("Efficiency").value / 100;
-  console.log(xPrecision)
   for (let x = MinX(); x <= MaxX(); x += xPrecision){
       let y = f(x);
       if (first){
@@ -312,6 +310,8 @@ function RenderFunctionWithPointsOnlyFromList(f, color){
 function scrollingEvent(){
     canvas_2d.addEventListener('wheel', function(event)
     {
+        if (plots2D.length <= 0)
+          return;
         if (event.deltaY < 0)
         {
             // scrolling up
@@ -386,4 +386,36 @@ function resizeCanvas() {
 
 window.addEventListener("resize", resizeCanvas);
 
-export { DrawFirstAxes, MaxX, MinX, MaxY, MinY, XC, YC, Draw, DrawFromPlotList, XTickDelta, YTickDelta, DrawAxes, RenderFunction, RenderFunctionFromList, RenderFunctionWithPointsOnly, RenderFunctionWithPointsOnlyFromList, scrollingEvent, generatePlot2D, plots2D, calculatePoint }
+function DeleteFrom2DList(){
+  for(let el of plots2D){
+    if(el.id == idOfElement){
+      plots2D = plots2D.filter(function(item){
+        return item !== el
+      })
+    }
+  }
+  Ctx.clearRect(0,0,Width,Height);
+  if (plots2D.length >= 1){
+    DrawFromPlotList()
+  }else{
+    DrawFirstAxes();
+  }
+}
+
+function ChangeColorOfPlot(plotId){
+  for(let el of plots2D){
+    if(el.id == plotId){
+      let colorFromColorPickerInRgb = hsvToRgb(colorWheel.color.$["h"] / 360, colorWheel.color.$["s"] / 100, colorWheel.color.$["v"] / 100)
+      let color = `rgb(${colorFromColorPickerInRgb[0]}, ${colorFromColorPickerInRgb[1]}, ${colorFromColorPickerInRgb[2]})`;
+      el.color = color;
+    }
+  }
+  Ctx.clearRect(0,0,Width,Height);
+  if (plots2D.length >= 1){
+    DrawFromPlotList()
+  }else{
+    DrawFirstAxes();
+  }
+}
+
+export { ChangeColorOfPlot, DeleteFrom2DList, DrawFirstAxes, MaxX, MinX, MaxY, MinY, XC, YC, Draw, DrawFromPlotList, XTickDelta, YTickDelta, DrawAxes, RenderFunction, RenderFunctionFromList, RenderFunctionWithPointsOnly, RenderFunctionWithPointsOnlyFromList, scrollingEvent, generatePlot2D, plots2D, calculatePoint }
