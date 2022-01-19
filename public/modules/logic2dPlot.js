@@ -16,6 +16,15 @@ let xRightBound = parseFloat(xRange.querySelector("#maxRangeInput").value);
 let xPrecision = document.getElementById("Efficiency").value;
 let plots2D = []
 
+function RefreshPlots(){
+  Ctx.clearRect(0,0,Width,Height);
+  if (plots2D.length >= 1){
+    DrawFromPlotList()
+  }else{
+    DrawFirstAxes();
+  }
+}
+
 function ChangeOnlyPointsValue(newValue){
   onlyPointsGlobal = newValue;
 }
@@ -426,4 +435,4 @@ function ChangeColorOfPlot(plotId){
   }
 }
 
-export { ChangeOnlyPointsValue, ChangeColorOfPlot, DeleteFrom2DList, DrawFirstAxes, MaxX, MinX, MaxY, MinY, XC, YC, Draw, DrawFromPlotList, XTickDelta, YTickDelta, DrawAxes, RenderFunction, RenderFunctionFromList, RenderFunctionWithPointsOnly, RenderFunctionWithPointsOnlyFromList, scrollingEvent, generatePlot2D, plots2D, calculatePoint }
+export { RefreshPlots, ChangeOnlyPointsValue, ChangeColorOfPlot, DeleteFrom2DList, DrawFirstAxes, MaxX, MinX, MaxY, MinY, XC, YC, Draw, DrawFromPlotList, XTickDelta, YTickDelta, DrawAxes, RenderFunction, RenderFunctionFromList, RenderFunctionWithPointsOnly, RenderFunctionWithPointsOnlyFromList, scrollingEvent, generatePlot2D, plots2D, calculatePoint }
