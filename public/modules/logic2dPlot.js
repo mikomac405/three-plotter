@@ -402,4 +402,20 @@ function DeleteFrom2DList(){
   }
 }
 
-export { DeleteFrom2DList, DrawFirstAxes, MaxX, MinX, MaxY, MinY, XC, YC, Draw, DrawFromPlotList, XTickDelta, YTickDelta, DrawAxes, RenderFunction, RenderFunctionFromList, RenderFunctionWithPointsOnly, RenderFunctionWithPointsOnlyFromList, scrollingEvent, generatePlot2D, plots2D, calculatePoint }
+function ChangeColorOfPlot(plotId){
+  for(let el of plots2D){
+    if(el.id == plotId){
+      let colorFromColorPickerInRgb = hsvToRgb(colorWheel.color.$["h"] / 360, colorWheel.color.$["s"] / 100, colorWheel.color.$["v"] / 100)
+      let color = `rgb(${colorFromColorPickerInRgb[0]}, ${colorFromColorPickerInRgb[1]}, ${colorFromColorPickerInRgb[2]})`;
+      el.color = color;
+    }
+  }
+  Ctx.clearRect(0,0,Width,Height);
+  if (plots2D.length >= 1){
+    DrawFromPlotList()
+  }else{
+    DrawFirstAxes();
+  }
+}
+
+export { ChangeColorOfPlot, DeleteFrom2DList, DrawFirstAxes, MaxX, MinX, MaxY, MinY, XC, YC, Draw, DrawFromPlotList, XTickDelta, YTickDelta, DrawAxes, RenderFunction, RenderFunctionFromList, RenderFunctionWithPointsOnly, RenderFunctionWithPointsOnlyFromList, scrollingEvent, generatePlot2D, plots2D, calculatePoint }

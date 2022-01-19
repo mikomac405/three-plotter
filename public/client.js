@@ -248,20 +248,20 @@ deleteFunc.addEventListener('click',() => {
     generateList();
     }
   else{
-    DeleteFrom2DList()
+    DeleteFrom2DList();
     generateList();
   }
 });
 
 
-const changeColorFunc = document.getElementById('changeColor');
+const changeColorFunc = document.getElementsByClassName("changeColor")[0];
 
 changeColorFunc.addEventListener('click', () => {
   if(scene == scene3D){
     console.log("To implement.")
     }
   else{
-    ChangeColorOfPlot()
+    ChangeColorOfPlot(idOfElement);
     generateList();
   }
 });
