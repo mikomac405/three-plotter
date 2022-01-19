@@ -217,7 +217,7 @@ function saveFileJPG() {
           if (scene == scene3D){
             imgData = renderer.domElement.toDataURL(strMime);
           }else{
-            imgData = document.getElementById("jpg").toDataURL("image/jpg");
+            imgData = document.getElementById("2d-graph").toDataURL("image/jpg");
           }
           let link = document.createElement('a');
           if (typeof link.download === 'string') {
@@ -245,7 +245,7 @@ function saveFilePNG() {
         if (scene == scene3D){
           imgData = renderer.domElement.toDataURL(strMime);
         }else{
-          imgData = document.getElementById("png").toDataURL("image/png");
+          imgData = document.getElementById("2d-graph").toDataURL("image/png");
         }
         let link = document.createElement('a');
         if (typeof link.download === 'string') {
