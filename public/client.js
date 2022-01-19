@@ -14,8 +14,6 @@ const canvas_2d = document.getElementById("2d-graph");
 const slideZoomContainer = document.getElementsByClassName("slideZoomContainer")[0]
 const renderer = new THREE.WebGLRenderer({canvas,alpha: true, preserveDrawingBuffer: true });
 
-let current_function_id = NaN;
-
 // ============================ Scene logic
 // Default scene
 let scene = scene3D;
@@ -35,7 +33,6 @@ iconOf2DMode.addEventListener('click',()=>{
       zRange.style.visibility = "visible";
       yRange.style.visibility = "visible";
       canvas.style.visibility = "visible";
-      slideZoomContainer.style.display = "block";
       canvas_2d.style.visibility = "hidden";
       container2D.style.display = 'none';
       scene = scene3D;
@@ -48,7 +45,6 @@ iconOf2DMode.addEventListener('click',()=>{
       zRange.style.visibility = "hidden";
       yRange.style.visibility = "hidden";
       canvas.style.visibility = "hidden";
-      slideZoomContainer.style.display = "none";
       canvas_2d.style.visibility = "visible";
       container2D.style.display = 'block';
       scene = scene2D;
@@ -77,6 +73,7 @@ iconOfDarkLightMode.addEventListener('click',()=>{
 const listOfFunc = document.getElementById('list');
 const addFunc = document.getElementById('button-plus');
 const functionInput = document.getElementById('input');
+const changeColor = document.getElementById('changeColor');
 
 const xRange = document.getElementById("X");
 const yRange = document.getElementById("Y");
@@ -152,6 +149,32 @@ addFunc.addEventListener('click',()=>{
   functionInput.value = "";
 });
 
+changeColor.addEventListener('click', ()=>{
+  if(scene == scene3D){
+    for(let el of plots3D){
+      console.log(el)
+      if(el.id == idOfElement){
+        let raw_color = hsvToRgb(colorWheel.color.$["h"] / 360, colorWheel.color.$["s"] / 100, colorWheel.color.$["v"] / 100)
+        el.color = {r: raw_color[0], g:raw_color[1], b:raw_color[2]}
+        scene3D.remove(el.mesh)
+        scene3D.add(el.mesh)
+        console.log(plots3D)
+      }
+    }
+  }
+  else{
+    for(let el of plots2D){
+      console.log(el)
+      if(el.id == idOfElement){
+        resizeCanvas();
+        //plots2D = plots2D.filter(function(item){
+        //  return item !== el
+        //})
+      }
+    }
+  }
+});
+
 function generatePlot(id){
   let x_range = {
     min : parseFloat(xRange.querySelector("#minRangeInput").value),
@@ -190,7 +213,7 @@ function generatePlot(id){
   }
 }
 
-function saveFile() {
+function saveFileJPG() {
     const strDownloadMime = "image/octet-stream";
     let imgData;
       try {
@@ -198,12 +221,12 @@ function saveFile() {
           if (scene == scene3D){
             imgData = renderer.domElement.toDataURL(strMime);
           }else{
-            imgData = document.getElementById("2d-graph").toDataURL("image/png");
+            imgData = document.getElementById("jpg").toDataURL("image/jpg");
           }
           let link = document.createElement('a');
           if (typeof link.download === 'string') {
               document.body.appendChild(link); //Firefox requires the link to be in the body
-              link.download = "test.png";
+              link.download = "wykreślacz.jpg";
               link.href = imgData.replace(strMime, strDownloadMime);
               link.click();
               document.body.removeChild(link); //remove the link when done
@@ -218,9 +241,39 @@ function saveFile() {
    
 }
 
-let jpgButton = document.getElementById("button-jpg");
-jpgButton.addEventListener("click", saveFile);
+function saveFilePNG() {
+  const strDownloadMime = "image/octet-stream";
+  let imgData;
+    try {
+        var strMime = "image/png";
+        if (scene == scene3D){
+          imgData = renderer.domElement.toDataURL(strMime);
+        }else{
+          imgData = document.getElementById("png").toDataURL("image/png");
+        }
+        let link = document.createElement('a');
+        if (typeof link.download === 'string') {
+            document.body.appendChild(link); //Firefox requires the link to be in the body
+            link.download = "wykreślacz.png";
+            link.href = imgData.replace(strMime, strDownloadMime);
+            link.click();
+            document.body.removeChild(link); //remove the link when done
+        } else {
+            location.replace(uri);
+        }
 
+    } catch (e) {
+        console.log(e);
+        return;
+    }
+ 
+}
+
+let jpgButton = document.getElementById("button-jpg");
+jpgButton.addEventListener("click", saveFileJPG);
+
+let pngButton = document.getElementById("button-png");
+pngButton.addEventListener("click", saveFilePNG);
 
 
 // delete and change colors of elements from list
@@ -249,13 +302,16 @@ const deleteFunc = document.getElementById('deleteFunc');
 deleteFunc.addEventListener('click',() => {
   if(scene == scene3D){
     for(let el of plots3D){
-      console.log(el.id)
+      console.log(el)
       if(el.id == idOfElement){
+        scene3D.remove(el.mesh)
+        plots3D.pop(el)
         plots3D = plots3D.filter(function(item){
           return item !== el
         })
       }
     }
+    console.log(plots3D);
     generateList();
     }
   else{
@@ -331,7 +387,7 @@ slider.oninput = function() {
 
 // Zoom slider TO DO get zoom working
 
-
+/*
 var zoomslider = document.getElementById("zoomer");
 output.innerHTML = slider.value;
 zoomslider.oninput = function() {
@@ -339,7 +395,7 @@ zoomslider.oninput = function() {
   scene.style.webkitTransform = "scale("+zoomlevel+")";
 	scene.style.transform = "scale("+zoomlevel+")";
 }
-
+*/
 
 // Main function
 function main() {
