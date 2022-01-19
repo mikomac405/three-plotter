@@ -1,6 +1,6 @@
 import * as THREE from "three"
 import { renderFunctionMesh } from "./modules/delaunator.js"
-import { DrawFirstAxes, DrawFromPlotList, generatePlot2D, plots2D, DeleteFrom2DList, ChangeColorOfPlot } from "./modules/logic2dPlot.js"
+import { DrawFirstAxes, DrawFromPlotList, generatePlot2D, plots2D, DeleteFrom2DList, ChangeColorOfPlot, ChangeOnlyPointsValue } from "./modules/logic2dPlot.js"
 import { OrbitControls }  from "three/examples/jsm/controls/OrbitControls";
 import Formula from 'fparser';
 import { plot3D } from "./classes/plot3D.js"
@@ -11,7 +11,7 @@ const scene2D = "2D";
 const canvas = document.getElementById('writer');
 const container2D = document.getElementById("container2D")
 const canvas_2d = document.getElementById("2d-graph");
-const dotted2D = document.getElementById("dotted2D");  // <------ próbowałem XDDD
+const dotted2D = document.getElementById("dotted2D");
 const renderer = new THREE.WebGLRenderer({canvas,alpha: true, preserveDrawingBuffer: true });
 
 // ============================ Scene logic
@@ -33,7 +33,7 @@ iconOf2DMode.addEventListener('click',()=>{
       zRange.style.visibility = "visible";
       yRange.style.visibility = "visible";
       canvas.style.visibility = "visible";
-      //dotted2D.style.display = "none";  // <------ próbowałem XDDD
+      dotted2D.style.visibility = "hidden";
       canvas_2d.style.visibility = "hidden";
       container2D.style.display = 'none';
       scene = scene3D;
@@ -47,7 +47,7 @@ iconOf2DMode.addEventListener('click',()=>{
       yRange.style.visibility = "hidden";
       canvas.style.visibility = "hidden";
       canvas_2d.style.visibility = "visible";
-      //dotted2D.style.display = "visible";  // <------ próbowałem XDDD
+      dotted2D.style.visibility = "visible";
       container2D.style.display = 'block';
       scene = scene2D;
       if (plots2D.length >= 1){
@@ -270,6 +270,22 @@ jpgButton.addEventListener("click", saveFileJPG);
 
 let pngButton = document.getElementById("button-png");
 pngButton.addEventListener("click", saveFilePNG);
+
+// change to dotted plot 
+let dottedButtonClicked = false;
+
+dotted2D.addEventListener("click", () => {
+  if (dottedButtonClicked){
+    dotted2D.style.background = 'rgb(' + 186 + ',' + 11 + ',' + 34 + ')';
+    ChangeOnlyPointsValue(false);
+    dottedButtonClicked = false;
+  }else{
+    dotted2D.style.background = 'rgb(' + 20 + ',' + 138 + ',' + 4 + ')';
+    ChangeOnlyPointsValue(true);
+    dottedButtonClicked = true;
+  }
+  
+})
 
 
 // delete and change colors of elements from list
