@@ -385,6 +385,25 @@ li:hover {
   display: inline-block;
 }
 
+#dotted2D {
+  position: absolute;
+  color: white;
+  top: $margin + $margin + $widthOfOpt + $margin + $margin + $widthOfOpt + 40px+ $margin + $margin + $widthOfButton + $margin + $margin + $widthOfButton + $margin + $margin + $widthOfButton + $widthOfButton + $margin + $margin;
+  right: 0;
+  border-radius: 10px;
+  margin: $margin $margin $margin $margin;
+  width: $widthOfOpt;
+  height: 20px;
+  padding: 12px 5px;
+  background-color: rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 0px 15px 2px rgba(0, 0, 0, 0.6);
+}
+
+#dotted2D:hover{
+  background-color: rgba(0, 0, 0, 0.3);
+  box-shadow: 0px 0px 15px 2px rgba(0, 0, 0, 0.7);
+}
+
 .xValueRange {
   position: absolute;
   color: white;
@@ -428,7 +447,6 @@ li:hover {
 }
 
 .slideZoomContainer {
-  display: none;
   position: absolute;
   color: white;
   text-align: center;

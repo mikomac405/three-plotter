@@ -11,7 +11,7 @@ const scene2D = "2D";
 const canvas = document.getElementById('writer');
 const container2D = document.getElementById("container2D")
 const canvas_2d = document.getElementById("2d-graph");
-const slideZoomContainer = document.getElementsByClassName("slideZoomContainer")[0]
+const dotted2D = document.getElementById("dotted2D");  // <------ próbowałem XDDD
 const renderer = new THREE.WebGLRenderer({canvas,alpha: true, preserveDrawingBuffer: true });
 
 // ============================ Scene logic
@@ -33,6 +33,7 @@ iconOf2DMode.addEventListener('click',()=>{
       zRange.style.visibility = "visible";
       yRange.style.visibility = "visible";
       canvas.style.visibility = "visible";
+      //dotted2D.style.display = "none";  // <------ próbowałem XDDD
       canvas_2d.style.visibility = "hidden";
       container2D.style.display = 'none';
       scene = scene3D;
@@ -46,6 +47,7 @@ iconOf2DMode.addEventListener('click',()=>{
       yRange.style.visibility = "hidden";
       canvas.style.visibility = "hidden";
       canvas_2d.style.visibility = "visible";
+      //dotted2D.style.display = "visible";  // <------ próbowałem XDDD
       container2D.style.display = 'block';
       scene = scene2D;
       if (plots2D.length >= 1){
@@ -284,18 +286,7 @@ listOfFunc.addEventListener('click',e => {
   e.stopPropagation();
   idOfElement = e.target.id;
   console.log(idOfElement)
-  setClickedPlotEffect(idOfElement)
 });
-
-function setClickedPlotEffect(plotId){
-  for(let element of listOfFunc.getElementsByTagName("li")){
-    if (element.id == plotId){
-      element.style.background = 'rgb(' + 20 + ',' + 138 + ',' + 4 + ')';
-    }else{
-      element.style.background = 'rgb(' + 15 + ',' + 27 + ',' + 49 + ')';
-    }
-  }
-}
 
 const deleteFunc = document.getElementById('deleteFunc');
 
