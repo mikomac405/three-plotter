@@ -116,6 +116,10 @@ li {
   vertical-align: top;
 }
 
+li:hover {
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
 .changeColor {
   position: absolute;
   top: 220px;
@@ -258,7 +262,7 @@ li {
 .sliderContainer {
   position: absolute;
   text-align: center;
-  top: 720px;
+  top: 540px;
   right: 0vh;
   border-radius: 10px;
   margin: 10px 10px 10px 10px;
@@ -270,41 +274,39 @@ li {
           box-shadow: 0px 0px 15px 2px rgba(0, 0, 0, 0.6);
 }
 
-.xml {
+/*
+.xml{
   position: absolute;
-  top: 840px;
+  top: $margin + $margin + $widthOfButton + $margin + $margin + $margin + $margin + $widthOfOpt + $margin + $widthOfButton + $margin + 40px + $margin + $margin + $widthOfButton+ $margin + $margin + $widthOfButton+ $margin + $margin + $widthOfButton + $widthOfOpt+ $widthOfButton + $margin + $margin;
   outline: 0;
   right: 0;
   border: 0;
-  border-radius: 10px;
-  margin: 10px 10px 10px 10px;
-  width: 40px;
-  height: 40px;
+  border-radius: $margin;
+  margin: $margin $margin $margin $margin;
+  width: $widthOfButton;
+  height:$widthOfButton;
   padding: 5px 5px;
   background-color: rgba(0, 0, 0, 0.2);
-  -webkit-box-shadow: 0px 0px 15px 2px rgba(0, 0, 0, 0.6);
-          box-shadow: 0px 0px 15px 2px rgba(0, 0, 0, 0.6);
-  -webkit-transition: .3s;
+  box-shadow: 0px 0px 15px 2px rgba(0, 0, 0, 0.6);
   transition: .3s;
 }
 
-.xml:hover {
+.xml:hover{
   background-color: rgba(0, 0, 0, 0.3);
-  -webkit-box-shadow: 0px 0px 15px 2px rgba(0, 0, 0, 0.7);
-          box-shadow: 0px 0px 15px 2px rgba(0, 0, 0, 0.7);
+  box-shadow: 0px 0px 15px 2px rgba(0, 0, 0, 0.7);
 }
-
-.png {
+*/
+#png {
   position: absolute;
-  top: 840px;
+  top: 600px;
   outline: 0;
-  right: 80px;
+  right: 0px;
   border: 0;
   border-radius: 10px;
   margin: 10px 10px 10px 10px;
   width: 40px;
   height: 40px;
-  padding: 5px 5px;
+  padding: 5px 30px;
   background-color: rgba(0, 0, 0, 0.2);
   -webkit-box-shadow: 0px 0px 15px 2px rgba(0, 0, 0, 0.6);
           box-shadow: 0px 0px 15px 2px rgba(0, 0, 0, 0.6);
@@ -312,23 +314,23 @@ li {
   transition: .3s;
 }
 
-.png:hover {
+#png:hover {
   background-color: rgba(0, 0, 0, 0.3);
   -webkit-box-shadow: 0px 0px 15px 2px rgba(0, 0, 0, 0.7);
           box-shadow: 0px 0px 15px 2px rgba(0, 0, 0, 0.7);
 }
 
-.jpg {
+#jpg {
   position: absolute;
-  top: 840px;
+  top: 600px;
   outline: 0;
-  right: 160px;
+  right: 110px;
   border: 0;
   border-radius: 10px;
   margin: 10px 10px 10px 10px;
   width: 40px;
   height: 40px;
-  padding: 5px 5px;
+  padding: 5px 30px;
   background-color: rgba(0, 0, 0, 0.2);
   -webkit-box-shadow: 0px 0px 15px 2px rgba(0, 0, 0, 0.6);
           box-shadow: 0px 0px 15px 2px rgba(0, 0, 0, 0.6);
@@ -336,7 +338,7 @@ li {
   transition: .3s;
 }
 
-.jpg:hover {
+#jpg:hover {
   background-color: rgba(0, 0, 0, 0.3);
   -webkit-box-shadow: 0px 0px 15px 2px rgba(0, 0, 0, 0.7);
           box-shadow: 0px 0px 15px 2px rgba(0, 0, 0, 0.7);
@@ -397,7 +399,7 @@ li {
 .xValueRange {
   position: absolute;
   color: white;
-  top: 540px;
+  top: 660px;
   right: 0;
   border-radius: 10px;
   margin: 10px 10px 10px 10px;
@@ -412,7 +414,7 @@ li {
 .yValueRange {
   position: absolute;
   color: white;
-  top: 600px;
+  top: 720px;
   right: 0;
   border-radius: 10px;
   margin: 10px 10px 10px 10px;
@@ -427,7 +429,7 @@ li {
 .zValueRange {
   position: absolute;
   color: white;
-  top: 660px;
+  top: 780px;
   right: 0;
   border-radius: 10px;
   margin: 10px 10px 10px 10px;
@@ -440,6 +442,7 @@ li {
 }
 
 .slideZoomContainer {
+  display: none;
   position: absolute;
   color: white;
   text-align: center;

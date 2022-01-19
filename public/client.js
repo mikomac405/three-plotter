@@ -33,7 +33,6 @@ iconOf2DMode.addEventListener('click',()=>{
       zRange.style.visibility = "visible";
       yRange.style.visibility = "visible";
       canvas.style.visibility = "visible";
-      slideZoomContainer.style.display = "block";
       canvas_2d.style.visibility = "hidden";
       container2D.style.display = 'none';
       scene = scene3D;
@@ -46,7 +45,6 @@ iconOf2DMode.addEventListener('click',()=>{
       zRange.style.visibility = "hidden";
       yRange.style.visibility = "hidden";
       canvas.style.visibility = "hidden";
-      slideZoomContainer.style.display = "none";
       canvas_2d.style.visibility = "visible";
       container2D.style.display = 'block';
       scene = scene2D;
@@ -57,7 +55,6 @@ iconOf2DMode.addEventListener('click',()=>{
       }
       changeScene(scene);
       generateList();
-      resizeCanvas();
   }
 });
 
@@ -216,7 +213,7 @@ function generatePlot(id){
   }
 }
 
-function saveFile() {
+function saveFileJPG() {
     const strDownloadMime = "image/octet-stream";
     let imgData;
       try {
@@ -224,12 +221,12 @@ function saveFile() {
           if (scene == scene3D){
             imgData = renderer.domElement.toDataURL(strMime);
           }else{
-            imgData = document.getElementById("2d-graph").toDataURL("image/png");
+            imgData = document.getElementById("jpg").toDataURL("image/jpg");
           }
           let link = document.createElement('a');
           if (typeof link.download === 'string') {
               document.body.appendChild(link); //Firefox requires the link to be in the body
-              link.download = "test.png";
+              link.download = "wykreślacz.jpg";
               link.href = imgData.replace(strMime, strDownloadMime);
               link.click();
               document.body.removeChild(link); //remove the link when done
@@ -244,9 +241,39 @@ function saveFile() {
    
 }
 
-let jpgButton = document.getElementById("button-jpg");
-jpgButton.addEventListener("click", saveFile);
+function saveFilePNG() {
+  const strDownloadMime = "image/octet-stream";
+  let imgData;
+    try {
+        var strMime = "image/png";
+        if (scene == scene3D){
+          imgData = renderer.domElement.toDataURL(strMime);
+        }else{
+          imgData = document.getElementById("png").toDataURL("image/png");
+        }
+        let link = document.createElement('a');
+        if (typeof link.download === 'string') {
+            document.body.appendChild(link); //Firefox requires the link to be in the body
+            link.download = "wykreślacz.png";
+            link.href = imgData.replace(strMime, strDownloadMime);
+            link.click();
+            document.body.removeChild(link); //remove the link when done
+        } else {
+            location.replace(uri);
+        }
 
+    } catch (e) {
+        console.log(e);
+        return;
+    }
+ 
+}
+
+let jpgButton = document.getElementById("button-jpg");
+jpgButton.addEventListener("click", saveFileJPG);
+
+let pngButton = document.getElementById("button-png");
+pngButton.addEventListener("click", saveFilePNG);
 
 
 // delete and change colors of elements from list
@@ -349,7 +376,7 @@ slider.oninput = function() {
 
 // Zoom slider TO DO get zoom working
 
-
+/*
 var zoomslider = document.getElementById("zoomer");
 output.innerHTML = slider.value;
 zoomslider.oninput = function() {
@@ -357,7 +384,7 @@ zoomslider.oninput = function() {
   scene.style.webkitTransform = "scale("+zoomlevel+")";
 	scene.style.transform = "scale("+zoomlevel+")";
 }
-
+*/
 
 // Main function
 function main() {
