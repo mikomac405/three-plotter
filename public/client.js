@@ -1,6 +1,6 @@
 import * as THREE from "three"
 import { renderFunctionMesh } from "./modules/delaunator.js"
-import { DrawFirstAxes, DrawFromPlotList, generatePlot2D, plots2D, resizeCanvas } from "./modules/logic2dPlot.js"
+import { DrawFirstAxes, DrawFromPlotList, generatePlot2D, plots2D, DeleteFrom2DList, ChangeColorOfPlot } from "./modules/logic2dPlot.js"
 import { OrbitControls }  from "three/examples/jsm/controls/OrbitControls";
 import Formula from 'fparser';
 import { plot3D } from "./classes/plot3D.js"
@@ -277,21 +277,23 @@ deleteFunc.addEventListener('click',() => {
     generateList();
     }
   else{
-    for(let el of plots2D){
-      console.log(el)
-      if(el.id == idOfElement){
-        plots2D.pop(el)
-        resizeCanvas();
-        //plots2D = plots2D.filter(function(item){
-        //  return item !== el
-        //})
-      }
-    }
-    console.log(plots2D);
+    DeleteFrom2DList();
     generateList();
   }
 });
 
+
+const changeColorFunc = document.getElementsByClassName("changeColor")[0];
+
+changeColorFunc.addEventListener('click', () => {
+  if(scene == scene3D){
+    console.log("To implement.")
+    }
+  else{
+    ChangeColorOfPlot(idOfElement);
+    generateList();
+  }
+});
 
 // Color picker
 var colorWheel = new iro.ColorPicker("#colorPicker", {
@@ -420,4 +422,4 @@ function changeScene(scene){
 }
 changeScene(scene)
 
-export { hsvToRgb, colorWheel}
+export { hsvToRgb, colorWheel, idOfElement}
