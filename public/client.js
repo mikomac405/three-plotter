@@ -1,6 +1,6 @@
 import * as THREE from "three"
 import { renderFunctionMesh } from "./modules/delaunator.js"
-import { DrawFirstAxes, DrawFromPlotList, generatePlot2D, plots2D, DeleteFrom2DList, ChangeColorOfPlot, ChangeOnlyPointsValue } from "./modules/logic2dPlot.js"
+import { DrawFirstAxes, DrawFromPlotList, generatePlot2D, plots2D, DeleteFrom2DList, ChangeColorOfPlot, ChangeOnlyPointsValue, RefreshPlots } from "./modules/logic2dPlot.js"
 import { OrbitControls }  from "three/examples/jsm/controls/OrbitControls";
 import Formula from 'fparser';
 import { plot3D } from "./classes/plot3D.js"
@@ -278,10 +278,12 @@ dotted2D.addEventListener("click", () => {
   if (dottedButtonClicked){
     dotted2D.style.background = 'rgb(' + 186 + ',' + 11 + ',' + 34 + ')';
     ChangeOnlyPointsValue(false);
+    RefreshPlots();
     dottedButtonClicked = false;
   }else{
     dotted2D.style.background = 'rgb(' + 20 + ',' + 138 + ',' + 4 + ')';
     ChangeOnlyPointsValue(true);
+    RefreshPlots();
     dottedButtonClicked = true;
   }
   
