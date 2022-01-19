@@ -279,8 +279,19 @@ let idOfElement = "";
 listOfFunc.addEventListener('click',e => {
   e.stopPropagation();
   idOfElement = e.target.id;
-  console.log(idOfElement)
+  console.log(idOfElement);
+  setClickedPlotEffect(idOfElement);
 });
+
+function setClickedPlotEffect(plotId){
+  for(let element of listOfFunc.getElementsByTagName("li")){
+    if (element.id == plotId){
+      element.style.background = 'rgb(' + 20 + ',' + 138 + ',' + 4 + ')';
+    }else{
+      element.style.background = 'rgb(' + 15 + ',' + 27 + ',' + 49 + ')';
+    }
+  }
+}
 
 const deleteFunc = document.getElementById('deleteFunc');
 
