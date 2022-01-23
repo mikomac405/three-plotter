@@ -12,6 +12,10 @@ import {
 } from "./modules/logic2dPlot.js";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import Formula from "fparser";
+import { plot3D } from "./classes/plot3D.js";
+import { Fog } from "three";
+
+const debugMode = true; // Debug mode flag
 
 // ============================ Default 3D environment
 
@@ -22,7 +26,9 @@ const renderer = new THREE.WebGLRenderer({
   alpha: true,
   preserveDrawingBuffer: true,
 }); // Creating new WebGL renderer for canvas3D
-let plots3D = []; // Intialization of 3D plots list
+renderer.shadowMap.enabled = true;
+renderer.shadowMap.type = THREE.BasicShadowMap;
+let plots3D = []; // Intialization of 3D plots array
 let scene = scene3D; // Default scene (3D)
 
 // ============================ Default 2D environment
@@ -82,7 +88,6 @@ iconOfDarkLightMode.addEventListener("click", () => {
   iconOfDarkLightMode.classList.toggle("transition1");
 });
 
-const listOfFunc = document.getElementById("list"); // List of all function (renders elements from plots2D or plots3D, depends on app mode)
 const functionInput = document.getElementById("input"); // Text input for function (parsed by `fparser`)
 
 // Ranges
@@ -92,23 +97,25 @@ const zRange = document.getElementById("Z"); // Range on Z axis
 
 const addFunc = document.getElementById("button-plus"); // Button to add function to plots2D/3D, depends on mode
 
-// Adding function to list of plots
-addFunc.addEventListener("click", () => {
+// Adding function to array of plots
+addFunc.addEventListener("click", addNewFunction);
+
+function addNewFunction() {
   let input = functionInput.value;
   // Checks if empty or contains only spaces
   if (!input.trim().length) {
     return;
   }
   try {
-    // TODO: Find a better way use this parser
-    // WARNING: CHECK MEMORY LEAKS ON CREATING Formula OBJECT (SUS)
-    let obj = new Formula(input); // Creating a fparser object
     let exists = false; // Flag used checking if plots2D/3D contains already this function
     // TODO: Create a test for checking duplicates in plots2D/3D
     if (scene == scene2D) {
+      // TODO: Find a better way use this parser
+      // WARNING: CHECK MEMORY LEAKS ON CREATING Formula OBJECT (SUS)
+      const obj = new Formula(input); // Creating a fparser object
       for (let fun2d of plots2D) {
         if (fun2d.func_string == input) {
-          console.log("This function already exist in the list!");
+          console.log("This function already exist in the array!");
           exists = true;
           break;
         }
@@ -119,8 +126,16 @@ addFunc.addEventListener("click", () => {
       }
     } else {
       for (let fun3d of plots3D) {
+        // TODO: Find a better way use this parser
+        // WARNING: CHECK MEMORY LEAKS ON CREATING Formula OBJECT (SUS)
+        if(input.includes("x") && input.includes("y") && input.includes("z")){
+          console.log("Sphere")
+        }
+        else{
+          const obj = new Formula(input); // Creating a fparser object
+        }
         if (fun3d.func_string == input) {
-          console.log("This function already exist in the list!");
+          console.log("This function already exist in the array!");
           exists = true;
           break;
         }
@@ -132,11 +147,11 @@ addFunc.addEventListener("click", () => {
     }
   } catch (error) {
     // WARNING: This catch should be more specific !
-    console.log("Can't calculate this function!");
+    // console.log("Can't calculate this function!");
     console.log(error);
   }
   functionInput.value = ""; // Clear input everytime the button is clicked
-});
+};
 
 const changeColor = document.getElementById("changeColor"); // Button for changing colors of selected plot
 
@@ -146,12 +161,7 @@ changeColor.addEventListener("click", () => {
     for (let el of plots3D) {
       if (el.id == idOfElement) {
         // FIXME: This is a terrible way to change color
-        let raw_color = hsvToRgb(
-          colorWheel.color.$["h"] / 360,
-          colorWheel.color.$["s"] / 100,
-          colorWheel.color.$["v"] / 100
-        );
-        el.color = { r: raw_color[0], g: raw_color[1], b: raw_color[2] };
+        el.color = colorWheel.color.hexString;
         // I don't know why,  I don't want to know why, I shouldn't
         // have to wonder why, but for whatever reason this stupid
         // plot isn't rerendering correctly unless we do this terribleness
@@ -173,10 +183,14 @@ const ImageType = {
 };
 
 let jpgButton = document.getElementById("button-jpg"); // Button for saving jpg image
-jpgButton.addEventListener("click", saveImage(ImageType.JPG));
+jpgButton.addEventListener("click", function(){ 
+  saveImage(ImageType.JPG);
+});
 
 let pngButton = document.getElementById("button-png"); // Button for saving png image
-pngButton.addEventListener("click", saveImage(ImageType.PNG));
+pngButton.addEventListener("click", function(){
+  saveImage(ImageType.PNG)
+});
 
 // Saving jpg and png
 function saveImage(imageType) {
@@ -209,8 +223,9 @@ function saveImage(imageType) {
 }
 
 let idOfElement = ""; // Currently selected plot
+const listOfFunc = document.getElementById("list"); // List of all function (renders elements from plots2D or plots3D, depends on app mode)
 
-// Selecting plot on list
+// Selecting plot on array
 listOfFunc.addEventListener("click", (e) => {
   e.stopPropagation();
   idOfElement = e.target.id;
@@ -231,15 +246,15 @@ function setClickedPlotEffect(plotId) {
 
 const deleteFunc = document.getElementById("deleteFunc"); // Button for deleting plot from plots2D/3D
 
-// Deleting plot and remove it from list
+// Deleting plot and remove it from array
 // TODO: Check if elements removes correctly
 deleteFunc.addEventListener("click", () => {
   if (scene == scene3D) {
     for (let el of plots3D) {
       console.log(el);
       if (el.id == idOfElement) {
-        scene3D.remove(el.mesh);
-        plots3D = plots3D.filter(function (item) {
+        scene3D.remove(el.mesh); // removing mesh of deleted plot from scene3D
+        plots3D = plots3D.filter(function (item) { // returns new array without deleted element
           return item !== el;
         });
       }
@@ -317,8 +332,7 @@ function generatePlot3D(id) {
       max: parseFloat(zRange.querySelector("#maxRangeInput").value),
     };
 
-    plots3D.push(
-      renderFunctionMesh(
+      const p3D = renderFunctionMesh(
         functionInput.value,
         x_range,
         y_range,
@@ -327,7 +341,9 @@ function generatePlot3D(id) {
         scene3D,
         id
       )
-    );
+      
+      if(p3D instanceof plot3D) plots3D.push(p3D)
+
     console.log(plots3D);
   } else if (scene == scene2D) {
     console.log("2D unimplemented");
@@ -354,39 +370,28 @@ var colorWheel = new iro.ColorPicker("#colorPicker", {
   ],
 });
 
+
 // ============================ Additional functions
-// HSV to RGB converter
-function hsvToRgb(h, s, v) {
-  var r, g, b;
-
-  var i = Math.floor(h * 6);
-  var f = h * 6 - i;
-  var p = v * (1 - s);
-  var q = v * (1 - f * s);
-  var t = v * (1 - (1 - f) * s);
-
-  switch (i % 6) {
-    case 0:
-      (r = v), (g = t), (b = p);
-      break;
-    case 1:
-      (r = q), (g = v), (b = p);
-      break;
-    case 2:
-      (r = p), (g = v), (b = t);
-      break;
-    case 3:
-      (r = p), (g = q), (b = v);
-      break;
-    case 4:
-      (r = t), (g = p), (b = v);
-      break;
-    case 5:
-      (r = v), (g = p), (b = q);
-      break;
+function renderAxisHelperLabels(axHelper){
+  let color = new THREE.Color();
+  color.setRGB(255, 250, 250);
+  let textMaterial = new THREE.MeshBasicMaterial({ color: color });
+  for(i in axHelper.geometry.vertices){
+    let text = new THREE.Mesh(
+      new THREE.TextGeometry('1', {
+        size: 5,
+        height: 2,
+        curveSegments: 6,
+        font: "helvetiker",
+        style: "normal"       
+       }),
+       textMaterial);
+    text.position.x = axHelper.geometry.vertices[i].x;
+    text.position.y = axHelper.geometry.vertices[i].y;
+    text.position.z = axHelper.geometry.vertices[i].z;
+    scene.add(text);
+    
   }
-
-  return [r * 255, g * 255, b * 255];
 }
 
 // ============================ Rendering logic
@@ -410,12 +415,29 @@ function main() {
   // Default light
   let sceneLightColor = 0xffffff;
   let sceneLightIntensity = 2;
-  const sceneLight = new THREE.HemisphereLight(0xffffbb, 0x080820, 0.5);
+  //const sceneLight = new THREE.HemisphereLight(0x858585, 0xFFFFFF, 0.8);
+  const sceneLight = new THREE.AmbientLight(0xffffff, 0.2)
   scene.add(sceneLight);
+
+  const pointLight = new THREE.PointLight(0xffffff, 0.8, 18);
+  pointLight.position.set(-3,6,0);
+  pointLight.castShadow = true;
+  pointLight.shadow.camera.near = 0.1;
+  pointLight.shadow.camera.far = 25;
+  scene.add(pointLight);
+
+  const pointLight2 = new THREE.PointLight(0xffffff, 0.8, 18);
+  pointLight2.position.set(-3,-6,0);
+  pointLight2.castShadow = true;
+  pointLight2.shadow.camera.near = 0.1;
+  pointLight2.shadow.camera.far = 25;
+  scene.add(pointLight2);
 
   // Rendering mesh from points
   const axesHelper = new THREE.AxesHelper(5);
   scene.add(axesHelper);
+  console.log(axesHelper)
+  renderAxisHelperLabels(axesHelper);
 
   // Smart resizer
   function resizeRendererToDisplaySize(renderer) {
@@ -454,4 +476,9 @@ function changeScene(scene) {
 }
 changeScene(scene);
 
-export { hsvToRgb, colorWheel, idOfElement };
+if(debugMode){
+  functionInput.value = "x*z";
+}
+
+
+export { colorWheel, idOfElement };

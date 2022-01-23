@@ -10,7 +10,7 @@ class plot3D {
   }
 
   set color(color) {
-    this.mesh.material.color = new Color(color.r, color.g, color.b);
+    this.mesh.material.color = new Color(color);
   }
 
   set scale(num) {
