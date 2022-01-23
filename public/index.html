@@ -61,19 +61,21 @@
             </div>
         </div>
 
-        <div class="jpg">
+        <div id="jpg">
             <div id="button-jpg"></div>
         </div>
 
-        <div class="png">
+        <div id="png">
             <div id="button-png"></div>
         </div>
 
+        <!--
         <div class="xml">
             <div id="button-xml"></div>
         </div>
-
-        <div class="changeColor">
+        -->
+        
+        <div id="changeColor" class="changeColor">
             <center><span id="rangeSpan" style="justify-content: center">Change color of a function</span></center>
         </div>
 
@@ -101,13 +103,12 @@
             <span id="rangeSpan">z max range: </span>
             <input type="text" id="maxRangeInput" value="1">
         </div>   
-
-        <div class="slideZoomContainer">
-            <span id="zoomSpan">Scale</span>
-            <input type="range" min="1" max="100" value="50" class="slider" id="zoomer" oninput="zoomfunction()">
+ 
+        <div id="dotted2D" style="visibility: hidden;">
+            <center><span id="rangeSpan" style="justify-content: center">Dotted function</span></center>
         </div>
-    </div>
 
+    </div>
     <script type="module" src="client.js"></script>
 </body>
 </html>
