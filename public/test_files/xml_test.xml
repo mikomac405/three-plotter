@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data>
+  <plot3D>
+    <formula>x^2</formula>
+    <color>1 2 3</color>
+    <id>xddd</id>
+  </plot3D>
+  <plot2D>
+    <formula>x^2</formula>
+    <color>1 2 3</color>
+    <id>xddd</id>
+  </plot2D>
+</data>

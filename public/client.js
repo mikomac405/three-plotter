@@ -13,7 +13,8 @@ import {
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import Formula from "fparser";
 import { plot3D } from "./classes/plot3D.js";
-import { Fog } from "three";
+
+import { saveXmlConfiguration, uploadXmlConfiguration } from "./modules/xmlFunctions.js";
 
 const debugMode = true; // Debug mode flag
 
@@ -98,10 +99,11 @@ const zRange = document.getElementById("Z"); // Range on Z axis
 const addFunc = document.getElementById("button-plus"); // Button to add function to plots2D/3D, depends on mode
 
 // Adding function to array of plots
-addFunc.addEventListener("click", addNewFunction);
+addFunc.addEventListener("click", function(){
+  addNewFunction(functionInput.value)
+});
 
-function addNewFunction() {
-  let input = functionInput.value;
+function addNewFunction(input, id=(Math.random() + 1).toString(36).substring(7)) {
   // Checks if empty or contains only spaces
   if (!input.trim().length) {
     return;
@@ -121,7 +123,7 @@ function addNewFunction() {
         }
       }
       if (!exists) {
-        generatePlot2D((Math.random() + 1).toString(36).substring(7)); // Argument is random ID (char[5])
+        generatePlot2D(id); // Argument is random ID (char[5])
         generateList(); // Rerenders <ul></ul> of plots on every plot added
       }
     } else {
@@ -141,7 +143,7 @@ function addNewFunction() {
         }
       }
       if (!exists) {
-        generatePlot3D((Math.random() + 1).toString(36).substring(7));
+        generatePlot3D(id);
         generateList();
       }
     }
@@ -156,10 +158,14 @@ function addNewFunction() {
 const changeColor = document.getElementById("changeColor"); // Button for changing colors of selected plot
 
 // Changing color of plot
-changeColor.addEventListener("click", () => {
+changeColor.addEventListener("click", function(){
+  changePlotColor(idOfElement);
+});
+
+function changePlotColor(id){
   if (scene == scene3D) {
     for (let el of plots3D) {
-      if (el.id == idOfElement) {
+      if (el.id == id) {
         // FIXME: This is a terrible way to change color
         el.color = colorWheel.color.hexString;
         // I don't know why,  I don't want to know why, I shouldn't
@@ -170,11 +176,11 @@ changeColor.addEventListener("click", () => {
       }
     }
   } else {
-    ChangeColorOfPlot(idOfElement);
+    ChangeColorOfPlot(id);
     // BRUH: Why? Plz explain
     generateList();
   }
-});
+}
 
 // Enum with image type (JavaScript doesn't support traditional enums)
 const ImageType = {
@@ -221,6 +227,17 @@ function saveImage(imageType) {
     return;
   }
 }
+
+let xmlDownloadButton = document.getElementById("button-xml");
+xmlDownloadButton.addEventListener("click", function(){
+  saveXmlConfiguration(plots3D, plots2D);
+});
+
+let xmlUploadButton = document.getElementById("button-xml-upload");
+xmlUploadButton.addEventListener("input", function(){
+  uploadXmlConfiguration(xmlUploadButton.files[0])
+});
+
 
 let idOfElement = ""; // Currently selected plot
 const listOfFunc = document.getElementById("list"); // List of all function (renders elements from plots2D or plots3D, depends on app mode)
