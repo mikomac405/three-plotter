@@ -1,0 +1,14 @@
+{
+    "data": {
+    "plot3D": {
+       "formula" : "x^2", 
+       "color" : "1 2 3", 
+       "id" : "xddd"
+    },
+   "plot2D": {
+       "formula" : "x^2", 
+       "color" : "1 2 3", 
+       "id" : "xddd"
+   }
+  }
+}
