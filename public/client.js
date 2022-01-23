@@ -15,6 +15,7 @@ import Formula from "fparser";
 import { plot3D } from "./classes/plot3D.js";
 
 import { saveXmlConfiguration, uploadXmlConfiguration } from "./modules/xmlFunctions.js";
+import { NotImplementedError } from "./modules/utils.js";
 
 const debugMode = true; // Debug mode flag
 
@@ -80,6 +81,8 @@ iconOf2DMode.addEventListener("click", () => {
   }
 });
 
+let currentlySelectedPlotID = ""; // Currently selected plot
+
 const dark = document.getElementById("dark"); // Dark background
 const iconOfDarkLightMode = document.getElementById("light-dark-button"); // Button to switch between dark and light theme
 
@@ -93,13 +96,75 @@ const functionInput = document.getElementById("input"); // Text input for functi
 
 // Ranges
 const xRange = document.getElementById("X"); // Range on X axis
+
+xRange.addEventListener("change", () => {
+  if(currentlySelectedPlotID < 1){
+    return;
+  }
+  if(scene == scene3D){
+    for(let el of plots3D){
+      if(currentlySelectedPlotID == el.id){
+        el.x = {
+          min: parseFloat(xRange.querySelector("#minRangeInput").value),
+          max: parseFloat(xRange.querySelector("#maxRangeInput").value)
+        }
+        return;
+      }
+    }
+  }
+  else{
+    throw NotImplementedError;
+  }
+})
+
 const yRange = document.getElementById("Y"); // Range on Y axis
+yRange.addEventListener("change", () => {
+  if(currentlySelectedPlotID < 1){
+    return;
+  }
+  if(scene == scene3D){
+    for(let el of plots3D){
+      if(currentlySelectedPlotID == el.id){
+        el.y = {
+          min: parseFloat(yRange.querySelector("#minRangeInput").value),
+          max: parseFloat(yRange.querySelector("#maxRangeInput").value)
+        }
+        return;
+      }
+    }
+  }
+  else{
+    throw NotImplementedError;
+  }
+})
+
 const zRange = document.getElementById("Z"); // Range on Z axis
+zRange.addEventListener("change", () => {
+  if(currentlySelectedPlotID < 1){
+    return;
+  }
+  if(scene == scene3D){
+    for(let el of plots3D){
+      if(currentlySelectedPlotID == el.id){
+        el.z = {
+          min: parseFloat(zRange.querySelector("#minRangeInput").value),
+          max: parseFloat(zRange.querySelector("#maxRangeInput").value)
+        }
+        return;
+      }
+    }
+  }
+  else{
+    throw NotImplementedError;
+  }
+})
+
 
 const addFunc = document.getElementById("button-plus"); // Button to add function to plots2D/3D, depends on mode
 
 // Adding function to array of plots
 addFunc.addEventListener("click", function(){
+  currentlySelectedPlotID = ""
   addNewFunction(functionInput.value)
 });
 
@@ -159,20 +224,14 @@ const changeColor = document.getElementById("changeColor"); // Button for changi
 
 // Changing color of plot
 changeColor.addEventListener("click", function(){
-  changePlotColor(idOfElement);
+  changePlotColor(currentlySelectedPlotID);
 });
 
 function changePlotColor(id){
   if (scene == scene3D) {
     for (let el of plots3D) {
-      if (el.id == id) {
-        // FIXME: This is a terrible way to change color
+      if (el.id == id) {r
         el.color = colorWheel.color.hexString;
-        // I don't know why,  I don't want to know why, I shouldn't
-        // have to wonder why, but for whatever reason this stupid
-        // plot isn't rerendering correctly unless we do this terribleness
-        scene3D.remove(el.mesh);
-        scene3D.add(el.mesh);
       }
     }
   } else {
@@ -239,15 +298,21 @@ xmlUploadButton.addEventListener("input", function(){
 });
 
 
-let idOfElement = ""; // Currently selected plot
 const listOfFunc = document.getElementById("list"); // List of all function (renders elements from plots2D or plots3D, depends on app mode)
 
 // Selecting plot on array
 listOfFunc.addEventListener("click", (e) => {
   e.stopPropagation();
-  idOfElement = e.target.id;
-  console.log(idOfElement);
-  setClickedPlotEffect(idOfElement);
+  if(currentlySelectedPlotID == e.target.id){
+    currentlySelectedPlotID = "";
+    for (let element of listOfFunc.getElementsByTagName("li")) {
+        element.style.background = "rgb(" + 15 + "," + 27 + "," + 49 + ")";
+    }
+    return;
+  }
+  currentlySelectedPlotID = e.target.id;
+  console.log(currentlySelectedPlotID);
+  setClickedPlotEffect(currentlySelectedPlotID);
 });
 
 // Changing style of clicked plot
@@ -269,7 +334,7 @@ deleteFunc.addEventListener("click", () => {
   if (scene == scene3D) {
     for (let el of plots3D) {
       console.log(el);
-      if (el.id == idOfElement) {
+      if (el.id == currentlySelectedPlotID) {
         scene3D.remove(el.mesh); // removing mesh of deleted plot from scene3D
         plots3D = plots3D.filter(function (item) { // returns new array without deleted element
           return item !== el;
@@ -309,6 +374,22 @@ output.innerHTML = slider.value;
 slider.oninput = function () {
   output.innerHTML = (51 + this.value * -1) / 100;
 };
+slider.addEventListener("change", () =>{
+  if(currentlySelectedPlotID < 1){
+    return;
+  }
+  if(scene == scene3D){
+    for(let el of plots3D){
+      if(currentlySelectedPlotID == el.id){
+        el.pointsDensity = (51 + slider.value * -1) / 100
+        return;
+      }
+    }
+  }
+  else{
+    throw NotImplementedError;
+  }  
+});
 
 // ============================ Functions related to rendering new objects (HTML tags / Three.js objects)
 
@@ -349,18 +430,17 @@ function generatePlot3D(id) {
       max: parseFloat(zRange.querySelector("#maxRangeInput").value),
     };
 
-      const p3D = renderFunctionMesh(
-        functionInput.value,
-        x_range,
-        y_range,
-        z_range,
-        (51 + slider.value * -1) / 100,
-        scene3D,
-        id
-      )
-      
-      if(p3D instanceof plot3D) plots3D.push(p3D)
-
+    const p3D = new plot3D(functionInput.value, x_range, y_range, z_range, (51 + slider.value * -1) / 100,id)
+    // const p3D = renderFunctionMesh(
+    //   functionInput.value,
+    //   x_range,
+    //   y_range,
+    //   z_range,
+    //   (51 + slider.value * -1) / 100,
+    //   scene3D,
+    //   id
+    // )
+    plots3D.push(p3D)
     console.log(plots3D);
   } else if (scene == scene2D) {
     console.log("2D unimplemented");
@@ -386,6 +466,24 @@ var colorWheel = new iro.ColorPicker("#colorPicker", {
     },
   ],
 });
+
+colorWheel.on("color:change", changePlotColor2)
+
+function changePlotColor2(color){
+  if(currentlySelectedPlotID < 1){
+    return;
+  }
+  if(scene == scene3D){
+    for(let el of plots3D){
+      if(el.id == currentlySelectedPlotID){
+        el.color = color.hexString;
+      }
+    }
+  }
+  else{
+    throw NotImplementedError;
+  }
+}
 
 
 // ============================ Additional functions
@@ -498,4 +596,4 @@ if(debugMode){
 }
 
 
-export { colorWheel, idOfElement };
+export { colorWheel, currentlySelectedPlotID, scene3D };

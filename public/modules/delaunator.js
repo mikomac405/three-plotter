@@ -74,8 +74,7 @@ function renderFunctionMesh(
   y_range,
   z_range,
   precision,
-  scene,
-  id
+  scene
 ) {
 
   let points3d = calculatePoints(func, x_range, y_range, z_range, precision);
@@ -111,15 +110,8 @@ function renderFunctionMesh(
   mesh.material.flatShading = false;
   mesh.material.side = THREE.DoubleSide;
 
-  
-  let plt = new plot3D(func, mesh, id);
-
-  console.log(plt);
-
-  scene.add(plt.mesh);
-
   sphere = false;
-  return plt;
+  return mesh;
 }
 
 export { calculatePoints, renderFunctionMesh };

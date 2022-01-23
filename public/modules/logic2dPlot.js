@@ -1,4 +1,4 @@
-import { colorWheel, idOfElement } from "../client.js";
+import { colorWheel, currentlySelectedPlotID } from "../client.js";
 import { plot2D } from "../classes/plot2D.js";
 import Formula from "fparser";
 
