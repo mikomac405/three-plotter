@@ -243,8 +243,8 @@ function changePlotColor(id){
 
 // Enum with image type (JavaScript doesn't support traditional enums)
 const ImageType = {
-  PNG: "jpg",
-  JPG: "png",
+  PNG: "png",
+  JPG: "jpg",
 };
 
 let jpgButton = document.getElementById("button-jpg"); // Button for saving jpg image
