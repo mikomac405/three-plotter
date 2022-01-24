@@ -112,17 +112,44 @@ li{
   border-radius: $margin;
   list-style-type: none;
   height: $height4Func;
-  margin: $margin4Func 0 $margin4Func 0;
-  width: 195px;
+  margin: 0;
+  width: 145px;
   color: white;
   background-color: rgba(0, 0, 0, 0.2);
   font-family: $font-stack;
   font-size: 20px;
-  vertical-align:top
+  vertical-align:left;
 }
 
 li:hover {
   background-color: rgba(0, 0, 0, 0.3);
+}
+
+.trashButton {
+  padding: 5px 5px 5px 5px;
+  border-radius: $margin;
+  height: $height4Func;
+  margin: $margin4Func 0 $margin4Func $margin4Func;
+  width: $height4Func;
+  background-color: rgba(0, 0, 0, 0.2);
+  vertical-align:right;
+  right:0;
+}
+
+.trashButton:hover {
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+.containerInList{
+  padding: 0px;
+  border-radius: $margin;
+  list-style-type: none;
+  height: 44px;
+  margin: $margin4Func 0 $margin4Func 0;
+  width: 200px;
+  right:0;
+  display: flex;
+  align-items: center;
 }
 
 .changeColor{
@@ -552,4 +579,12 @@ li:hover {
   width: $widthOfButton;
   background-image: url(../resources/png.png);
   background-size: $widthOfButton , $widthOfButton;
+}
+
+.button-bin{
+  position: absolute;
+  height: $height4Func;
+  width: $height4Func;
+  background-image: url(../resources/bin.png);
+  background-size: $height4Func , $height4Func;
 }

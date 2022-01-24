@@ -401,7 +401,17 @@ function generateList() {
       const elementOfList = document.createElement("li");
       elementOfList.setAttribute("id", `${el.id}`);
       elementOfList.textContent = `${el.func_string}`;
-      listOfFunc.prepend(elementOfList);
+      const trashButton = document.createElement("div");
+      trashButton.setAttribute("class", "trashButton");
+      trashButton.setAttribute("id", `${el.id}_trash`);
+      elementOfList.textContent = `${el.func_string}`;
+      const containerInList = document.createElement("div");
+      containerInList.setAttribute("class", "containerInList");
+      const binPic = document.createElement("div");
+      binPic.setAttribute("class", "button-bin");
+      trashButton.append(binPic);
+      containerInList.append(elementOfList,trashButton);
+      listOfFunc.prepend(containerInList);
     }
   } else {
     for (let el of plots2D) {

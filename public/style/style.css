@@ -107,17 +107,48 @@ li {
   border-radius: 10px;
   list-style-type: none;
   height: 34px;
-  margin: 5px 0 5px 0;
-  width: 195px;
+  margin: 0;
+  width: 145px;
   color: white;
   background-color: rgba(0, 0, 0, 0.2);
   font-family: sans-serif, Helvetica;
   font-size: 20px;
-  vertical-align: top;
+  vertical-align: left;
 }
 
 li:hover {
   background-color: rgba(0, 0, 0, 0.3);
+}
+
+.trashButton {
+  padding: 5px 5px 5px 5px;
+  border-radius: 10px;
+  height: 34px;
+  margin: 5px 0 5px 5px;
+  width: 34px;
+  background-color: rgba(0, 0, 0, 0.2);
+  vertical-align: right;
+  right: 0;
+}
+
+.trashButton:hover {
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+.containerInList {
+  padding: 0px;
+  border-radius: 10px;
+  list-style-type: none;
+  height: 44px;
+  margin: 5px 0 5px 0;
+  width: 200px;
+  right: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 .changeColor {
@@ -573,5 +604,13 @@ li:hover {
   width: 40px;
   background-image: url(../resources/png.png);
   background-size: 40px, 40px;
+}
+
+.button-bin {
+  position: absolute;
+  height: 34px;
+  width: 34px;
+  background-image: url(../resources/bin.png);
+  background-size: 34px, 34px;
 }
 /*# sourceMappingURL=style.css.map */
