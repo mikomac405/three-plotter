@@ -5,14 +5,14 @@ import { renderFunctionMesh } from "../modules/delaunator.js"
 import { scene3D } from "../client.js"
 
 class plot3D {
-  constructor(func_string, x_range, y_range, z_range, precision, id) {
+  constructor(func_string, x_range, y_range, z_range, precision) {
     this.func_string = func_string;
     this.x_range = x_range;
     this.y_range = y_range;
     this.z_range = z_range;
     this.precision = precision;
     this.mesh = renderFunctionMesh(func_string, x_range, y_range, z_range, precision)
-    this.id = id;
+    this.id = (Math.random() + 1).toString(36).substring(7);
     scene3D.add(this.mesh)
   }
 
