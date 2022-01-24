@@ -220,13 +220,6 @@ function addNewFunction(input, id=(Math.random() + 1).toString(36).substring(7))
   functionInput.value = ""; // Clear input everytime the button is clicked
 };
 
-const changeColor = document.getElementById("changeColor"); // Button for changing colors of selected plot
-
-// Changing color of plot
-changeColor.addEventListener("click", function(){
-  changePlotColor(currentlySelectedPlotID);
-});
-
 function changePlotColor(id){
   if (scene == scene3D) {
     for (let el of plots3D) {
@@ -326,29 +319,6 @@ function setClickedPlotEffect(plotId) {
   }
 }
 
-const deleteFunc = document.getElementById("deleteFunc"); // Button for deleting plot from plots2D/3D
-
-// Deleting plot and remove it from array
-// TODO: Check if elements removes correctly
-deleteFunc.addEventListener("click", () => {
-  if (scene == scene3D) {
-    for (let el of plots3D) {
-      console.log(el);
-      if (el.id == currentlySelectedPlotID) {
-        scene3D.remove(el.mesh); // removing mesh of deleted plot from scene3D
-        plots3D = plots3D.filter(function (item) { // returns new array without deleted element
-          return item !== el;
-        });
-      }
-    }
-    console.log(plots3D);
-    generateList();
-  } else {
-    DeleteFrom2DList();
-    generateList();
-  }
-});
-
 const dotted2D = document.getElementById("dotted2D"); // Button to change 2D plot type
 let dottedButtonClicked = false; // Flag for checking plot type
 
@@ -404,6 +374,26 @@ function generateList() {
       const trashButton = document.createElement("div");
       trashButton.setAttribute("class", "trashButton");
       trashButton.setAttribute("id", `${el.id}_trash`);
+      const bindedId = el.id;
+      trashButton.addEventListener("click", () => {
+        if (scene == scene3D) {
+          for (let el of plots3D) {
+            console.log(el);
+            if (el.id == bindedId) {
+              scene3D.remove(el.mesh); // removing mesh of deleted plot from scene3D
+              plots3D = plots3D.filter(function (item) { // returns new array without deleted element
+                return item !== el;
+              });
+            }
+          }
+          console.log(plots3D);
+          generateList();
+        } else {
+          throw NotImplementedError;
+          DeleteFrom2DList();
+          generateList();
+        }
+      });
       elementOfList.textContent = `${el.func_string}`;
       const containerInList = document.createElement("div");
       containerInList.setAttribute("class", "containerInList");
