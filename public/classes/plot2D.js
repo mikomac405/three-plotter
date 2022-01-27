@@ -1,8 +1,8 @@
 class plot2D {
-  constructor(func_string, color, id) {
+  constructor(func_string, color) {
     this.func_string = func_string;
     this.color = color;
-    this.id = id;
+    this.id = (Math.random() + 1).toString(36).substring(7);
   }
 }
 

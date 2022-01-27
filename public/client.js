@@ -17,7 +17,7 @@ import { plot3D } from "./classes/plot3D.js";
 import { saveXmlConfiguration, uploadXmlConfiguration } from "./modules/xmlFunctions.js";
 import { NotImplementedError } from "./modules/utils.js";
 
-const debugMode = true; // Debug mode flag
+const debugMode = false; // Debug mode flag
 
 // ============================ Default 3D environment
 
@@ -168,7 +168,7 @@ addFunc.addEventListener("click", function(){
   addNewFunction(functionInput.value)
 });
 
-function addNewFunction(input, id=(Math.random() + 1).toString(36).substring(7)) {
+function addNewFunction(input) {
   // Checks if empty or contains only spaces
   if (!input.trim().length) {
     return;
@@ -188,7 +188,7 @@ function addNewFunction(input, id=(Math.random() + 1).toString(36).substring(7))
         }
       }
       if (!exists) {
-        generatePlot2D(id); // Argument is random ID (char[5])
+        generatePlot2D(); // Argument is random ID (char[5])
         generateList(); // Rerenders <ul></ul> of plots on every plot added
       }
     } else {
@@ -208,7 +208,7 @@ function addNewFunction(input, id=(Math.random() + 1).toString(36).substring(7))
         }
       }
       if (!exists) {
-        generatePlot3D(id);
+        generatePlot3D();
         generateList();
       }
     }
@@ -299,7 +299,7 @@ listOfFunc.addEventListener("click", (e) => {
   if(currentlySelectedPlotID == e.target.id){
     currentlySelectedPlotID = "";
     for (let element of listOfFunc.getElementsByTagName("li")) {
-        element.style.background = "rgb(" + 15 + "," + 27 + "," + 49 + ")";
+        element.style = "";
     }
     return;
   }
@@ -313,8 +313,9 @@ function setClickedPlotEffect(plotId) {
   for (let element of listOfFunc.getElementsByTagName("li")) {
     if (element.id == plotId) {
       element.style.background = "rgb(" + 20 + "," + 138 + "," + 4 + ")";
-    } else {
-      element.style.background = "rgb(" + 15 + "," + 27 + "," + 49 + ")";
+    }
+    else {
+      element.style = "";
     }
   }
 }
@@ -414,7 +415,7 @@ function generateList() {
 }
 
 // Genereting 3D plot
-function generatePlot3D(id) {
+function generatePlot3D() {
   let x_range = {
     min: parseFloat(xRange.querySelector("#minRangeInput").value),
     max: parseFloat(xRange.querySelector("#maxRangeInput").value),
@@ -429,17 +430,8 @@ function generatePlot3D(id) {
       min: parseFloat(zRange.querySelector("#minRangeInput").value),
       max: parseFloat(zRange.querySelector("#maxRangeInput").value),
     };
-
-    const p3D = new plot3D(functionInput.value, x_range, y_range, z_range, (51 + slider.value * -1) / 100,id)
-    // const p3D = renderFunctionMesh(
-    //   functionInput.value,
-    //   x_range,
-    //   y_range,
-    //   z_range,
-    //   (51 + slider.value * -1) / 100,
-    //   scene3D,
-    //   id
-    // )
+    console.log(functionInput.value, x_range, y_range, z_range, (51 + slider.value * -1) / 100)
+    const p3D = new plot3D(functionInput.value, x_range, y_range, z_range, (51 + slider.value * -1) / 100)
     plots3D.push(p3D)
     console.log(plots3D);
   } else if (scene == scene2D) {
@@ -521,8 +513,10 @@ function main() {
   let far = 200;
 
   const camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
-  camera.position.y = -2;
-  camera.position.z = 5;
+  camera.position.x = 6;
+  camera.position.y = 4;
+  camera.position.z = 5.5;
+  
 
   // Orbital controls
   const controls = new OrbitControls(camera, canvas3D);
@@ -596,4 +590,4 @@ if(debugMode){
 }
 
 
-export { colorWheel, currentlySelectedPlotID, scene3D };
+export { colorWheel, currentlySelectedPlotID, scene3D, plots3D, generateList };
