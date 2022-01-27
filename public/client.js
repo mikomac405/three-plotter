@@ -280,7 +280,7 @@ function saveImage(imageType) {
   }
 }
 
-let xmlDownloadButton = document.getElementById("button-xml");
+let xmlDownloadButton = document.getElementById("button-xml-download");
 xmlDownloadButton.addEventListener("click", function(){
   saveXmlConfiguration(plots3D, plots2D);
 });
