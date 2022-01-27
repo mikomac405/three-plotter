@@ -112,51 +112,44 @@ li{
   border-radius: $margin;
   list-style-type: none;
   height: $height4Func;
-  margin: $margin4Func 0 $margin4Func 0;
-  width: 195px;
+  margin: 0;
+  width: 145px;
   color: white;
   background-color: rgba(0, 0, 0, 0.2);
   font-family: $font-stack;
   font-size: 20px;
-  vertical-align:top
+  vertical-align:left;
 }
 
 li:hover {
   background-color: rgba(0, 0, 0, 0.3);
 }
 
-.changeColor{
-  position: absolute;
-  top: $widthOfOpt + $margin + $margin;
-  right: 110px;
+.trashButton {
+  padding: 5px 5px 5px 5px;
   border-radius: $margin;
-  margin: $margin $margin $margin $margin;
-  width: 90px;
-  height: $widthOfButton;
-  padding: 5px 5px;
+  height: $height4Func;
+  margin: $margin4Func 0 $margin4Func $margin4Func;
+  width: $height4Func;
   background-color: rgba(0, 0, 0, 0.2);
-  box-shadow: 0px 0px 15px 2px rgba(0, 0, 0, 0.6);
+  vertical-align:right;
+  right:0;
 }
 
-.changeColor:hover{
+.trashButton:hover {
   background-color: rgba(0, 0, 0, 0.3);
 }
 
-#deleteFunc{
-  position: absolute;
-  top: $widthOfOpt + $margin + $margin;
-  right: 0vh;
+.containerInList{
+  padding: 0px;
   border-radius: $margin;
-  margin: $margin $margin $margin $margin;
-  width: 90px;
-  height: $widthOfButton;
-  padding: 5px 5px;
-  background-color: rgba(0, 0, 0, 0.2);
-  box-shadow: 0px 0px 15px 2px rgba(0, 0, 0, 0.6);
-}
-
-#deleteFunc:hover{
-  background-color: rgba(0, 0, 0, 0.3);
+  list-style-type: none;
+  height: 44px;
+  margin: $margin4Func 0 $margin4Func 0;
+  width: 200px;
+  right:0;
+  display: flex;
+  align-items: center;
 }
 
 .inputFunction{
@@ -246,7 +239,7 @@ li:hover {
 }
 .dock{
   position: absolute;
-  top: $widthOfOpt + $margin + $margin + $widthOfButton + $margin + $margin;
+  top: $widthOfOpt + $margin + $margin;
   right: 0vh;
   border-radius: $margin;
   margin: $margin $margin $margin $margin;
@@ -260,7 +253,7 @@ li:hover {
 .sliderContainer{
   position: absolute;
   text-align: center;
-  top:  $margin + $margin + $widthOfOpt + $margin + $margin + $widthOfOpt + 40px + $widthOfButton + $margin + $margin;
+  top:  $margin + $margin + $widthOfOpt + $margin + $margin + $widthOfOpt + 40px;
   right: 0vh;
   border-radius: $margin;
   margin: $margin $margin $margin $margin;
@@ -275,11 +268,11 @@ li:hover {
   position: absolute;
   top: $margin + $margin + $widthOfOpt + $margin + $margin + $widthOfOpt + $margin + $widthOfButton + $margin + 40px+ $widthOfButton + $margin + $margin;
   outline: 0;
-  right: 80px;
+  right: 0;
   border: 0;
   border-radius: $margin;
   margin: $margin $margin $margin $margin;
-  width: $widthOfButton;
+  width: $widthOfOpt;
   height:$widthOfButton;
   padding: 5px 5px;
   background-color: rgba(0, 0, 0, 0.2);
@@ -287,22 +280,17 @@ li:hover {
   transition: .3s;
 }
 
-.xml:hover{
-  background-color: rgba(0, 0, 0, 0.3);
-  box-shadow: 0px 0px 15px 2px rgba(0, 0, 0, 0.7);
-}
-
 #png{
   position: absolute;
-  top: $margin + $margin + $widthOfOpt + $margin + $margin + $widthOfOpt + $margin + $widthOfButton + $margin + 40px+ $widthOfButton + $margin + $margin;
+  top: $margin + $margin + $widthOfOpt + $margin + $margin + $widthOfOpt + $margin + $widthOfButton + $margin + 40px;
   outline: 0;
   right: 0px;
   border: 0;
   border-radius: $margin;
   margin: $margin $margin $margin $margin;
-  width: $widthOfButton;
+  width: 40px;
   height:$widthOfButton;
-  padding: 5px 5px;
+  padding: 5px 30px;
   background-color: rgba(0, 0, 0, 0.2);
   box-shadow: 0px 0px 15px 2px rgba(0, 0, 0, 0.6);
   transition: .3s;
@@ -315,15 +303,15 @@ li:hover {
 
 #jpg{
   position: absolute;
-  top: $margin + $margin + $widthOfOpt + $margin + $margin + $widthOfOpt + $margin + $widthOfButton + $margin + 40px+ $widthOfButton + $margin + $margin;
+  top: $margin + $margin + $widthOfOpt + $margin + $margin + $widthOfOpt + $margin + $widthOfButton + $margin + 40px;
   outline: 0;
-  right: 160px;
+  right: 110px;
   border: 0;
   border-radius: $margin;
   margin: $margin $margin $margin $margin;
   width: 40px;
   height:$widthOfButton;
-  padding: 5px 5px;
+  padding: 5px 30px;
   background-color: rgba(0, 0, 0, 0.2);
   box-shadow: 0px 0px 15px 2px rgba(0, 0, 0, 0.6);
   transition: .3s;
@@ -552,4 +540,12 @@ li:hover {
   width: $widthOfButton;
   background-image: url(../resources/png.png);
   background-size: $widthOfButton , $widthOfButton;
+}
+
+.button-bin{
+  position: absolute;
+  height: $height4Func;
+  width: $height4Func;
+  background-image: url(../resources/bin.png);
+  background-size: $height4Func , $height4Func;
 }
