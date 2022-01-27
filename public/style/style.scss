@@ -33,6 +33,14 @@ body{
   right: 0;
 }
 
+input[type="file"] {
+  display: none;
+}
+/*
+#button-xml-download{
+  
+}
+*/
 #light{
   z-index: -1;
   position: absolute;
@@ -484,6 +492,7 @@ li:hover {
   width: $widthOfButton;
   background-image: url(../resources/moon.png);
   background-size: $widthOfButton,$widthOfButton;
+  cursor: pointer;
 }
 
 #light-dark-button.transition1{
@@ -492,6 +501,7 @@ li:hover {
   width: $widthOfButton;
   background-image: url(../resources/sun.png);
   background-size: $widthOfButton,$widthOfButton;
+  cursor: pointer;
 }
 
 #button-2D{
@@ -500,6 +510,7 @@ li:hover {
   width: $widthOfButton;
   background-image: url(../resources/2D.png);
   background-size: $widthOfButton,$widthOfButton;
+  cursor: pointer;
 }
 
 #button-3D{
@@ -508,6 +519,7 @@ li:hover {
   width: $widthOfButton;
   background-image: url(../resources/3D.png);
   background-size: $widthOfButton,$widthOfButton;
+  cursor: pointer;
 }
 
 #button-plus{
@@ -516,14 +528,40 @@ li:hover {
   width: $height4Func;
   background-image: url(../resources/plus.png);
   background-size: $height4Func , $height4Func;
+  cursor: pointer;
 }
 
-#button-xml{
+#xml-label{
   position: absolute;
-  height: $widthOfButton;
+  display: inline-block;
+  margin: 0 80px;
+  height: $widthOfButton - 20px;
   width: $widthOfButton;
   background-image: url(../resources/xml.png);
   background-size: $widthOfButton , $widthOfButton;
+  cursor: pointer;
+}
+
+#button-xml-upload-style{
+  position: absolute;
+  display: inline-block;
+  margin: 20px 0px 0px 0px;
+  height: $widthOfButton - 20px;
+  width: 90px;
+  background-image: url(../resources/upload.png);
+  background-size: 90px , 20px;
+  cursor: pointer;
+}
+
+#button-xml-download{
+  position: absolute;
+  display: inline-block;
+  margin: 20px 0px 0px 105px;
+  height: $widthOfButton - 20px;
+  width: 90px;
+  background-image: url(../resources/download.png);
+  background-size: 90px , 20px;
+  cursor: pointer;
 }
 
 #button-jpg{
@@ -532,6 +570,7 @@ li:hover {
   width: $widthOfButton;
   background-image: url(../resources/jpg.png);
   background-size: $widthOfButton , $widthOfButton;
+  cursor: pointer;
 }
 
 #button-png{
@@ -540,6 +579,7 @@ li:hover {
   width: $widthOfButton;
   background-image: url(../resources/png.png);
   background-size: $widthOfButton , $widthOfButton;
+  cursor: pointer;
 }
 
 .button-bin{
@@ -548,4 +588,5 @@ li:hover {
   width: $height4Func;
   background-image: url(../resources/bin.png);
   background-size: $height4Func , $height4Func;
+  cursor: pointer;
 }

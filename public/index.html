@@ -60,7 +60,6 @@
                 <span id="Precision"></span>
                 <input type="range" min="1" max="50" value="0.5" class="slider" id="Efficiency">
             </div>
-            <input type="file" name="fileupload" accept=".xml" id="button-xml-upload"/>
         </div>
 
         <div id="jpg">
@@ -72,8 +71,12 @@
         </div>
 
         <div class="xml">
-            <div id="button-xml"></div>
-            
+            <div id="xml-label"></div>
+            <label id="button-xml-upload-style" for="button-xml-upload">
+                <input type="file" name="fileupload" accept=".xml" id="button-xml-upload"/>
+            </label>
+            <div id="button-xml-download">
+            </div>
         </div>
 
         <div class="xValueRange" id="X">
