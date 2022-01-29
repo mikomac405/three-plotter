@@ -419,7 +419,7 @@ window.addEventListener("resize", resizeCanvas);
 
 function DeleteFrom2DList() {
   for (let el of plots2D) {
-    if (el.id == idOfElement) {
+    if (el.id == currentlySelectedPlotID) {
       plots2D = plots2D.filter(function (item) {
         return item !== el;
       });
@@ -453,6 +453,16 @@ function ChangeColorOfPlot(plotId) {
   }
 }
 
+function DrawAfterXmlUpload(){
+  console.log(plots2D)
+  xLeftBound = parseFloat(xRange.querySelector("#minRangeInput").value);
+  xRightBound = parseFloat(xRange.querySelector("#maxRangeInput").value);
+  canvas_2d.onmouseover = scrollingEvent();
+  if (plots2D.length >= 2) {
+    DrawFromPlotList();
+  }
+}
+
 export {
   RefreshPlots,
   ChangeOnlyPointsValue,
@@ -478,4 +488,5 @@ export {
   generatePlot2D,
   plots2D,
   calculatePoint,
+  DrawAfterXmlUpload,
 };

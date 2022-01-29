@@ -1,7 +1,9 @@
 import { saveAs } from "file-saver"
 import { Color } from "three"
 import { plot3D } from "../classes/plot3D.js"
-import { plots3D, generateList } from "../client.js"
+import { plot2D } from "../classes/plot2D.js"
+import { plots3D, generateList, scene, scene2D } from "../client.js"
+import { plots2D, DrawAfterXmlUpload } from "../modules/logic2dPlot.js"
 
 function uploadXmlConfiguration(file){
     let rd = new FileReader();
@@ -29,8 +31,21 @@ function uploadXmlConfiguration(file){
             plot.color = color;
             plots3D.push(plot);
         }
+        for(let el of plots2Dxml){
+            let formula = el.getElementsByTagName("formula")[0].textContent
+            let rgb = el.getElementsByTagName("color")[0].textContent.split(" ")
+            let r = rgb[0].substring(4,rgb[0].length-1);
+            let g = rgb[1].substring(0,rgb[1].length-1);
+            let b = rgb[2].substring(0,rgb[2].length-1);
+            let color = `rgb(${r}, ${g}, ${b})`;
+            const plot = new plot2D(formula, color)
+            plot.color = color;
+            plots2D.push(plot);
+        }
         generateList();
-         
+        if(scene == scene2D){
+            DrawAfterXmlUpload()
+        }
     }
 }
 
