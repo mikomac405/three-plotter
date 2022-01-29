@@ -414,8 +414,9 @@ function generateList() {
       trashButton.setAttribute("id", `${el.id}_trash`);
       const bindedId = el.id;
       trashButton.addEventListener("click", () => {
+        let plot_thrash_id = trashButton.id.split("_")[0]
         if (scene == scene2D){
-          DeleteFrom2DList();
+          DeleteFrom2DList(plot_thrash_id);
           generateList();
         }
       });

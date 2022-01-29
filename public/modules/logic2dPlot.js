@@ -417,9 +417,9 @@ function resizeCanvas() {
 
 window.addEventListener("resize", resizeCanvas);
 
-function DeleteFrom2DList() {
+function DeleteFrom2DList(thrashPlotId) {
   for (let el of plots2D) {
-    if (el.id == currentlySelectedPlotID) {
+    if (el.id == thrashPlotId) {
       plots2D = plots2D.filter(function (item) {
         return item !== el;
       });
