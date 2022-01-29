@@ -164,7 +164,10 @@ function addNewFunction(input) {
   if (!input.trim().length) {
     return;
   }
+
   try {
+    const obj = new Formula(input); // Creating a fparser object
+    let vars = obj.getVariables()
     let exists = false; // Flag used checking if plots2D/3D contains already this function
     // TODO: Create a test for checking duplicates in plots2D/3D
     if (scene == scene2D) {
@@ -183,15 +186,21 @@ function addNewFunction(input) {
         generateList(); // Rerenders <ul></ul> of plots on every plot added
       }
     } else {
+      if(vars.length == 3 && vars.includes("x") && vars.includes("y") && vars.includes("z")){
+        console.log("Sphere");
+      }
+      else if(
+        (vars.length == 2 && vars.includes("x") && vars.includes("z")) ||
+        (vars.length == 1 && (vars.includes("x") || vars.includes("z")))
+      ){
+        console.log("f(x,z)/f(x)/f(z)");
+      }
+      else{
+        functionInput.value = "";
+        console.log("wrong params")
+        return;
+      }
       for (let fun3d of plots3D) {
-        // TODO: Find a better way use this parser
-        // WARNING: CHECK MEMORY LEAKS ON CREATING Formula OBJECT (SUS)
-        if(input.includes("x") && input.includes("y") && input.includes("z")){
-          console.log("Sphere")
-        }
-        else{
-          const obj = new Formula(input); // Creating a fparser object
-        }
         if (fun3d.func_string == input) {
           console.log("This function already exist in the array!");
           exists = true;
@@ -206,6 +215,7 @@ function addNewFunction(input) {
   } catch (error) {
     // WARNING: This catch should be more specific !
     // console.log("Can't calculate this function!");
+    functionInput.value = "";
     console.log(error);
   }
   functionInput.value = ""; // Clear input everytime the button is clicked
@@ -303,7 +313,10 @@ listOfFunc.addEventListener("click", (e) => {
 function setClickedPlotEffect(plotId) {
   for (let element of listOfFunc.getElementsByTagName("li")) {
     if (element.id == plotId) {
-      element.style.background = "rgb(" + 20 + "," + 138 + "," + 4 + ")";
+      //element.style.background = "rgb(" + 20 + "," + 138 + "," + 4 + ")";
+      element.style = "-webkit-box-shadow: 0px 0px 6px 2px rgba(98, 218, 128, 1);\
+      -moz-box-shadow: 0px 0px 6px 2px rgba(98, 218, 128, 1);\
+      box-shadow: 0px 0px 6px 2px rgba(98, 218, 128, 1);"
     }
     else {
       element.style = "";
