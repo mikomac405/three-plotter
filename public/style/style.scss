@@ -36,11 +36,51 @@ body{
 input[type="file"] {
   display: none;
 }
-/*
-#button-xml-download{
-  
+
+#errorPopUp{
+  visibility: hidden;
+  position: fixed;
+  color: white;
+  top: $margin;
+  left: 50%;
+  border-radius: 10px;
+  min-width: 250px;
+  margin-left: -125px;
+  height: $widthOfButton - 10px;
+  padding: 15px 10px 5px 10px;
+  background-color: rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 0px 15px 2px rgba(0, 0, 0, 0.6);
+  font-size: 20px;
+  text-align: center;
+  font-family: $font-stack;
 }
-*/
+
+#errorPopUp.show {
+  visibility: visible;
+  -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+  animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+@-webkit-keyframes fadein {
+  from {top: 0; opacity: 0;} 
+  to {top: $margin; opacity: 1;}
+}
+
+@keyframes fadein {
+  from {top: 0; opacity: 0;}
+  to {top: $margin; opacity: 1;}
+}
+
+@-webkit-keyframes fadeout {
+  from {top: $margin; opacity: 1;} 
+  to {top: 0; opacity: 0;}
+}
+
+@keyframes fadeout {
+  from {top: $margin; opacity: 1;}
+  to {top: 0; opacity: 0;}
+}
+
 #light{
   z-index: -1;
   position: absolute;
@@ -116,10 +156,10 @@ ul{
 }
 
 li{
-  padding: 5px 0 5px 5px;
+  padding: 10px 0 5px 5px;
   border-radius: $margin;
   list-style-type: none;
-  height: $height4Func;
+  height: $height4Func - 5px;
   margin: 0;
   width: 145px;
   color: white;
@@ -127,6 +167,7 @@ li{
   font-family: $font-stack;
   font-size: 20px;
   vertical-align:left;
+  overflow:auto;
 }
 
 li:hover {
@@ -227,6 +268,7 @@ li:hover {
 /* width */
 ::-webkit-scrollbar {
   width: 5px;
+  height:5px
 }
 
 /* Track */
@@ -539,7 +581,6 @@ li:hover {
   width: $widthOfButton;
   background-image: url(../resources/xml.png);
   background-size: $widthOfButton , $widthOfButton;
-  cursor: pointer;
 }
 
 #button-xml-upload-style{
