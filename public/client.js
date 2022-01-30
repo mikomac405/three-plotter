@@ -305,6 +305,7 @@ const listOfFunc = document.getElementById("list"); // List of all function (ren
 listOfFunc.addEventListener("click", (e) => {
   e.stopPropagation();
   if(currentlySelectedPlotID == e.target.id){
+    scene3D.remove(selectedPointOfPlot3D)
     currentlySelectedPlotID = "";
     for (let element of listOfFunc.getElementsByTagName("li")) {
         element.style = "";
@@ -318,6 +319,7 @@ listOfFunc.addEventListener("click", (e) => {
 
 // Changing style of clicked plot
 function setClickedPlotEffect(plotId) {
+  scene3D.remove(selectedPointOfPlot3D)
   for (let element of listOfFunc.getElementsByTagName("li")) {
     if (element.id == plotId) {
       //element.style.background = "rgb(" + 20 + "," + 138 + "," + 4 + ")";
@@ -372,6 +374,87 @@ slider.addEventListener("change", () =>{
     RefreshPlots();
   }  
 });
+
+// Showing point on 3D plot
+let showPointX = document.getElementById("valueInputX");
+showPointX.value = 0;
+let showPointZ = document.getElementById("valueInputZ");
+showPointZ.value = 0;
+let showPointButton = document.getElementById("button-show-point");
+
+let selectedPointOfPlot3D = null;
+
+showPointButton.addEventListener('click', ()=>{
+  if(scene==scene3D){
+    if(selectedPointOfPlot3D != null){
+      scene3D.remove(selectedPointOfPlot3D);
+    }
+    try{
+      let x = parseFloat(showPointX.value);
+      let z = parseFloat(showPointZ.value);
+      
+      if(currentlySelectedPlotID.length == 0){
+        errorPopUp.textContent = "No plot is selected";
+        errorPopUp.className = "show";
+        setTimeout(function(){ errorPopUp.className = errorPopUp.className.replace("show", ""); }, 3000);
+        return;
+      }
+
+      let plot3D;
+
+      for(let el of plots3D){
+        if(el.id == currentlySelectedPlotID){
+          plot3D = el;
+          break;
+        }   
+      }
+
+      if(x < plot3D.x_range.min || x > plot3D.x_range.max){
+        errorPopUp.textContent = "x out of range!";
+        errorPopUp.className = "show";
+        setTimeout(function(){ errorPopUp.className = errorPopUp.className.replace("show", ""); }, 3000);
+        return;
+      }
+
+      if(z < plot3D.z_range.min || z > plot3D.z_range.max){
+        errorPopUp.textContent = "z out of range!";
+        errorPopUp.className = "show";
+        setTimeout(function(){ errorPopUp.className = errorPopUp.className.replace("show", ""); }, 3000);
+        return;
+      }
+      
+      
+
+      let funObj = new Formula(plot3D.func_string)
+      let result = funObj.evaluate({"x":x, "z":z })
+
+      if(result < plot3D.y_range.min || result > plot3D.y_range.max){
+        errorPopUp.textContent = "y out of range!";
+        errorPopUp.className = "show";
+        setTimeout(function(){ errorPopUp.className = errorPopUp.className.replace("show", ""); }, 3000);
+        return;
+      }
+
+      let vec = new THREE.Vector3();
+      console.log(vec)
+      const mesh = new THREE.SphereGeometry(0.05)
+      const material = new THREE.MeshPhongMaterial( { color: 0x03e3fc } );
+      selectedPointOfPlot3D = new THREE.Mesh(mesh,material)
+      
+
+      console.log(selectedPointOfPlot3D);
+      scene3D.add(selectedPointOfPlot3D);
+      selectedPointOfPlot3D.position.set(x,result,z);
+
+
+    }
+    catch(error){
+      errorPopUp.textContent = error;
+      errorPopUp.className = "show";
+      setTimeout(function(){ errorPopUp.className = errorPopUp.className.replace("show", ""); }, 3000);
+    }
+  }
+})
 
 // ============================ Functions related to rendering new objects (HTML tags / Three.js objects)
 
@@ -545,7 +628,7 @@ function main() {
 
   // Orbital controls
   const controls = new OrbitControls(camera, canvas3D);
-
+ 
   // Default light
   let sceneLightColor = 0xffffff;
   let sceneLightIntensity = 2;
