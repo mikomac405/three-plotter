@@ -18,6 +18,9 @@ import { saveXmlConfiguration, uploadXmlConfiguration } from "./modules/xmlFunct
 import { NotImplementedError } from "./modules/utils.js";
 
 const debugMode = false; // Debug mode flag
+// ============================ error popup
+
+const errorPopUp = document.getElementById("errorPopUp");
 
 // ============================ Default 3D environment
 
@@ -176,7 +179,9 @@ function addNewFunction(input) {
       const obj = new Formula(input); // Creating a fparser object
       for (let fun2d of plots2D) {
         if (fun2d.func_string == input) {
-          console.log("This function already exist in the array!");
+          errorPopUp.textContent = "This function already exist in the array!";
+          errorPopUp.className = "show";
+          setTimeout(function(){ errorPopUp.className = errorPopUp.className.replace("show", ""); }, 3000);
           exists = true;
           break;
         }
@@ -202,7 +207,9 @@ function addNewFunction(input) {
       }
       for (let fun3d of plots3D) {
         if (fun3d.func_string == input) {
-          console.log("This function already exist in the array!");
+          errorPopUp.textContent = "This function already exist in the array!";
+          errorPopUp.className = "show";
+          setTimeout(function(){ errorPopUp.className = errorPopUp.className.replace("show", ""); }, 3000);
           exists = true;
           break;
         }
