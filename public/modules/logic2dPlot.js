@@ -463,6 +463,29 @@ function DrawAfterXmlUpload(){
   }
 }
 
+let calculateSinglePoint = function (x, func_string) {
+  const fObj = new Formula(func_string);
+  let y = fObj.evaluate({ x: x });
+  return y;
+};
+
+function RenderSinglePoint(xPoint, plotId) {
+  let color;
+  let f;
+  for (let el of plots2D) {
+    if (el.id == plotId) {
+      f = el.func_string;
+      color = el.color;
+    }
+  }
+  xPrecision = document.getElementById("Efficiency").value / 100;
+  Ctx.beginPath();
+  Ctx.fillStyle = color;
+  if (xPrecision < 0.5) Ctx.fillRect(XC(xPoint), YC(calculateSinglePoint(xPoint, f)), 5, 5);
+  else Ctx.fillRect(XC(xPoint), YC(calculateSinglePoint(xPoint, f)), 8, 8);
+  Ctx.stroke();
+}
+
 export {
   RefreshPlots,
   ChangeOnlyPointsValue,
@@ -489,4 +512,5 @@ export {
   plots2D,
   calculatePoint,
   DrawAfterXmlUpload,
+  RenderSinglePoint,
 };

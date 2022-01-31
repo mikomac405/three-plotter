@@ -9,6 +9,7 @@ import {
   ChangeColorOfPlot,
   ChangeOnlyPointsValue,
   RefreshPlots,
+  RenderSinglePoint,
 } from "./modules/logic2dPlot.js";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import Formula from "fparser";
@@ -453,6 +454,15 @@ showPointButton.addEventListener('click', ()=>{
       errorPopUp.className = "show";
       setTimeout(function(){ errorPopUp.className = errorPopUp.className.replace("show", ""); }, 3000);
     }
+  }else{
+    if(currentlySelectedPlotID.length == 0){
+      errorPopUp.textContent = "No plot is selected";
+      errorPopUp.className = "show";
+      setTimeout(function(){ errorPopUp.className = errorPopUp.className.replace("show", ""); }, 3000);
+      return;
+    }
+    let x = parseFloat(showPointX.value);
+    RenderSinglePoint(x, currentlySelectedPlotID)
   }
 })
 
