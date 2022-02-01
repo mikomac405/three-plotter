@@ -1,3 +1,6 @@
+// Three-Plotter
+// Created by Aleksander Kulpa, Daniel Kosytorz, Mikołaj Macura, Paweł Szary
+
 import * as THREE from "three";
 import { renderFunctionMesh } from "./modules/delaunator.js";
 import {
